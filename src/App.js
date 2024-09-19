@@ -1,36 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-// import 'axios';
-// import Axios from 'axios';
-import axios from 'axios';
+// Sources:
+// [1]: https://dev.to/jps27cse/react-router-dom-v6-boilerplate-2ce1
 
-const apiCall = () => {
-  axios.get('http://localhost:5000').then((data) => {
-    // this console.log will be in our frontend console
-    console.log(data)
-  })
-};
+// hosting the platform is considered a bonus - nice
+// next week is last week, so have front end and backend working
 
-function App() {
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import FormPage from "./pages/FormPage";
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={apiCall}>Make API call</button>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+        <Router>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/new-form" element={<FormPage />} />
+                {/* <Route path="/path_name/:dynamic" element={<Component_Name />} /> //dynamic route */}
+                {/* <Route path="/*" element={<Component_Name />} />  */}
+              </Routes>
+        </Router>
   );
-}
+};
 
 export default App;

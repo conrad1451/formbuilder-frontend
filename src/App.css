@@ -13,13 +13,33 @@
   }
 }
 
-.App-header {
+:root { 
+
+  --color-env: lightblue;
+
+  /* old envelope coloor */
+  /* --color-env: #0077b2; */
+  /*green version*/
+  /*--color-env: #00b277;*/
+  --color-env-insides: darken(var(--color-env), 3%);
+  --color-flap: darken(var(--color-env), 20%);
+  --color-bg: lighten(var(--color-env), 48%);
+  --env-border-radius: 6px;
+  --form-button-size: 25;
+  /* --form-button-size: 2.5; */
+  --env-width: (var(--form-button-size) * 14px);
+  --env-height: (var(--form-button-size) * 9px);
+  --dist-letter-movement: (var(--env-height) * (14.5/18));
+  /*   --white: #ffffff; */
+}
+
+.Button-section {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -36,3 +56,86 @@
     transform: rotate(360deg);
   }
 }
+/* CHQ: live reload? let's go */
+.leftside {
+  /* width: 50%; */
+  width: 20%;
+  float: left;
+}
+
+.modal-label {
+  font-size: 30px;
+}
+
+
+/* CHQ: the below worked in inheriting from Button-section: NICE */
+.Button-section .leftside {
+  /* width: 50%; */
+  width: 20%;
+  float: left;
+  margin-top: 120%;
+}
+
+.rightside {
+  /* width: 50%; */
+  width: 80%;
+  /* height: 100%; */
+  float: right;
+  background-color: #69e8f4;
+  /* min-height: 80vh; */
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+} 
+
+.formbuttons {
+  align-items: center;
+  text-align: center; 
+
+  transition: all 0.1s linear;
+  -webkit-appearance: none;
+  background-color: transparent;
+  border-radius: 4px;
+  color: var(--color-env);
+  display: inline-block;
+  font-weight: bold;
+  font-size: calc(var(--form-button-size) * (16/20) * 1px);
+  /* font-size: calc(var(--form-button-size) * (14/20) * 1px); */
+    /* padding: calc(var(--form-button-size) * (12/20) * 1px); */
+    padding: calc(var(--form-button-size) * (10/20) * 1px);
+  /* margin: calc(var(--form-button-size) * (12/20) * 1px); */
+  margin: calc(var(--form-button-size) * (8/20) * 1px);
+
+  /* padding: (var(--form-button-size) * (12/20) * 1px); */
+  line-height: 1em;
+  text-decoration: none;
+ 
+  width: 75%; 
+
+  cursor: pointer;  
+  /* &--reset button {
+    @extend .formButton;
+
+    font-weight: 800;
+    font-style: normal;
+    border: solid 2px var(--color-env);
+    line-height: 1em;
+    text-decoration: none;
+    min-width: 120px;
+    cursor: pointer;
+
+    width: 100%; 
+     font-size: (var(--form-button-size) * (12/20) * 1px);
+   
+    }
+  &--reset button:hover {
+    background-color: var(--color-env);
+    color: #fff;
+  } */
+}
+
+/* .formbuilderspace { */
+  /* display: flex;
+  flex-direction: column; */
