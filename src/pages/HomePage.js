@@ -90,6 +90,27 @@ function FormModal3() {
       </>
     );
   }
+
+
+function QuestionSelector()
+{
+  return(
+    <div>
+      <button className='formbuttons' onClick={apiCall}>Multiple Choice</button>
+      <br/>
+      <button className='formbuttons' onClick={apiCall}>Short Answer</button>
+      <br/>
+      <button className='formbuttons' onClick={apiCall}>Long Answer</button>
+      <button className='formbuttons' onClick={apiCall}>True/False</button>
+      <br/>
+      <button className='formbuttons' onClick={apiCall}>Multiple Select</button>
+      <button className='formbuttons' onClick={apiCall}>Fill in the blank</button>
+      <button className='formbuttons' onClick={apiCall}>Matching</button>
+      </div> 
+      );
+}
+
+
 function HomePage() {
   // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
   // const [formArea, setFormArea] = useState(Array<String>); // CHQ: didn't work
@@ -99,24 +120,11 @@ function HomePage() {
     <div className="App"> 
       <FormModal3 />
       <div className='Button-section leftside'>
-      {/* <img src={logo} className="App-logo" alt="logo" /> */}
-
-
+        {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
-            Form Question Types
-        </p>      
-        <button className='formbuttons' onClick={apiCall}>←</button>
-
-        <button className='formbuttons' onClick={apiCall}>Multiple Choice</button>
-        <br/><br/>
-        <button className='formbuttons' onClick={apiCall}>Short Answer</button>
-        <br></br><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                <button className='formbuttons' onClick={apiCall}>Long Answer</button>
-        <button className='formbuttons' onClick={apiCall}>True/False</button>
-        <br/><br/>
-        <br/><br/><button className='formbuttons' onClick={apiCall}>Multiple Select</button>
-        <button className='formbuttons' onClick={apiCall}>Fill in the blank</button>
-        <button className='formbuttons' onClick={apiCall}>Matching</button>
+          Form Question Types
+        </p>
+        {/* <QuestionSelector/> */}
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -125,6 +133,7 @@ function HomePage() {
         >
           Help
         </a>
+        <button className='formbuttons' onClick={apiCall}>Logout</button>
 
       </div>
       <div className='rightside'>
@@ -132,7 +141,7 @@ function HomePage() {
       <img src={logo} className="App-logo" alt="logo" />
         <button onClick={apiCall}>Make API call</button>
         <p>
-            THIS IS THE HOME PAGE
+            Make a New Form
         </p>
         <a
           className="App-link"
