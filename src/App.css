@@ -1,3 +1,7 @@
+/* Sources
+[1]: https://www.geeksforgeeks.org/how-to-position-a-div-at-the-bottom-of-its-container-using-css/#
+ */
+
 .App {
   text-align: center;
 }
@@ -139,3 +143,16 @@
 /* .formbuilderspace { */
   /* display: flex;
   flex-direction: column; */
+
+  .bottomSideBar{
+
+    /* background-color: #0656f6; */
+
+    position: absolute;
+    /* bottom: 0px; */
+    /* below works but I want percentages  */
+    /* bottom: 20px;  */
+    /* I think this is 4% the way up from the bottom */
+    bottom: 4vh;
+    /* the source is [X] */
+  }

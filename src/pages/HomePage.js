@@ -125,15 +125,19 @@ function HomePage() {
           Form Question Types
         </p>
         {/* <QuestionSelector/> */}
-        <a
+
+        <div className="bottomSideBar">
+          <a
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
-          Help
-        </a>
-        <button className='formbuttons' onClick={apiCall}>Logout</button>
+          >
+            Help
+            </a>
+            <button className='formbuttons' onClick={apiCall}>Logout</button>
+        </div>
+        
 
       </div>
       <div className='rightside'>
