@@ -151,6 +151,16 @@ function MyComponent(){
     </div>);
 }
 
+function MyComp1(){
+  return(    <input
+    className="formFields --nameField"
+    type="text"
+    id="name"
+    name="name"
+    placeholder="John Doe"
+    required
+  />)
+}
 
 
 function FormPage() {
@@ -235,7 +245,8 @@ function FormPage() {
                 THIS IS THE HOME PAGE
             </p>
             {/* <>{compList}</> */}
-            {/* <MyComponent/> */}
+            <MyComponent/>
+            <MyComp1/>
             {/* <a
               className="App-link"
               href="https://reactjs.org"
