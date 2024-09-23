@@ -33,18 +33,75 @@ interface DynamicComponentProps {
    })
  };
  function FormModal3() {
-     // const [open, setOpen] = useState(true);
-   
-     // CHQ: caused the page to break and not load
-     // if (open) {
-     //   // whether I called the method on thedialog or just as a function
-     //   showTheDialog();
-     //   thedialog.showTheDialog();
-     // }
-     // const [open, setOpen] = useState(false);
-   
- return(5);
-   }
+  // const [open, setOpen] = useState(true);
+
+  // CHQ: caused the page to break and not load
+  // if (open) {
+  //   // whether I called the method on thedialog or just as a function
+  //   showTheDialog();
+  //   thedialog.showTheDialog();
+  // }
+  // const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
+      <Dialog id="dialog2" open={true}>
+
+      {/* <Dialog id="dialog2" open={open}> */}
+
+        <form id="form2" method="dialog">
+          {/* <form method="dialog" action=""> */}
+          <br />
+          <label htmlFor="fname">Name: </label>
+          {/* <br /> */}
+          <input
+            className="formFields --nameField"
+            type="text"
+            id="name"
+            name="name"
+            placeholder="John Doe"
+            required
+          />
+          <br />
+          <br />
+          <label htmlFor="lname">Email: </label>
+          {/* <br /> */}
+          <input
+            className="formFields --nameField"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="john.doe@gmail.com"
+            required
+          />
+          <br />
+          <br />
+          <label htmlFor="DOB">Date of Birth:</label>
+          <input
+            className="formFields --nameField"
+            type="date"
+            id="dob"
+            name="dob"
+            max="2006-09-11"
+            // I won't allow anyone to say they are 200 years old
+            min="1806-09-11"
+            required
+          />
+          {/* <input type="submit"></input> */}
+          <br />
+          <br />
+          {/* <button onclick="closeDialog()">Cancel</button> */}
+          <input className="my_button" type="submit" value="Submit" />
+
+          {/* <button onclick="myFunc()" id="confirmBtn" value="default">
+              Confirm
+            </button> */}
+        </form>
+      </Dialog>
+    </>
+  );
+}
  
    function MultiChoice(){
      return(<p>mue</p>);
