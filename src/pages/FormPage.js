@@ -16,6 +16,11 @@ import '../App.css';
 // import Axios from 'axios';
 import axios from 'axios';
 
+
+import ControlledForm from "./Form1/ControlledForm";
+import CumbersomeForm from "./Form2/CumbersomeForm";
+
+
 const formField = []
 
 
