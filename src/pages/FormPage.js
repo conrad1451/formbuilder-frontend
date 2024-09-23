@@ -125,6 +125,34 @@ function FormModal3() {
   }
 
 
+function MyComponent(){
+  return (<div className="formTest">
+    <form id="form2" method="dialog">
+    {/* <form method="dialog" action=""> */}
+    <br />
+    <label htmlFor="fname">Name: </label>
+    {/* <br /> */}
+    <input
+      className="formFields --nameField"
+      type="text"
+      id="name"
+      name="name"
+      placeholder="John Doe"
+      required
+    />
+    <br />
+    <br /> 
+    <input className="my_button" type="submit" value="Submit" />
+
+    {/* <button onclick="myFunc()" id="confirmBtn" value="default">
+        Confirm
+      </button> */}
+  </form>
+    </div>);
+}
+
+
+
 function FormPage() {
   // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
   // const [formArea, setFormArea] = useState(Array<String>); // CHQ: didn't work
@@ -161,7 +189,7 @@ function FormPage() {
           component: "Matching",
         },
       ];
-
+      
       return (
         <div className="App"> 
           <FormModal3 />
@@ -206,6 +234,8 @@ function FormPage() {
             <p>
                 THIS IS THE HOME PAGE
             </p>
+            {/* <>{compList}</> */}
+            {/* <MyComponent/> */}
             {/* <a
               className="App-link"
               href="https://reactjs.org"

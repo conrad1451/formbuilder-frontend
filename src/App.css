@@ -178,3 +178,9 @@
     /* align-items: center; */
     /* the source is [X] */
   }
+
+  .formTest{
+    background-color: aliceblue;
+    width: 30vw;
+    display: inline-block;
+  }
