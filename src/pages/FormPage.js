@@ -9,7 +9,6 @@ import { useState } from "react";
 // import Dialog from "./MyDialog";
 import Dialog from "../modules/MyDialog";
 
-import CreateStudentForm from "./FactoryTest/FormOutput";
 
 import logo from '../logo.svg';
 import '../App.css';
@@ -255,7 +254,6 @@ function FormPage() {
             <p>
                 THIS IS THE HOME PAGE
             </p>
-            <CreateStudentForm/>
             {/* <>{compList}</> */}
             {/* <MyComponent/> */}
             {/* <a
