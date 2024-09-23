@@ -129,7 +129,38 @@ function FormPage() {
   // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
   // const [formArea, setFormArea] = useState(Array<String>); // CHQ: didn't work
       const [formArea, setFormArea] = useState(formField);
+      const [compList, setCompList] = [];
 
+      const theFormOptions = [
+        {
+          name: "Multiple Choice",
+          component: "MC Question",
+        },
+        {
+          name: "Short Answer",
+          component: "Short Answer",
+        },
+        {
+          name: "Long Answer",
+          component: "Long Answer",
+        },
+        {
+          name: "True/False",
+          component: "True/False",
+        },
+        {
+          name: "Multiple Select",
+          component: "Multiple Select",
+        },
+        {
+          name: "Fill in the blank",
+          component: "Fill in the blank",
+        },
+        {
+          name: "Matching",
+          component: "Matching",
+        },
+      ];
 
       return (
         <div className="App"> 
@@ -143,16 +174,18 @@ function FormPage() {
             </p>      
             <div>
                 {/* [AE] */}
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("MC Question"))}>Multiple Choice</button>
+                <button className='formbuttons' onClick={() => setCompList((compList) => compList.concat(<MyComponent/>))}>Test button</button>
+
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[0]))}>Multiple Choice</button>
                 <br/>
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Short Answer"))}>Short Answer</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[1]))}>Short Answer</button>
                 <br/>
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Long Answer"))}>Long Answer</button>
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("True/False"))}>True/False</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[2]))}>Long Answer</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[3]))}>True/False</button>
                 <br/>
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Multiple Select"))}>Multiple Select</button>
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Fill in the blank"))}>Fill in the blank</button>
-                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Matching"))}>Matching</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[4]))}>Multiple Select</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[5]))}>Fill in the blank</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[6]))}>Matching</button>
                 </div> 
     
           {/* <QuestionSelector/> */}
