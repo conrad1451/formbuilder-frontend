@@ -1,3 +1,10 @@
+/* Sources:
+
+[AE]: https://stackoverflow.com/questions/41052598/reactjs-array-push-function-not-working-in-setstate 
+ [AG]: https://www.freecodecamp.org/news/how-to-render-lists-in-react/ 
+ */
+
+
 import { useState } from "react";
 // import Dialog from "./MyDialog";
 import Dialog from "../modules/MyDialog";
@@ -91,6 +98,14 @@ function FormModal3() {
     );
   }
 
+  function MultiChoice(){
+    return(<p>multi choice</p>);
+  }
+
+  function InsertQuestion(){
+
+  }
+
   function QuestionSelector()
   {
     return(
@@ -126,8 +141,21 @@ function FormPage() {
             <p>
                 Form Question Types
             </p>      
+            <div>
+                {/* [AE] */}
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("MC Question"))}>Multiple Choice</button>
+                <br/>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Short Answer"))}>Short Answer</button>
+                <br/>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Long Answer"))}>Long Answer</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("True/False"))}>True/False</button>
+                <br/>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Multiple Select"))}>Multiple Select</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Fill in the blank"))}>Fill in the blank</button>
+                <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat("Matching"))}>Matching</button>
+                </div> 
     
-          <QuestionSelector/>
+          {/* <QuestionSelector/> */}
             <a
               className="App-link"
               href="https://reactjs.org"
@@ -145,14 +173,33 @@ function FormPage() {
             <p>
                 THIS IS THE HOME PAGE
             </p>
-            <a
+            {/* <a
               className="App-link"
               href="https://reactjs.org"
               target="_blank"
               rel="noopener noreferrer"
             >
               Learn React
-            </a>
+            </a> */}
+            <p className="listWindow">{JSON.stringify(formArea)}</p>
+            
+            
+            {/* [AG] */}
+            {/* <p>{(formArea => {})}</p> */}
+            {/* <>
+            {formArea.map(function(element) {
+              return (
+                <li>
+                  {element.name}
+                  </li>
+                  )
+                })}
+            </> */}
+            {/* <>{formArea.forEach(element => {
+              <li>element</li>
+            })}</> */}
+            
+
           </div>
         </div>
       );

@@ -156,3 +156,25 @@
     bottom: 4vh;
     /* the source is [X] */
   }
+
+  .listWindow{
+    /* position: absolute; */
+    background-color: rgb(34, 240, 27);
+    /* CHQ: original test */
+    /* width: 20vw;  */
+    width: 60vw;
+    align-items: center;
+    /* align-self: center; */
+    justify-content: center;
+    display: flex;
+     text-align: center; 
+  
+    transition: all 0.1s linear;
+     border-radius: 4px;
+     /*  CHQ: following line is the secret sauce to get the 
+     block centered in the middle of the element*/
+     display: inline-block;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* the source is [X] */
+  }

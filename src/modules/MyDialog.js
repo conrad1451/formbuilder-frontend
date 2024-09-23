@@ -1,5 +1,3 @@
-// /https://valstar.dev/blog/2023-07-21-native-dialog-in-react/
-
 import React, { useRef, useEffect } from "react";
 
 // @ts-ignore

@@ -1,5 +1,4 @@
-import { useState } from "react";
-// import Dialog from "./MyDialog";
+ // import Dialog from "./MyDialog";
 import Dialog from "../modules/MyDialog";
 
 import logo from '../logo.svg';
@@ -8,8 +7,7 @@ import '../App.css';
 // import Axios from 'axios';
 import axios from 'axios';
 
-const formField = []
-
+ 
 
 // CHQ: TODO: set margins between buttons
 
@@ -92,29 +90,10 @@ function FormModal3() {
   }
 
 
-function QuestionSelector()
-{
-  return(
-    <div>
-      <button className='formbuttons' onClick={apiCall}>Multiple Choice</button>
-      <br/>
-      <button className='formbuttons' onClick={apiCall}>Short Answer</button>
-      <br/>
-      <button className='formbuttons' onClick={apiCall}>Long Answer</button>
-      <button className='formbuttons' onClick={apiCall}>True/False</button>
-      <br/>
-      <button className='formbuttons' onClick={apiCall}>Multiple Select</button>
-      <button className='formbuttons' onClick={apiCall}>Fill in the blank</button>
-      <button className='formbuttons' onClick={apiCall}>Matching</button>
-      </div> 
-      );
-}
+ 
 
 
-function HomePage() {
-  // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
-  // const [formArea, setFormArea] = useState(Array<String>); // CHQ: didn't work
-      const [formArea, setFormArea] = useState(formField);
+function HomePage() { 
 
   return (
     <div className="App"> 
@@ -124,8 +103,7 @@ function HomePage() {
         <p>
           Form Question Types
         </p>
-        {/* <QuestionSelector/> */}
-
+ 
         <div className="bottomSideBar">
           <a
           className="App-link"
