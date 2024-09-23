@@ -1,8 +1,6 @@
 /* Sources:
 
-[AE]: https://stackoverflow.com/questions/41052598/reactjs-array-push-function-not-working-in-setstate 
- [AG]: https://www.freecodecamp.org/news/how-to-render-lists-in-react/ 
- */
+[AP]: https://medium.com/@gecno/creating-dynamic-components-in-react-with-typescript-f965bc8cd5fd */
 
 
  import { useState } from "react";
@@ -24,6 +22,7 @@
 interface DynamicComponentProps {
   text: string;
 }
+// [AP]
 
  
  const apiCall = () => {
