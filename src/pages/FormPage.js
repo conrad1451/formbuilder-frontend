@@ -9,6 +9,8 @@ import { useState } from "react";
 // import Dialog from "./MyDialog";
 import Dialog from "../modules/MyDialog";
 
+import CreateStudentForm from "./FactoryTest/FormOutput";
+
 import logo from '../logo.svg';
 import '../App.css';
 // import 'axios';
@@ -151,6 +153,25 @@ function MyComponent(){
     </div>);
 }
 
+function ModuleTest(){
+  return(
+  <form className="listWindow">
+    <label>
+      Choose your preferred party date (required, April 1st to 20th):
+      <input
+        type="date"
+        name="party"
+        min="2017-04-01"
+        max="2017-04-20"
+        required />
+      <span class="validity"></span>
+    </label>
+  
+    <p>
+      <button>Submit</button>
+    </p>
+  </form>)
+}
 
 
 function FormPage() {
@@ -234,6 +255,7 @@ function FormPage() {
             <p>
                 THIS IS THE HOME PAGE
             </p>
+            <CreateStudentForm/>
             {/* <>{compList}</> */}
             {/* <MyComponent/> */}
             {/* <a
@@ -244,6 +266,7 @@ function FormPage() {
             >
               Learn React
             </a> */}
+            <ModuleTest/>
             <p className="listWindow">{JSON.stringify(formArea)}</p>
             
             

@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import FormPage from "./pages/FormPage";
+import TestPage from "./pages/FactoryTest/TestPage";
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/new-form" element={<FormPage />} />
+                <Route path="/test" element={<TestPage />} />
                 {/* <Route path="/path_name/:dynamic" element={<Component_Name />} /> //dynamic route */}
                 {/* <Route path="/*" element={<Component_Name />} />  */}
               </Routes>
