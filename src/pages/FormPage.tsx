@@ -303,6 +303,19 @@ function Parent1({ textPassedToChildToDisplay }) {
   );
 }
 
+function Parent2({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
+  // let myArray = [0,1,2,3];
+
+  return (
+    <img
+    className="avatar"
+    src={urlOfImgPassedToChildToDisplay}
+    alt="Lin Lanying"
+    width={myWidth}
+    height={myHeight}
+  /> 
+  );
+}
 
  function Profile() {
   return (
@@ -418,8 +431,10 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
 
  return (
    <>
-   <Profile/>
-   <Profile2/>
+   {/* <Profile/> */}
+   {/* <Profile2/> */}
+   <Parent1 textPassedToChildToDisplay={"more text"}/>
+   <Parent2 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
      <>{text}</>
      <label>
      Option 1
