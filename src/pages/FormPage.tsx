@@ -292,6 +292,18 @@ function CardWhichIsAWrapperForContent({ children }) {
   );
 }
 
+function Parent1({ textPassedToChildToDisplay }) {
+  let myArray = [0,1,2,3];
+
+  return (
+    // the myArray.forEach(choice => { isn't doing anything
+    <div className="testThis">
+      {textPassedToChildToDisplay} 
+    </div>
+  );
+}
+
+
  function Profile() {
   return (
     <CardWhichIsAWrapperForContent>
@@ -310,13 +322,14 @@ function CardWhichIsAWrapperForContent({ children }) {
 
 function Avatar2() {
   return (
-    <img
-      className="avatar"
-      src="https://i.imgur.com/1bX5QH6.jpg"
-      alt="Lin Lanying"
-      width={100}
-      height={100}
-    />
+    // <img
+    //   className="avatar"
+    //   src="https://i.imgur.com/1bX5QH6.jpg"
+    //   alt="Lin Lanying"
+    //   width={100}
+    //   height={100}
+    // />
+    <p>bro</p>
   );
 }
 
@@ -348,8 +361,17 @@ function Profile2() {
     // 'Card2' cannot be used as a JSX component.
 /**Its type '() => void' is not a valid JSX element type.
     Type '() => void' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'. */
-    <Card2/> 
-  );
+    // <Card2/> 
+
+    // <Avatar2/>
+
+    // CHQ: errors below
+    // <Parent1>
+    //   <p>hihi</p>
+    //   <Parent1/>
+    <Parent1 textPassedToChildToDisplay={"ddd"}/>
+  );    
+
 }
 
 
