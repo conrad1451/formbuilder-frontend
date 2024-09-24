@@ -33,6 +33,17 @@
 interface DynamicComponentProps {
   text: string;
 }
+
+interface DynamicMCProps {
+  text: string;
+  checkedCondition: boolean;
+  checkedFunction: Function;
+  // checkedFunction: function;
+    // checkedFunction: function name(params:type) {
+    
+  // }
+}
+
 // [AP]
 
  
@@ -415,11 +426,126 @@ function Profile2() {
 // return  <tbody>    {rows.map((object, i) => <AgainThis obj={object} key={i} />)}  </tbody>
 // }
 
+
+const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
+    const [isChecked, setIsChecked] = useState(false);
+    
+  return (
+    <>
+    <>{text}</>
+    <label> 
+      Option 1
+      <input
+        type="radio"
+        checked={isChecked}
+        onChange={checkedFunction}
+        onClick={(isChecked) => {
+          setIsChecked(()=>
+            {
+              if(true){
+                return true
+              }
+              else{
+                return false
+              }})
+            }
+          } 
+        // onClick={()=> {if(!checkedCondition){checkedCondition = true}}} 
+    // onClick={()=> {if(true){alert("33")}}} 
+    />
+  </label>  
+
+  <br/>
+    </>
+  );
+};
+
+
 const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
+  // const DynamicTrueFalse: React.FC<{}> = () => {
+    const [truth, setTruth] = useState(false);
+    const [theChoice, setTheChoice] = useState("");
+    // [AU]
+ 
+    let myChoices=["A", "B", "C", "D"];
+ 
+    let theseChoices = ["Option 1", "Option 2", "Option 3", "Option 4"];
+ 
+    let brobro = theseChoices.forEach(choice => {
+     <p>{choice}</p>
+    });
+ 
+  return (
+    <>
+    {/* <Profile/> */}
+    {/* <Profile2/> */}
+    <Parent1 textPassedToChildToDisplay={"more text"}/>
+    <Parent2 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
+      <>{text}</>
+      <label>
+      Option 1
+      <input
+      type="radio"  
+      checked={truth} 
+      onChange={e => setTruth(true) }
+      // onClick={setTruth(true)} 
+      />
+    </label>  
+ 
+    <br/>
+    <label>
+      Option 2
+      <input
+      type="radio"  
+      checked={!truth}
+      onChange={e => setTruth(false) }
+      // onClick={setTruth(true)} 
+      />
+    </label>  
+    <br />
+    <label>
+      Option 3
+      <input
+      type="radio"  
+      checked={!truth}
+      onChange={e => setTruth(false) }
+      // onClick={setTruth(true)} 
+      />
+    </label>  
+    <br />
+    <label>
+      Option 4
+      <input
+      type="radio"  
+      checked={!truth}
+      onChange={e => setTruth(false) }
+      // onClick={setTruth(true)} 
+      />
+    </label>  
+    <br />
+ 
+    <button onClick={apiCall}>Add more options - feature coming soon</button>
+ 
+    <br />
+    <br />
+    
+    </>
+  );
+ };
+ 
+
+const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
    const [truth, setTruth] = useState(false);
    const [theChoice, setTheChoice] = useState("");
    // [AU]
+
+   let myListing = [createDynamicComponent2(DynamicMultiChoice, "sss")];
+
+   <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
+
+   const [theInnerPlatform, setTheInnerPlatform] = useState(myListing);
+
 
    let myChoices=["A", "B", "C", "D"];
 
@@ -479,6 +605,20 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
    <br />
 
    <button onClick={apiCall}>Add more options - feature coming soon</button>
+   <button className='formbuttons' id="some-inner-answer"
+        onClick={() =>
+          // @ts-ignore comment
+          setTheInnerPlatform((theInnerPlatform) =>
+            theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer))
+          )
+        }
+      >
+        Add an inner answer
+      </button> 
+      <p>total number of inner things: {theInnerPlatform.length}</p>
+
+<div>{theInnerPlatform}</div>
+      <br />
 
    <br />
    <br />
@@ -643,6 +783,22 @@ const App3: React.FC = () => {
       </button>
       <br />
 
+      <button className='formbuttons' id="multi-choice"
+        onClick={() =>
+          // @ts-ignore comment
+          // CHQ: the following doesn't work.
+          setThePlatform((thePlatform) =>
+            thePlatform.concat(
+              createDynamicComponent2(DynamicMegaMultiChoice, {
+                text: "First component stored in a list",
+              })
+            )
+          )
+        }
+      >
+        Add Mega Multiple choice
+      </button>
+      <br />
       
       {/* <p>total number of questions: {thePlatform.length}</p> */}
       {/* <div>{myList3}</div> */}
