@@ -1,9 +1,14 @@
 /* Sources:
 
-[AE]: https://stackoverflow.com/questions/41052598/reactjs-array-push-function-not-working-in-setstate 
- [AG]: https://www.freecodecamp.org/news/how-to-render-lists-in-react/ 
- */
+[AP]: https://medium.com/@gecno/creating-dynamic-components-in-react-with-typescript-f965bc8cd5fd 
 
+[AR]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/textbox_role
+
+[AV]: https://react.dev/reference/react/memo#updating-a-memoized-component-using-state
+
+[AU]: https://www.pluralsight.com/resources/blog/guides/how-to-use-radio-buttons-in-reactjs
+*/
+// 
 
  import { useState } from "react";
  import React from "react";
@@ -24,6 +29,7 @@
 interface DynamicComponentProps {
   text: string;
 }
+// [AP]
 
  
  const apiCall = () => {
@@ -167,76 +173,97 @@ interface DynamicComponentProps {
    />)
  }
  
-//  const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
-  const DynamicShortAnswer: React.FC<{}> = () => {
+ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+// Property 'text' does not exist on type '{}'.ts(2339)
+// const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
+// const DynamicShortAnswer: React.FC<{}> = () => {
+  const [field, setField] = useState('');
+    
+  // [AR]
   return (
     <>
-      <input
-        // className="formFields --nameField"
-        //   type="text"
-        id="name"
-        name="name"
-        placeholder="John Doe"
-        size={50}
-        maxLength={4}
-        minLength={4}
-        required
-      />
+    <label>
+      {/* {text}{': '} */}
       <br />
-      {/* <br /> */}
+      <input
+      type="textarea"
+      // type="text"
+      value={field}
+      onChange={e => setField(e.target.value) }
+      size={50}
+      // contentEditable="true"
+      aria-multiline="true"
+      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+      // rows={10}
+      maxLength={280} 
+      />
+    </label> 
+    <br />
     </>
   );
 };
 
-//  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
-  const DynamicLongAnswer: React.FC<{}> = () => {
+// [AV]
+
+ const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+  // const DynamicLongAnswer: React.FC<{}> = () => {
+    const [field, setField] = useState('');
+    
   return (
     <>
-      <input
-        // className="formFields --nameField"
-        //   type="text"
-        id="name"
-        name="name"
-        placeholder="John Doe"
-        size={50}
-        maxLength={4}
-        minLength={4}
-        required
-      />
+    <label>
+      {/* {text}{': '} */}
       <br />
-      {/* <br /> */}
+      <input
+      type="textarea"
+      // type="text"
+      value={field}
+      onChange={e => setField(e.target.value) }
+      size={50}
+      // contentEditable="true"
+      aria-multiline="true"
+      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+      // rows={10}
+      maxLength={560} 
+      />
+    </label> 
+    <br />
     </>
   );
 };
 
  const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
+    const [truth, setTruth] = useState(false);
+    const [val, setVal] = useState("");
 
+    // [AU]
   return (
     <>
       <>{text}</>
-      <button
-      //  onClick={() =>
-      //   // @ts-ignore comment
-      //   setThePlatform((thePlatform) =>
-      //     thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-      //   )
-      // }
-      >
-        True
-      </button>
-      <button
-      //  onClick={() =>
-      //   // @ts-ignore comment
-      //   setThePlatform((thePlatform) =>
-      //     thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-      //   )
-      // }
-      >
-        False
-      </button>
-      <br />
-      {/* <br /> */}
+      <label>
+      True
+      <input
+      type="radio"  
+      checked={truth} 
+      onChange={e => setTruth(true) }
+      // onClick={setTruth(true)} 
+      />
+    </label>  
+    
+    <br/>
+    <label>
+      False
+      <input
+      type="radio"  
+      checked={!truth}
+      onChange={e => setTruth(false) }
+      // onClick={setTruth(true)} 
+      />
+    </label> 
+    <br />
+    <br />
+    
     </>
   );
 };
@@ -251,8 +278,19 @@ interface DynamicComponentProps {
      return React.createElement(component, props);
    }
  };
+
+ function QuestionSelector2({ exampleFunc }) {
+  const [childData, setChildData] = useState("");
+
+  return(
+    <div> <button className='formbuttons' onClick={exampleFunc}>Multiple Choice</button> </div>
+      );
+}
+
  
- let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
+ let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
+//  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
+
 
  const App2: React.FC = () => {
   const [count, setCount] = useState(0);
@@ -274,7 +312,8 @@ interface DynamicComponentProps {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
           )
         }
       >
@@ -313,7 +352,116 @@ interface DynamicComponentProps {
   ); 
 };
 
- function FormPage() {
+const App3: React.FC = () => {
+  // const [count, setCount] = useState(0);
+  // @ts-ignore comment
+  //   const [thePlatform, setThePlatform] = [];
+  const [thePlatform, setThePlatform] = useState(myList3);
+  // const [formArea, setFormArea] = useState(formField);
+
+  
+  return (
+    <> 
+      <div className='Button-section leftside'>
+        <button className='formbuttons' onClick={apiCall}>←</button>
+        <p> Form Question Types </p>
+        <button className='formbuttons' id="short-answer"
+        onClick={() =>
+          // @ts-ignore comment
+          setThePlatform((thePlatform) =>
+            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+          )
+        }
+        >
+          Add short answer
+        </button>
+        <br />
+      <button className='formbuttons' id="long-answer"
+        onClick={() =>
+          // @ts-ignore comment
+          setThePlatform((thePlatform) =>
+            thePlatform.concat(createDynamicComponent2(DynamicLongAnswer))
+          )
+        }
+      >
+        Add long answer
+      </button> 
+      <br />
+
+     <button className='formbuttons' id="true-false"
+        onClick={() =>
+          // @ts-ignore comment
+          // CHQ: the following doesn't work.
+          setThePlatform((thePlatform) =>
+            thePlatform.concat(
+              createDynamicComponent2(DynamicTrueFalse, {
+                text: "First component stored in a list",
+              })
+            )
+          )
+        }
+      >
+        Add True/False
+      </button>
+      <br />
+
+      
+      {/* <p>total number of questions: {thePlatform.length}</p> */}
+      {/* <div>{myList3}</div> */}
+           {/* <QuestionSelector/> */}
+             <a
+               className="App-link"
+               href="https://reactjs.org"
+               target="_blank"
+               rel="noopener noreferrer"
+             >
+               Help
+             </a>
+     
+           </div>
+           <div className='rightside'>
+     
+           <img src={logo} className="App-logo" alt="logo" />
+             <button onClick={apiCall}>Make API call</button>
+             <p>
+                 THIS IS THE HOME PAGE
+             </p>
+             {/* FIXME: inserting component here did not work */}
+             {/* Too many re-renders. React limits the number of renders to prevent an infinite loop. */}
+                          {/* <QuestionSelector2 exampleFunc={setFormArea((formArea) => formArea.concat({
+           name: "Multiple Choice",
+           component: "MC Question",
+         }))}/> */}
+
+             {/* <App2/> */}
+             {/* <div>
+              <button onClick={() =>
+            // @ts-ignore comment
+            setThePlatform((thePlatform) =>
+              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+            )
+              }
+            >
+            Add short answer
+            </button>
+
+
+             </div>  */}
+                   <p>total number of questions: {thePlatform.length}</p>
+
+             <div>{thePlatform}</div>
+
+             {/* <p className="listWindow">{JSON.stringify(formArea)}</p>  */}
+           </div>
+    </>
+  ); 
+};
+// function FormPage2() {
+//   return();
+// }
+
+ function FormPage1() {
    // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
    // const [formArea, setFormArea] = useState(Array<String>); // CHQ: didn't work
        const [formArea, setFormArea] = useState(formField);
@@ -353,6 +501,7 @@ interface DynamicComponentProps {
        return (
          <div className="App"> 
            <FormModal3 />
+           <App2/>
            <div className='Button-section leftside'>
            {/* <img src={logo} className="App-logo" alt="logo" /> */}
                  <button className='formbuttons' onClick={apiCall}>←</button>
@@ -360,6 +509,7 @@ interface DynamicComponentProps {
              <p>
                  Form Question Types
              </p>      
+             {/* <App2/> */}
              <div>
                  {/* [AE] */}
                  {/* <button className='formbuttons' onClick={() => setCompList((compList) => compList.concat(<MyComponent/>))}>Test button</button> */}
@@ -394,7 +544,29 @@ interface DynamicComponentProps {
              <p>
                  THIS IS THE HOME PAGE
              </p>
+             {/* FIXME: inserting component here did not work */}
+             {/* Too many re-renders. React limits the number of renders to prevent an infinite loop. */}
+                          {/* <QuestionSelector2 exampleFunc={setFormArea((formArea) => formArea.concat({
+           name: "Multiple Choice",
+           component: "MC Question",
+         }))}/> */}
+
              <App2/>
+             <div>
+              <button onClick={() =>
+            // @ts-ignore comment
+            setThePlatform((thePlatform) =>
+              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+            // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+            )
+              }
+            >
+            Add short answer
+            </button>
+
+
+             </div>
+            
              {/* <>{compList}</> */}
              {/* <MyComponent/> */}
              {/* <MyComp1/> */}
@@ -428,6 +600,12 @@ interface DynamicComponentProps {
            </div>
          </div>
        );
+ }
+
+
+ function FormPage() {
+  // return(<FormPage1/>)
+  return(<App3/>)
  }
  
  export default FormPage;
