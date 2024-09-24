@@ -1,8 +1,13 @@
 /* Sources:
 
-[AP]: https://medium.com/@gecno/creating-dynamic-components-in-react-with-typescript-f965bc8cd5fd */
+[AP]: https://medium.com/@gecno/creating-dynamic-components-in-react-with-typescript-f965bc8cd5fd 
 
+[AR]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/textbox_role
 
+[AV]: https://react.dev/reference/react/memo#updating-a-memoized-component-using-state
+
+*/
+// 
  import { useState } from "react";
  import React from "react";
  // import Dialog from "./MyDialog";
@@ -166,45 +171,61 @@ interface DynamicComponentProps {
    />)
  }
  
-//  const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
-  const DynamicShortAnswer: React.FC<{}> = () => {
+ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+// Property 'text' does not exist on type '{}'.ts(2339)
+// const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
+// const DynamicShortAnswer: React.FC<{}> = () => {
+  const [field, setField] = useState('');
+    
+  // [AR]
   return (
     <>
-      <input
-        // className="formFields --nameField"
-        //   type="text"
-        id="name"
-        name="name"
-        placeholder="John Doe"
-        size={50}
-        maxLength={4}
-        minLength={4}
-        required
-      />
+    <label>
+      {/* {text}{': '} */}
       <br />
-      {/* <br /> */}
+      <input
+      type="textarea"
+      // type="text"
+      value={field}
+      onChange={e => setField(e.target.value) }
+      size={50}
+      // contentEditable="true"
+      aria-multiline="true"
+      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+      // rows={10}
+      maxLength={280} 
+      />
+    </label> 
+    <br />
     </>
   );
 };
 
-//  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
-  const DynamicLongAnswer: React.FC<{}> = () => {
+// [AV]
+
+ const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+  // const DynamicLongAnswer: React.FC<{}> = () => {
+    const [field, setField] = useState('');
+    
   return (
     <>
-      <input
-        // className="formFields --nameField"
-        //   type="text"
-        id="name"
-        name="name"
-        placeholder="John Doe"
-        size={50}
-        rows={10}
-        maxLength={4}
-        minLength={4}
-        required
-      />
+    <label>
+      {/* {text}{': '} */}
       <br />
-      {/* <br /> */}
+      <input
+      type="textarea"
+      // type="text"
+      value={field}
+      onChange={e => setField(e.target.value) }
+      size={50}
+      // contentEditable="true"
+      aria-multiline="true"
+      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+      // rows={10}
+      maxLength={560} 
+      />
+    </label> 
+    <br />
     </>
   );
 };
@@ -261,7 +282,8 @@ interface DynamicComponentProps {
 }
 
  
- let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
+ let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
+//  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
 
 
  const App2: React.FC = () => {
@@ -284,7 +306,8 @@ interface DynamicComponentProps {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
           )
         }
       >
@@ -324,11 +347,11 @@ interface DynamicComponentProps {
 };
 
 const App3: React.FC = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
   const [thePlatform, setThePlatform] = useState(myList3);
-  const [formArea, setFormArea] = useState(formField);
+  // const [formArea, setFormArea] = useState(formField);
 
   
   return (
@@ -341,6 +364,7 @@ const App3: React.FC = () => {
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
             thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
           )
         }
         >
@@ -422,7 +446,7 @@ const App3: React.FC = () => {
 
              <div>{thePlatform}</div>
 
-             <p className="listWindow">{JSON.stringify(formArea)}</p> 
+             {/* <p className="listWindow">{JSON.stringify(formArea)}</p>  */}
            </div>
     </>
   ); 
@@ -526,7 +550,8 @@ const App3: React.FC = () => {
               <button onClick={() =>
             // @ts-ignore comment
             setThePlatform((thePlatform) =>
-              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+            // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
             )
               }
             >
