@@ -236,7 +236,7 @@ interface DynamicComponentProps {
   // const DynamicTrueFalse: React.FC<{}> = () => {
     const [truth, setTruth] = useState(false);
     const [val, setVal] = useState("");
-
+    
     // [AU]
   return (
     <>
@@ -250,7 +250,7 @@ interface DynamicComponentProps {
       // onClick={setTruth(true)} 
       />
     </label>  
-    
+
     <br/>
     <label>
       False
@@ -267,6 +267,40 @@ interface DynamicComponentProps {
     </>
   );
 };
+const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
+ // const DynamicTrueFalse: React.FC<{}> = () => {
+   const [truth, setTruth] = useState(false);
+   // [AU]
+ return (
+   <>
+     <>{text}</>
+     <label>
+     True
+     <input
+     type="radio"  
+     checked={truth} 
+     onChange={e => setTruth(true) }
+     // onClick={setTruth(true)} 
+     />
+   </label>  
+
+   <br/>
+   <label>
+     False
+     <input
+     type="radio"  
+     checked={!truth}
+     onChange={e => setTruth(false) }
+     // onClick={setTruth(true)} 
+     />
+   </label> 
+   <br />
+   <br />
+   
+   </>
+ );
+};
+
 
  const createDynamicComponent2 = (
    component: React.ComponentType<any>,
@@ -403,6 +437,23 @@ const App3: React.FC = () => {
         }
       >
         Add True/False
+      </button>
+      <br />
+
+      <button className='formbuttons' id="multi-choice"
+        onClick={() =>
+          // @ts-ignore comment
+          // CHQ: the following doesn't work.
+          setThePlatform((thePlatform) =>
+            thePlatform.concat(
+              createDynamicComponent2(DynamicMultiChoice, {
+                text: "First component stored in a list",
+              })
+            )
+          )
+        }
+      >
+        Add Multiple choice
       </button>
       <br />
 
