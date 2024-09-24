@@ -6,6 +6,7 @@
 
 [AV]: https://react.dev/reference/react/memo#updating-a-memoized-component-using-state
 
+[AU]: https://www.pluralsight.com/resources/blog/guides/how-to-use-radio-buttons-in-reactjs
 */
 // 
 
@@ -233,32 +234,35 @@ interface DynamicComponentProps {
 
  const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
+    const [truth, setTruth] = useState(false);
+    const [val, setVal] = useState("");
 
+    // [AU]
   return (
     <>
       <>{text}</>
-      <button
-      //  onClick={() =>
-      //   // @ts-ignore comment
-      //   setThePlatform((thePlatform) =>
-      //     thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-      //   )
-      // }
-      >
-        True
-      </button>
-      <button
-      //  onClick={() =>
-      //   // @ts-ignore comment
-      //   setThePlatform((thePlatform) =>
-      //     thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-      //   )
-      // }
-      >
-        False
-      </button>
-      <br />
-      {/* <br /> */}
+      <label>
+      True
+      <input
+      type="radio"  
+      checked={truth} 
+      onChange={e => setTruth(true) }
+      // onClick={setTruth(true)} 
+      />
+    </label> 
+    <br/>
+    <label>
+      False
+      <input
+      type="radio"  
+      checked={!truth}
+      onChange={e => setTruth(false) }
+      // onClick={setTruth(true)} 
+      />
+    </label> 
+    <br />
+    <br />
+    
     </>
   );
 };
