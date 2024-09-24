@@ -554,7 +554,7 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
   //  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, Props={"sss", true})];
 
   // CHQ: following line works without compiler errors
-  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { name: 'Lin Lanying', imageId: '1bX5QH6' })];
+  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: 'false' })];
   
    
   //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
@@ -574,30 +574,7 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
    <>
    {/* <Profile/> */}
    {/* <Profile2/> */}
-   <Parent1 textPassedToChildToDisplay={"more text"}/>
-   <Parent2 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
-     <>{text}</>
-     <label>
-     Option 1
-     <input
-     type="radio"  
-     checked={truth} 
-     onChange={e => setTruth(true) }
-     // onClick={setTruth(true)} 
-     />
-   </label>  
-
-   <br/>
-   <label>
-     Option 2
-     <input
-     type="radio"  
-     checked={!truth}
-     onChange={e => setTruth(false) }
-     // onClick={setTruth(true)} 
-     />
-   </label>  
-   <br />
+     
    <label>
      Option 3
      <input
@@ -623,8 +600,11 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
    <button className='formbuttons' id="some-inner-answer"
         onClick={() =>
           // @ts-ignore comment
-          setTheInnerPlatform((theInnerPlatform) =>
-            theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer))
+          setTheInnerPlatform((theInnerPlatform) =>  
+            theInnerPlatform.concat(
+              createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: 'false' })
+            )
+            // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
           )
         }
       >
