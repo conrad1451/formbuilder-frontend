@@ -428,8 +428,11 @@ function Profile2() {
 
 
 const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
-    const [isChecked, setIsChecked] = useState(false);
+    // const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(checkedCondition);
     
+    // if I click on the option and it is not already selected, now it will be selected
+    // if I click on the option and it is already selected, it is just selected - indempotent action
   return (
     <>
     <>{text}</>
@@ -438,18 +441,14 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
       <input
         type="radio"
         checked={isChecked}
-        onChange={checkedFunction}
-        onClick={(isChecked) => {
-          setIsChecked(()=>
-            {
-              if(true){
-                return true
-              }
-              else{
-                return false
-              }})
-            }
-          } 
+
+        onChange={() => { setIsChecked(true) }}
+
+        // onChange={checkedFunction}
+        // onClick={() => { setIsChecked(true) }}
+
+
+        // onClick={(isChecked) => { setIsChecked(true) }} 
         // onClick={()=> {if(!checkedCondition){checkedCondition = true}}} 
     // onClick={()=> {if(true){alert("33")}}} 
     />
@@ -540,9 +539,14 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
    const [theChoice, setTheChoice] = useState("");
    // [AU]
 
-   let myListing = [createDynamicComponent2(DynamicMultiChoice, "sss")];
+  //  let myListing = [createDynamicComponent2(DynamicMultiChoice, "sss")];
+  //  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, Props={"sss", true})];
 
-   <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
+  // CHQ: following line works without compiler errors
+  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { name: 'Lin Lanying', imageId: '1bX5QH6' })];
+  
+   
+  //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
 
    const [theInnerPlatform, setTheInnerPlatform] = useState(myListing);
 
