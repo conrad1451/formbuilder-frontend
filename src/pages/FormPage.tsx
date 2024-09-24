@@ -7,6 +7,10 @@
 [AV]: https://react.dev/reference/react/memo#updating-a-memoized-component-using-state
 
 [AU]: https://www.pluralsight.com/resources/blog/guides/how-to-use-radio-buttons-in-reactjs
+
+[BA]: https://stackoverflow.com/questions/47616355/foreach-in-react-jsx-does-not-output-any-html
+
+
 */
 // 
 
@@ -316,27 +320,35 @@ function Avatar2() {
   );
 }
 
-function Card2({ children }) {
-  return (
-    <div className="card">
-      {children}{children}{children}
-    </div>
-  );
+// [BA]: https://stackoverflow.com/questions/47616355/foreach-in-react-jsx-does-not-output-any-html 
+
+function Card2() {
+
+  let myArray = [0,1,2,3];
+ 
+  myArray.forEach(choice => {
+      <p>{choice}</p>
+     });
+
+    //  below lines failed
+     //@ts-ignore
+    //  return ( {
+    //        //@ts-ignore
+    //   myArray.map((i) => {children})
+    // } );
+
+    return( myArray.forEach(choice => {
+      <p>{choice}</p>
+     }))
 }
 
 
 function Profile2() {
   return (
-    <Card2>
-      <Avatar
-      //@ts-ignore
-        size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
-        }}
-      />
-    </Card2>
+    // 'Card2' cannot be used as a JSX component.
+/**Its type '() => void' is not a valid JSX element type.
+    Type '() => void' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'. */
+    <Card2/> 
   );
 }
 
