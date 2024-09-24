@@ -249,7 +249,8 @@ interface DynamicComponentProps {
       onChange={e => setTruth(true) }
       // onClick={setTruth(true)} 
       />
-    </label> 
+    </label>  
+    
     <br/>
     <label>
       False
