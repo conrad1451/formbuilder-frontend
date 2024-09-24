@@ -44,6 +44,17 @@ interface DynamicMCProps {
   // }
 }
 
+ const createDynamicComponent2 = (
+   component: React.ComponentType<any>,
+   props?: any
+ ) => {
+   if ((props = undefined)) {
+     return React.createElement(component);
+   } else {
+     return React.createElement(component, props);
+   }
+ };
+
 // [AP]
 
  
@@ -632,16 +643,6 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
 };
 
 
- const createDynamicComponent2 = (
-   component: React.ComponentType<any>,
-   props?: any
- ) => {
-   if ((props = undefined)) {
-     return React.createElement(component);
-   } else {
-     return React.createElement(component, props);
-   }
- };
 
  function QuestionSelector2({ exampleFunc }) {
   const [childData, setChildData] = useState("");
