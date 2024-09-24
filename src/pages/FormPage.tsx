@@ -198,6 +198,7 @@ interface DynamicComponentProps {
         name="name"
         placeholder="John Doe"
         size={50}
+        rows={10}
         maxLength={4}
         minLength={4}
         required
@@ -335,7 +336,7 @@ const App3: React.FC = () => {
       <div className='Button-section leftside'>
         <button className='formbuttons' onClick={apiCall}>←</button>
         <p> Form Question Types </p>
-        <button id="short-answer"
+        <button className='formbuttons' id="short-answer"
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
@@ -345,7 +346,8 @@ const App3: React.FC = () => {
         >
           Add short answer
         </button>
-      <button id="long-answer"
+        <br />
+      <button className='formbuttons' id="long-answer"
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
@@ -355,7 +357,9 @@ const App3: React.FC = () => {
       >
         Add long answer
       </button> 
-     <button id="true-false"
+      <br />
+
+     <button className='formbuttons' id="true-false"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -370,6 +374,8 @@ const App3: React.FC = () => {
       >
         Add True/False
       </button>
+      <br />
+
       
       {/* <p>total number of questions: {thePlatform.length}</p> */}
       {/* <div>{myList3}</div> */}
