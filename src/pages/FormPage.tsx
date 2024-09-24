@@ -265,15 +265,130 @@ interface DynamicComponentProps {
     </>
   );
 };
+
+//[AW]: https://react.dev/learn/passing-props-to-a-component
+function Avatar() {
+  return (
+    <img
+      className="avatar"
+      src="https://i.imgur.com/1bX5QH6.jpg"
+      alt="Lin Lanying"
+      width={100}
+      height={100}
+    />
+  );
+}
+
+// CHQ: this functional component acts as a wrappeer
+function CardWhichIsAWrapperForContent({ children }) {
+  return (
+    <div className="testThis">
+      {children}
+    </div>
+  );
+}
+
+ function Profile() {
+  return (
+    <CardWhichIsAWrapperForContent>
+      <Avatar
+      //@ts-ignore
+        size={100}
+        person={{ 
+          name: 'Katsuko Saruhashi',
+          imageId: 'YfeOqp2'
+        }}
+      />
+      
+    </CardWhichIsAWrapperForContent>
+  );
+}
+
+function Avatar2() {
+  return (
+    <img
+      className="avatar"
+      src="https://i.imgur.com/1bX5QH6.jpg"
+      alt="Lin Lanying"
+      width={100}
+      height={100}
+    />
+  );
+}
+
+function Card2({ children }) {
+  return (
+    <div className="card">
+      {children}{children}{children}
+    </div>
+  );
+}
+
+
+function Profile2() {
+  return (
+    <Card2>
+      <Avatar
+      //@ts-ignore
+        size={100}
+        person={{ 
+          name: 'Katsuko Saruhashi',
+          imageId: 'YfeOqp2'
+        }}
+      />
+    </Card2>
+  );
+}
+
+
+// function AgainThis()
+// {
+// return(
+//    <label>
+//   Option 1
+//   <input
+//   type="radio"  
+//   checked={truth} 
+//   onChange={e => setTruth(true) }
+//   // onClick={setTruth(true)} 
+//   />
+// </label> );
+// }
+
+// function YesThis()
+// {
+//   const rows = ["dd", "d42d", "dhrd", "drd"];
+  
+//   // for (let i = 0; i < 4; i++) {
+//   //   // note: we are adding a key prop here to allow react to uniquely identify each
+//   //   // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
+//   //   rows.push(<ObjectRow key={i} />);
+//   // }
+//   // return <tbody>{rows}</tbody>;
+// return  <tbody>    {rows.map((object, i) => <AgainThis obj={object} key={i} />)}  </tbody>
+// }
+
 const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
    const [truth, setTruth] = useState(false);
+   const [theChoice, setTheChoice] = useState("");
    // [AU]
+
+   let myChoices=["A", "B", "C", "D"];
+
+   let theseChoices = ["Option 1", "Option 2", "Option 3", "Option 4"];
+
+   let brobro = theseChoices.forEach(choice => {
+    <p>{choice}</p>
+   });
+
  return (
    <>
+   <Profile/>
+   <Profile2/>
      <>{text}</>
      <label>
-     True
+     Option 1
      <input
      type="radio"  
      checked={truth} 
@@ -284,14 +399,38 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
 
    <br/>
    <label>
-     False
+     Option 2
      <input
      type="radio"  
      checked={!truth}
      onChange={e => setTruth(false) }
      // onClick={setTruth(true)} 
      />
-   </label> 
+   </label>  
+   <br />
+   <label>
+     Option 3
+     <input
+     type="radio"  
+     checked={!truth}
+     onChange={e => setTruth(false) }
+     // onClick={setTruth(true)} 
+     />
+   </label>  
+   <br />
+   <label>
+     Option 4
+     <input
+     type="radio"  
+     checked={!truth}
+     onChange={e => setTruth(false) }
+     // onClick={setTruth(true)} 
+     />
+   </label>  
+   <br />
+
+   <button onClick={apiCall}>Add more options - feature coming soon</button>
+
    <br />
    <br />
    
