@@ -235,8 +235,6 @@ interface DynamicComponentProps {
  const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
     const [truth, setTruth] = useState(false);
-    const [val, setVal] = useState("");
-    
     // [AU]
   return (
     <>
