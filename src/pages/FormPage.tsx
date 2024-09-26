@@ -451,8 +451,12 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
    // [AU]
 
   // CHQ: following line works without compiler errors
-  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})];
-  
+  let myListing = [
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})
+  ];
   const [theInnerPlatform, setTheInnerPlatform] = useState(myListing);
   
   // let myChoices=["A", "B", "C", "D"];
