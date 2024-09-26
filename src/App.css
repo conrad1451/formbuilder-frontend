@@ -144,53 +144,140 @@
   /* display: flex;
   flex-direction: column; */
 
-  .bottomSideBar{
+.bottomSideBar{
 
-    /* background-color: #0656f6; */
+  /* background-color: #0656f6; */
 
-    position: absolute;
-    /* bottom: 0px; */
-    /* below works but I want percentages  */
-    /* bottom: 20px;  */
-    /* I think this is 4% the way up from the bottom */
-    bottom: 4vh;
-    /* the source is [X] */
-  }
+  position: absolute;
+  /* bottom: 0px; */
+  /* below works but I want percentages  */
+  /* bottom: 20px;  */
+  /* I think this is 4% the way up from the bottom */
+  bottom: 4vh;
+  /* the source is [X] */
+}
 
-  .listWindow{
-    /* position: absolute; */
-    background-color: rgb(34, 240, 27);
-    /* CHQ: original test */
-    /* width: 20vw;  */
-    width: 60vw;
-    align-items: center;
-    /* align-self: center; */
-    justify-content: center;
-    display: flex;
-     text-align: center; 
-  
-    transition: all 0.1s linear;
-     border-radius: 4px;
-     /*  CHQ: following line is the secret sauce to get the 
-     block centered in the middle of the element*/
-     display: inline-block;
-    /* flex-direction: column; */
-    /* align-items: center; */
-    /* the source is [X] */
-  }
+.listWindow{
+  /* position: absolute; */
+  background-color: rgb(34, 240, 27);
+  /* CHQ: original test */
+  /* width: 20vw;  */
+  width: 60vw;
+  align-items: center;
+  /* align-self: center; */
+  justify-content: center;
+  display: flex;
+    text-align: center; 
 
-  .formTest{
-    background-color: aliceblue;
-    width: 30vw;
+  transition: all 0.1s linear;
+    border-radius: 4px;
+    /*  CHQ: following line is the secret sauce to get the 
+    block centered in the middle of the element*/
     display: inline-block;
-  }
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* the source is [X] */
+}
 
-  .testThis{
-    background-color: rgb(48, 223, 8);
-    width: 10vw;
-    /* height: 10vh; */
-    display: flex;
-    align-items: center;
-    align-self: center;
-    justify-content: center;
-  }
+.formTest{
+  background-color: aliceblue;
+  width: 30vw;
+  display: inline-block;
+}
+
+.testThis{
+  background-color: rgb(48, 223, 8);
+  width: 10vw;
+  /* height: 10vh; */
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+}
+
+.multiChoiceSubSec{
+  background-color: rgb(48, 223, 8);
+  width: 50%;
+  /* height: 10vh; */
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+}
+
+.multiChoiceOptLayout{
+  background-color: rgb(219, 56, 31);
+  /* width: 60%; */
+  display:inline-block
+    /* width: 33%; */
+  /* height: 10vh; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* align-self: center; */
+  /* justify-content: center; */
+}
+.multiChoiceOptinnerLayout{
+  background-color: rgb(71, 206, 41);
+  width: 60%;
+  /* height: 10vh; */
+  /* display: flex; */
+  /* align-items: center; */
+  /* align-self: center; */
+  /* justify-content: center; */
+}
+
+.multiChoiceOptinnerLayout .left{
+  float: left;
+}  
+
+.multiChoiceOptinnerLayout .right{
+  float: right;
+}
+
+/* [AS] */
+.multiChoiceOptionSection {
+  /* background-color: aqua; */
+  /* float: left; */
+  background-color: rgb(219, 56, 31);
+  /* height: 15vh; */
+
+  /* height: 5vh; */
+  height: 5vh;
+  /* width: 7.5vw; */
+  /* CHQ: auto works poorly */
+  /* width: auto; */
+  display: inline-block;
+  margin: 0 1.5%;
+  /* width: 50%; */
+  /* width: 25%; */
+  /* width: 12.5%; */
+  width: 20%;
+}
+
+.isNowVisible{
+  margin: 0 1.5%;
+  display: inline-block;
+  width: 5vw;
+  /* font-size: 10px; */
+  /* font-size: 100%; */
+  font-size: 20px;
+  visibility: visible;
+  /* visibility: hidden; */
+}
+.isNowHidden{
+  margin: 0 1.5%;
+  width: 0vw;
+  display: inline-block;
+
+  /* visibility: visible; */
+  visibility: hidden;
+}
+
+.testMe{
+  display: inline-block;
+  width: 1vw;
+  /* CHQ: doesn't add much */
+  /* font-size: 20px; */
+  /* setting width to 5% pushes "Edit options" downward */
+  /* width: 5vw; */
+}

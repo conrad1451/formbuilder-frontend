@@ -10,10 +10,21 @@
 
 [BA]: https://stackoverflow.com/questions/47616355/foreach-in-react-jsx-does-not-output-any-html
 
+[VB]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator
+
+[AW]: https://react.dev/learn/passing-props-to-a-component
+
+[ZA]: https://daily.dev/blog/pop-and-push-in-javascript-array-essentials
+
+ [ZB]: https://react.dev/learn/updating-arrays-in-state#removing-from-an-array
+
+[AT]: https://www.w3schools.com/jsref/prop_style_visibility.asp
+
+[AS]: https://learn.shayhowe.com/html-css/positioning-content/#inline-block
 
 */
 // 
-
+//
  import { useState } from "react";
  import React from "react";
  // import Dialog from "./MyDialog";
@@ -199,6 +210,37 @@ interface DynamicMCProps {
    />)
  }
  
+ const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
+  // Property 'text' does not exist on type '{}'.ts(2339)
+  // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
+  // const DynamicShortAnswer: React.FC<{}> = () => {
+    const [field, setField] = useState('');
+      
+    // [AR]
+    return (
+      <>
+      <label>
+        {/* {text}{': '} */}
+        <br />
+        <input
+        type="textarea"
+        // type="text"
+        value={field}
+        onChange={e => setField(e.target.value) }
+        size={10}
+        // contentEditable="true"
+        aria-multiline="true"
+        //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+        // rows={10}
+        maxLength={280} 
+        />
+      </label> 
+      <br />
+      </>
+    );
+  };
+  
+
  const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
 // Property 'text' does not exist on type '{}'.ts(2339)
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
@@ -292,7 +334,7 @@ interface DynamicMCProps {
   );
 };
 
-//[AW]: https://react.dev/learn/passing-props-to-a-component
+//[AW]:  
 function Avatar() {
   return (
     <img
@@ -368,7 +410,7 @@ function Avatar2() {
   );
 }
 
-// [BA]: https://stackoverflow.com/questions/47616355/foreach-in-react-jsx-does-not-output-any-html 
+// [BA]: 
 
 function Card2() {
 
@@ -438,17 +480,136 @@ function Profile2() {
 // }
 
 
+function SmallTextField({isVisible}){
+  const [field, setField] = useState('');
+
+  // CHQ: an optimization I put here. Far better than returning 
+  // one component when isVisible and a whole nother component
+  // when !isVisible, since the only difference between the
+  // two is the type of input (text area vs hidden)
+  // [VB]
+  return(    
+  <div className="testMe">
+  {/* <p>dddd</p> */}
+    <label>
+      {/* {text}{': '} */}
+      {/* <br /> */}
+      <input
+      // type="textarea"
+      // type="hidden"
+      type = {isVisible ? "textarea" : "hidden"}
+      // type="text"
+      value={field}
+      onChange={e => setField(e.target.value) }
+      size={10}
+      // contentEditable="true"
+      aria-multiline="true"
+      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+      // rows={10}
+      maxLength={280} 
+      />
+    </label> 
+    {/* <br /> */}
+    </div>)
+}
+
+// function SmallTextFieldAlt({isVisible}){
+function SmallTextFieldAlt({isVisible, thisText, setThisText}){
+  // const [field, setField] = useState('');
+
+  // CHQ: an optimization I put here. Far better than returning 
+  // one component when isVisible and a whole nother component
+  // when !isVisible, since the only difference between the
+  // two is the type of input (text area vs hidden)
+  // [VB]
+  return(    
+  <div className="testMe">
+  {/* <p>dddd</p> */}
+    <label>
+      {/* {text}{': '} */}
+      {/* <br /> */}
+      <input 
+      type = {isVisible ? "textarea" : "hidden"}
+      value={thisText}
+      onChange={e => setThisText(e.target.value) }
+      size={10}
+      // contentEditable="true"
+      aria-multiline="true"
+      maxLength={280} 
+      />
+    </label> 
+    {/* <br /> */}
+    </div>)
+}
+
+// function EditableTextModule({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
+  // function EditableTextModule({myText}) {
+  function EditableTextModule({myText, isEditing}) {
+  // let myArray = [0,1,2,3];
+  // const [fieldText, setFieldText] = useState(""); 
+  // const [isEditing, setIsEditing] = useState(true);
+
+  const [theText, setTheText] = useState("YES");
+  const [field, setField] = useState('');
+      
+  // [AR] // [AT]
+  return (
+    <>    <div className="multiChoiceOptionSection">
+      {/* <text visibility={false ? "visible" : "hidden"}> */}
+      {/* <text visibility="hidden"> */}
+      <text
+      className={!isEditing ? "isNowVisible" : "isNowHidden"}>
+        {/* {myText} */}
+        {theText}
+        {/* </text> <SmallTextField isVisible={!isEditing}/> */}
+        {/* </text> <SmallTextFieldAlt isVisible={isEditing}/> */}
+        {/* </text> <SmallTextFieldAlt isVisible={isEditing} field={field} setField={setField} /> */}
+        </text> <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} />
+
+      {/* </text> <p>dd</p><SmallTextField isVisible={!isEditing}/> */}
+    </div> 
+    <div className="multiChoiceOptLayout">
+
+
+    </div>
+
+    </>
+  );
+
+  // return (
+  //   <img
+  //   className="avatar"
+  //   src={urlOfImgPassedToChildToDisplay}
+  //   alt="Lin Lanying"
+  //   width={myWidth}
+  //   height={myHeight}
+  // /> 
+  // );
+}
+
 const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
     // const [isChecked, setIsChecked] = useState(false);
     const [isChecked, setIsChecked] = useState(checkedCondition);
+    const [optionText, setOptionText] = useState(text); 
+    const [hasEditorOpen, setHasEditorOpen] = useState(false);
+    
+    let myListing = [createDynamicComponent2(DynamicTextEntry)];
+    const [truth, setTruth] = useState(false);
+
+   
+    //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
+  
+     const [inputView, setInputView] = useState(myListing);
+
     
     // if I click on the option and it is not already selected, now it will be selected
     // if I click on the option and it is already selected, it is just selected - indempotent action
   return (
     <>
     <>{text}</>
-    <label> 
-      Option 1
+    {/* <label> 
+      sss{inputView}
+      {optionText}
       <input
         type="radio"
         checked={isChecked}
@@ -463,7 +624,34 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
         // onClick={()=> {if(!checkedCondition){checkedCondition = true}}} 
     // onClick={()=> {if(true){alert("33")}}} 
     />
-  </label>  
+  </label>   */}
+
+
+    {/* <EditableTextModule myText={"YdddddddddddddddddddddddddddddddddddddES"}/> */}
+  <EditableTextModule myText={"YES"} isEditing={hasEditorOpen}/>
+  <input
+    type="radio"
+    checked={truth}
+    // onChange={e => setTruth(e.target.value) }
+    // onChange={e => setTruth(false) }
+    onChange={() => setTruth(!truth) }
+    />
+   <button id="some-inner-answer"
+        onClick={() => { setHasEditorOpen(!hasEditorOpen) }}
+       
+        // onClick={() =>
+        //   // @ts-ignore comment
+        //   setTheInnerPlatform((inputView) =>  
+        //     setInputView.concat(
+        //       createDynamicComponent2(DynamicShortAnswer)
+        //     )
+        //     // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
+        //   )
+        // }
+      >
+        {hasEditorOpen ? "Save Changes": "Edit Option"}
+        
+      </button>   
 
   <br/>
     </>
@@ -544,6 +732,8 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  };
  
 
+//  [ZA]
+
 const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
    const [truth, setTruth] = useState(false);
@@ -554,7 +744,7 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
   //  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, Props={"sss", true})];
 
   // CHQ: following line works without compiler errors
-  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: 'false' })];
+  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})];
   
    
   //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
@@ -569,51 +759,71 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
    let brobro = theseChoices.forEach(choice => {
     <p>{choice}</p>
    });
-
- return (
-   <>
-   {/* <Profile/> */}
-   {/* <Profile2/> */}
-     
-   <label>
-     Option 3
-     <input
-     type="radio"  
-     checked={!truth}
-     onChange={e => setTruth(false) }
-     // onClick={setTruth(true)} 
-     />
-   </label>  
-   <br />
-   <label>
-     Option 4
-     <input
-     type="radio"  
-     checked={!truth}
-     onChange={e => setTruth(false) }
-     // onClick={setTruth(true)} 
-     />
-   </label>  
-   <br />
-
-   <button onClick={apiCall}>Add more options - feature coming soon</button>
-   <button className='formbuttons' id="some-inner-answer"
+ 
+   return (
+    <>
+    <div>
+      <div> 
+        <br />
+        <div>{theInnerPlatform}</div>
+        <br />
+      </div>
+    <div>
+   {/* <button className='formbuttons' id="some-inner-answer" */}
+    <button id="some-inner-answer"
         onClick={() =>
           // @ts-ignore comment
           setTheInnerPlatform((theInnerPlatform) =>  
             theInnerPlatform.concat(
-              createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: 'false' })
+              createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition:false })
             )
             // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
           )
         }
       >
-        Add an inner answer
+        Add Option (+)
+      </button>     
+      <button id="some-inner-answer"
+        onClick={() =>{
+          setTheInnerPlatform(theInnerPlatform.slice(0, -1))
+         // @ts-ignore comment
+
+
+        // [ZB]
+        
+          // setTheInnerPlatform.filter(theInnerPlatform =>
+          //   theInnerPlatform[-1] 
+          // )
+
+          // CHQ: bug: removes ALL added elements
+          // setTheInnerPlatform((theInnerPlatform) => theInnerPlatform.filter((radioOption, i) => i === -1) )
+
+          // CHQ: bug: does nothing
+          // setTheInnerPlatform((theInnerPlatform) => theInnerPlatform.filter((radioOption, i) => radioOption[i] === radioOption[-1]) )
+
+          // setTheInnerPlatform((theInnerPlatform) => 
+            
+          //   theInnerPlatform.concat(
+          //     createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: 'false' })
+          //   )
+          //   // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
+          // )  
+        }
+        }
+      >
+        Remove Option (-)
       </button> 
       <p>total number of inner things: {theInnerPlatform.length}</p>
 
-<div>{theInnerPlatform}</div>
-      <br />
+     </div>
+      
+</div>
+
+
+ 
+
+
+
 
    <br />
    <br />
@@ -889,7 +1099,6 @@ const App3: React.FC = () => {
              </p>      
              {/* <App2/> */}
              <div>
-                 {/* [AE] */}
                  {/* <button className='formbuttons' onClick={() => setCompList((compList) => compList.concat(<MyComponent/>))}>Test button</button> */}
  
                  <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[0]))}>Multiple Choice</button>
@@ -958,8 +1167,7 @@ const App3: React.FC = () => {
              </a> */}
              <p className="listWindow">{JSON.stringify(formArea)}</p>
              
-             
-             {/* [AG] */}
+              
              {/* <p>{(formArea => {})}</p> */}
              {/* <>
              {formArea.map(function(element) {
