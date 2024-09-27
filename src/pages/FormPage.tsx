@@ -19,6 +19,9 @@
 
 [AS]: https://learn.shayhowe.com/html-css/positioning-content/#inline-block
 
+
+[AZ]: https://www.geeksforgeeks.org/how-to-make-your-content-editable-in-html/#
+
 */
 // 
 //
@@ -497,7 +500,9 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
       >
         Remove Option (-)
       </button> 
-      <p>total number of inner things: {optionList.length}</p>
+      {/* CHQ: This is where I tested to prove that content editable would address my problems */}
+      <p contentEditable="true">total number of inner things: {optionList.length}</p>
+      {/* [AZ] */}
 
      </div>
       
