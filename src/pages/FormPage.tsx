@@ -680,42 +680,17 @@ const App3: React.FC = () => {
      
            <img src={logo} className="App-logo" alt="logo" />
              <button onClick={apiCall}>Make API call</button>
-             <p>
-                 THIS IS THE HOME PAGE
-             </p>
-             {/* FIXME: inserting component here did not work */}
-             {/* Too many re-renders. React limits the number of renders to prevent an infinite loop. */}
-                          {/* <QuestionSelector2 exampleFunc={setFormArea((formArea) => formArea.concat({
-           name: "Multiple Choice",
-           component: "MC Question",
-         }))}/> */}
+             <h2>
+                 New Form
+             </h2>
 
-             {/* <App2/> */}
-             {/* <div>
-              <button onClick={() =>
-            // @ts-ignore comment
-            setThePlatform((thePlatform) =>
-              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-            )
-              }
-            >
-            Add short answer
-            </button>
-
-
-             </div>  */}
-                   <p>total number of questions: {thePlatform.length}</p>
+                   <p>Number of questions: {thePlatform.length}</p>
 
              <div>{thePlatform}</div>
-
-             {/* <p className="listWindow">{JSON.stringify(formArea)}</p>  */}
            </div>
     </>
   ); 
-};
-// function FormPage2() {
-//   return();
-// }
+}; 
 
  function FormPage1() {
    // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
@@ -858,8 +833,8 @@ const App3: React.FC = () => {
 
  function FormPage() {
   // return(<FormPage1/>)
-  // return(<App3/>)
-  return(<App2/>)
+  return(<App3/>)
+  // return(<App2/>)
  }
  
  export default FormPage;
