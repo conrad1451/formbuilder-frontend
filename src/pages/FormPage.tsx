@@ -457,7 +457,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
     createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
     createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})
   ];
-  const [theInnerPlatform, setTheInnerPlatform] = useState(myListing);
+  const [optionList, setOptionList] = useState(myListing);
   
   // let myChoices=["A", "B", "C", "D"];
   
@@ -472,7 +472,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
     <div>
       <div> 
         <br />
-        <div>{theInnerPlatform}</div>
+        <div>{optionList}</div>
         <br />
       </div>
     <div>
@@ -480,11 +480,11 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
     <button id="some-inner-answer"
         onClick={() =>
           // @ts-ignore comment
-          setTheInnerPlatform((theInnerPlatform) =>  
-            theInnerPlatform.concat(
+          setOptionList((optionList) =>  
+            optionList.concat(
               createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition:false })
             )
-            // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
+            // optionList.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
           )
         }
       >
@@ -493,11 +493,11 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
       <button id="some-inner-answer"
         onClick={() =>{
           // [ZB]
-          setTheInnerPlatform(theInnerPlatform.slice(0, -1))} }
+          setOptionList(optionList.slice(0, -1))} }
       >
         Remove Option (-)
       </button> 
-      <p>total number of inner things: {theInnerPlatform.length}</p>
+      <p>total number of inner things: {optionList.length}</p>
 
      </div>
       
