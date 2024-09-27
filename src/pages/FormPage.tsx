@@ -371,79 +371,45 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 }
 
 // function EditableTextModule({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
-  // function EditableTextModule({myText}) {
-  function EditableTextModule({myText, isEditing}) {
-  // function EditableTextModule({isEditing}) {
-
-  // let myArray = [0,1,2,3];
-  // const [fieldText, setFieldText] = useState(""); 
-  // const [isEditing, setIsEditing] = useState(true);
-
-  // const [theText, setTheText] = useState("YES");
-  const [theText, setTheText] = useState(myText);
-
-  // const [field, setField] = useState('');
-      
+// function EditableTextModule({myText}) {
+function EditableTextModule({myText, isEditing}) {
+  // function EditableTextModule({isEditing}) { 
+  const [theText, setTheText] = useState(myText); 
   // [AR] // [AT]
-  return (
-    <>    <div className="multiChoiceOptionSection">
-      {/* <text visibility={false ? "visible" : "hidden"}> */}
-      {/* <text visibility="hidden"> */}
-      {/* Type '{ contentEditable: string; }' is not assignable to type 'SVGTextElementAttributes<SVGTextElement>'.
- */}
-      {/* <text      contentEditable="true" */}
-       {/* <text
-      className={!isEditing ? "isNowVisible" : "isNowHidden"}> {theText}
-        </text> <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */}
-        
-
-      {/* CHQ: the contentEditable field eilminates the need for a hidden text box altogether! */}
-        <p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>
-         {/* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */}
-      {/* [AZ] */}
-
-      {/* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */}
-      {/* </text> <p>dd</p><SmallTextField isVisible={!isEditing}/> */}
-    </div> 
-    <div className="multiChoiceOptLayout">
-
-
-    </div>
-
-    </>
-  );
+/* CHQ: the contentEditable field eilminates the need for a hidden text box altogether!
+/* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */ 
+/* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */
+/* [AZ] */
+  return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
 }
 
 const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
-    // const [isChecked, setIsChecked] = useState(false);
-    // const [isChecked, setIsChecked] = useState(checkedCondition);
-    // const [optionText, setOptionText] = useState(text); 
-    const [hasEditorOpen, setHasEditorOpen] = useState(false);
-    
-    // let myListing = [createDynamicComponent2(DynamicTextEntry)];
-    const [truth, setTruth] = useState(checkedCondition); 
-    //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
+  // const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(checkedCondition);
+  // const [optionText, setOptionText] = useState(text);
+  const [hasEditorOpen, setHasEditorOpen] = useState(false);
   
-    //  const [inputView, setInputView] = useState(myListing);
+  // let myListing = [createDynamicComponent2(DynamicTextEntry)];
+  const [truth, setTruth] = useState(checkedCondition);   
+  //  const [inputView, setInputView] = useState(myListing);
 
-    
-    // if I click on the option and it is not already selected, now it will be selected
-    // if I click on the option and it is already selected, it is just selected - indempotent action
+  // if I click on the option and it is not already selected, now it will be selected
+  // if I click on the option and it is already selected, it is just selected - indempotent action
   return (
     <>
-    {/* <>{text}</> */}
-    {/* <EditableTextModule myText={"Yes"} isEditing={hasEditorOpen}/> */}
-    <EditableTextModule myText={"Yah  "} isEditing={hasEditorOpen}/>
-    {/* <EditableTextModule myText={"Yes bro test this long string"} isEditing={hasEditorOpen}/> */}
-
+ 
     {/* <EditableTextModule isEditing={hasEditorOpen}/> */}
+
+    <div className="multiChoiceOptLayout">
     <input
       type="radio"
       checked={truth}
       // onChange={e => setTruth(e.target.value) }
       // onChange={e => setTruth(false) }
       onChange={() => setTruth(!truth) }
-      />
+      /><EditableTextModule myText={"Yah  "} isEditing={hasEditorOpen}/>
+    </div>
+
       <button id="some-inner-answer"
         onClick={() => { setHasEditorOpen(!hasEditorOpen) }}
         >
