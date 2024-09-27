@@ -252,13 +252,24 @@
   /* width: 50%; */
   /* width: 25%; */
   /* width: 12.5%; */
-  width: 20%;
+
+  /* Chose this but rethought */
+  /* width: 20%; */
+
+  width: auto;
 }
 
 .isNowVisible{
   margin: 0 1.5%;
   display: inline-block;
-  width: 5vw;
+  /* CHQ: this width I chose but am disablingn to see how it goes. teste dna dseems it was too small */
+  /* width: 5vw; */
+  /* too large */
+  /* width: 15vw; */
+  /* just right, but not when the text is longer despiate being within the red boundary */
+  /* width: 10vw; */
+  
+
   /* font-size: 10px; */
   /* font-size: 100%; */
   font-size: 20px;

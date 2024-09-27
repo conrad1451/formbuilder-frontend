@@ -387,14 +387,9 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
       {/* <text visibility={false ? "visible" : "hidden"}> */}
       {/* <text visibility="hidden"> */}
       <text
-      className={!isEditing ? "isNowVisible" : "isNowHidden"}>
-        {/* {myText} */}
-        {theText}
-        {/* </text> <SmallTextField isVisible={!isEditing}/> */}
-        {/* </text> <SmallTextFieldAlt isVisible={isEditing}/> */}
-        {/* </text> <SmallTextFieldAlt isVisible={isEditing} field={field} setField={setField} /> */}
+      className={!isEditing ? "isNowVisible" : "isNowHidden"}> {theText}
         </text> <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} />
-
+{/* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */}
       {/* </text> <p>dd</p><SmallTextField isVisible={!isEditing}/> */}
     </div> 
     <div className="multiChoiceOptLayout">
@@ -423,8 +418,11 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
     // if I click on the option and it is already selected, it is just selected - indempotent action
   return (
     <>
-    <>{text}</>
-    <EditableTextModule myText={"Yes bro"} isEditing={hasEditorOpen}/>
+    {/* <>{text}</> */}
+    {/* <EditableTextModule myText={"Yes"} isEditing={hasEditorOpen}/> */}
+    <EditableTextModule myText={"Yah  "} isEditing={hasEditorOpen}/>
+    {/* <EditableTextModule myText={"Yes bro test this long string"} isEditing={hasEditorOpen}/> */}
+
     {/* <EditableTextModule isEditing={hasEditorOpen}/> */}
     <input
       type="radio"
