@@ -603,6 +603,8 @@ const App3: React.FC = () => {
     <> 
     
       <div className='Button-section leftside'>
+        <img src={logo} width={200} className="App-logo" alt="logo"/>
+
         <button className='formbuttons' onClick={apiCall}>←</button>
         <p> Form Question Types - multiple select, fill in blank, and matching are missing </p>
         <button className='formbuttons' id="short-answer"
@@ -678,7 +680,6 @@ const App3: React.FC = () => {
            </div>
            <div className='rightside'>
      
-           <img src={logo} className="App-logo" alt="logo" />
              <button onClick={apiCall}>Make API call</button>
              <h2>
                  New Form
