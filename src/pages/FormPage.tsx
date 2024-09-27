@@ -8,11 +8,8 @@
 
 [AU]: https://www.pluralsight.com/resources/blog/guides/how-to-use-radio-buttons-in-reactjs
 
-[BA]: https://stackoverflow.com/questions/47616355/foreach-in-react-jsx-does-not-output-any-html
-
 [VB]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator
 
-[AW]: https://react.dev/learn/passing-props-to-a-component
 
 [ZA]: https://daily.dev/blog/pop-and-push-in-javascript-array-essentials
 
@@ -172,43 +169,7 @@ interface DynamicMCProps {
          );
    }
  
- 
- function MyComponent(){
-   return (<div className="formTest">
-     <form id="form2" method="dialog">
-     {/* <form method="dialog" action=""> */}
-     <br />
-     <label htmlFor="fname">Name: </label>
-     {/* <br /> */}
-     <input
-       className="formFields --nameField"
-       type="text"
-       id="name"
-       name="name"
-       placeholder="John Doe"
-       required
-     />
-     <br />
-     {/* <br />  */}
-     <input className="my_button" type="submit" value="Submit" />
- 
-     {/* <button onclick="myFunc()" id="confirmBtn" value="default">
-         Confirm
-       </button> */}
-   </form>
-     </div>);
- }
- 
- function MyComp1(){
-   return(    <input
-     className="formFields --nameField"
-     type="text"
-     id="name"
-     name="name"
-     placeholder="John Doe"
-     required
-   />)
- }
+  
  
  const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
   // Property 'text' does not exist on type '{}'.ts(2339)
@@ -333,151 +294,15 @@ interface DynamicMCProps {
     </>
   );
 };
-
-//[AW]:  
-function Avatar() {
-  return (
-    <img
-      className="avatar"
-      src="https://i.imgur.com/1bX5QH6.jpg"
-      alt="Lin Lanying"
-      width={100}
-      height={100}
-    />
-  );
-}
-
-// CHQ: this functional component acts as a wrappeer
-function CardWhichIsAWrapperForContent({ children }) {
-  return (
-    <div className="testThis">
-      {children}
-    </div>
-  );
-}
-
-function Parent1({ textPassedToChildToDisplay }) {
-  let myArray = [0,1,2,3];
-
-  return (
-    // the myArray.forEach(choice => { isn't doing anything
-    <div className="testThis">
-      {textPassedToChildToDisplay} 
-    </div>
-  );
-}
-
-function Parent2({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
-  // let myArray = [0,1,2,3];
-
-  return (
-    <img
-    className="avatar"
-    src={urlOfImgPassedToChildToDisplay}
-    alt="Lin Lanying"
-    width={myWidth}
-    height={myHeight}
-  /> 
-  );
-}
-
- function Profile() {
-  return (
-    <CardWhichIsAWrapperForContent>
-      <Avatar
-      //@ts-ignore
-        size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
-        }}
-      />
-      
-    </CardWhichIsAWrapperForContent>
-  );
-}
-
-function Avatar2() {
-  return (
-    // <img
-    //   className="avatar"
-    //   src="https://i.imgur.com/1bX5QH6.jpg"
-    //   alt="Lin Lanying"
-    //   width={100}
-    //   height={100}
-    // />
-    <p>bro</p>
-  );
-}
-
-// [BA]: 
-
-function Card2() {
-
-  let myArray = [0,1,2,3];
  
-  myArray.forEach(choice => {
-      <p>{choice}</p>
-     });
+ 
+ 
 
-    //  below lines failed
-     //@ts-ignore
-    //  return ( {
-    //        //@ts-ignore
-    //   myArray.map((i) => {children})
-    // } );
-
-    return( myArray.forEach(choice => {
-      <p>{choice}</p>
-     }))
-}
+ 
 
 
-function Profile2() {
-  return (
-    // 'Card2' cannot be used as a JSX component.
-/**Its type '() => void' is not a valid JSX element type.
-    Type '() => void' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'. */
-    // <Card2/> 
-
-    // <Avatar2/>
-
-    // CHQ: errors below
-    // <Parent1>
-    //   <p>hihi</p>
-    //   <Parent1/>
-    <Parent1 textPassedToChildToDisplay={"ddd"}/>
-  );    
-
-}
-
-
-// function AgainThis()
-// {
-// return(
-//    <label>
-//   Option 1
-//   <input
-//   type="radio"  
-//   checked={truth} 
-//   onChange={e => setTruth(true) }
-//   // onClick={setTruth(true)} 
-//   />
-// </label> );
-// }
-
-// function YesThis()
-// {
-//   const rows = ["dd", "d42d", "dhrd", "drd"];
-  
-//   // for (let i = 0; i < 4; i++) {
-//   //   // note: we are adding a key prop here to allow react to uniquely identify each
-//   //   // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-//   //   rows.push(<ObjectRow key={i} />);
-//   // }
-//   // return <tbody>{rows}</tbody>;
-// return  <tbody>    {rows.map((object, i) => <AgainThis obj={object} key={i} />)}  </tbody>
-// }
+ 
+ 
 
 
 function SmallTextField({isVisible}){
@@ -544,13 +369,15 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 
 // function EditableTextModule({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
   // function EditableTextModule({myText}) {
-  function EditableTextModule({myText, isEditing}) {
+  // function EditableTextModule({myText, isEditing}) {
+  function EditableTextModule({isEditing}) {
+
   // let myArray = [0,1,2,3];
   // const [fieldText, setFieldText] = useState(""); 
   // const [isEditing, setIsEditing] = useState(true);
 
   const [theText, setTheText] = useState("YES");
-  const [field, setField] = useState('');
+  // const [field, setField] = useState('');
       
   // [AR] // [AT]
   return (
@@ -575,31 +402,19 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 
     </>
   );
-
-  // return (
-  //   <img
-  //   className="avatar"
-  //   src={urlOfImgPassedToChildToDisplay}
-  //   alt="Lin Lanying"
-  //   width={myWidth}
-  //   height={myHeight}
-  // /> 
-  // );
 }
 
 const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
     // const [isChecked, setIsChecked] = useState(false);
-    const [isChecked, setIsChecked] = useState(checkedCondition);
-    const [optionText, setOptionText] = useState(text); 
+    // const [isChecked, setIsChecked] = useState(checkedCondition);
+    // const [optionText, setOptionText] = useState(text); 
     const [hasEditorOpen, setHasEditorOpen] = useState(false);
     
-    let myListing = [createDynamicComponent2(DynamicTextEntry)];
-    const [truth, setTruth] = useState(false);
-
-   
+    // let myListing = [createDynamicComponent2(DynamicTextEntry)];
+    const [truth, setTruth] = useState(false); 
     //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
   
-     const [inputView, setInputView] = useState(myListing);
+    //  const [inputView, setInputView] = useState(myListing);
 
     
     // if I click on the option and it is not already selected, now it will be selected
@@ -607,158 +422,50 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
   return (
     <>
     <>{text}</>
-    {/* <label> 
-      sss{inputView}
-      {optionText}
-      <input
-        type="radio"
-        checked={isChecked}
-
-        onChange={() => { setIsChecked(true) }}
-
-        // onChange={checkedFunction}
-        // onClick={() => { setIsChecked(true) }}
-
-
-        // onClick={(isChecked) => { setIsChecked(true) }} 
-        // onClick={()=> {if(!checkedCondition){checkedCondition = true}}} 
-    // onClick={()=> {if(true){alert("33")}}} 
-    />
-  </label>   */}
-
-
-    {/* <EditableTextModule myText={"YdddddddddddddddddddddddddddddddddddddES"}/> */}
-  <EditableTextModule myText={"YES"} isEditing={hasEditorOpen}/>
-  <input
-    type="radio"
-    checked={truth}
-    // onChange={e => setTruth(e.target.value) }
-    // onChange={e => setTruth(false) }
-    onChange={() => setTruth(!truth) }
-    />
-   <button id="some-inner-answer"
+    {/* <EditableTextModule myText={"YES"} isEditing={hasEditorOpen}/> */}
+    <EditableTextModule isEditing={hasEditorOpen}/>
+    <input
+      type="radio"
+      checked={truth}
+      // onChange={e => setTruth(e.target.value) }
+      // onChange={e => setTruth(false) }
+      onChange={() => setTruth(!truth) }
+      />
+      <button id="some-inner-answer"
         onClick={() => { setHasEditorOpen(!hasEditorOpen) }}
-       
-        // onClick={() =>
-        //   // @ts-ignore comment
-        //   setTheInnerPlatform((inputView) =>  
-        //     setInputView.concat(
-        //       createDynamicComponent2(DynamicShortAnswer)
-        //     )
-        //     // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
-        //   )
-        // }
-      >
-        {hasEditorOpen ? "Save Changes": "Edit Option"}
-        
-      </button>   
-
-  <br/>
+        >
+          {hasEditorOpen ? "Save Changes": "Edit Option"}
+          </button>
+          <br/>
     </>
   );
 };
-
-
-const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
-  // const DynamicTrueFalse: React.FC<{}> = () => {
-    const [truth, setTruth] = useState(false);
-    const [theChoice, setTheChoice] = useState("");
-    // [AU]
- 
-    let myChoices=["A", "B", "C", "D"];
- 
-    let theseChoices = ["Option 1", "Option 2", "Option 3", "Option 4"];
- 
-    let brobro = theseChoices.forEach(choice => {
-     <p>{choice}</p>
-    });
- 
-  return (
-    <>
-    {/* <Profile/> */}
-    {/* <Profile2/> */}
-    <Parent1 textPassedToChildToDisplay={"more text"}/>
-    <Parent2 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
-      <>{text}</>
-      <label>
-      Option 1
-      <input
-      type="radio"  
-      checked={truth} 
-      onChange={e => setTruth(true) }
-      // onClick={setTruth(true)} 
-      />
-    </label>  
- 
-    <br/>
-    <label>
-      Option 2
-      <input
-      type="radio"  
-      checked={!truth}
-      onChange={e => setTruth(false) }
-      // onClick={setTruth(true)} 
-      />
-    </label>  
-    <br />
-    <label>
-      Option 3
-      <input
-      type="radio"  
-      checked={!truth}
-      onChange={e => setTruth(false) }
-      // onClick={setTruth(true)} 
-      />
-    </label>  
-    <br />
-    <label>
-      Option 4
-      <input
-      type="radio"  
-      checked={!truth}
-      onChange={e => setTruth(false) }
-      // onClick={setTruth(true)} 
-      />
-    </label>  
-    <br />
- 
-    <button onClick={apiCall}>Add more options - feature coming soon</button>
- 
-    <br />
-    <br />
-    
-    </>
-  );
- };
  
 
 //  [ZA]
 
-const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
-   const [truth, setTruth] = useState(false);
-   const [theChoice, setTheChoice] = useState("");
+  //  const [truth, setTruth] = useState(false);
+  //  const [theChoice, setTheChoice] = useState("");
    // [AU]
 
-  //  let myListing = [createDynamicComponent2(DynamicMultiChoice, "sss")];
-  //  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, Props={"sss", true})];
-
   // CHQ: following line works without compiler errors
-  let myListing = [createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})];
+  let myListing = [
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})
+  ];
+  const [theInnerPlatform, setTheInnerPlatform] = useState(myListing);
   
-   
-  //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
-
-   const [theInnerPlatform, setTheInnerPlatform] = useState(myListing);
-
-
-   let myChoices=["A", "B", "C", "D"];
-
-   let theseChoices = ["Option 1", "Option 2", "Option 3", "Option 4"];
-
-   let brobro = theseChoices.forEach(choice => {
-    <p>{choice}</p>
-   });
+  // let myChoices=["A", "B", "C", "D"];
+  
+  // let theseChoices = ["Option 1", "Option 2", "Option 3", "Option 4"];
+  
+  // let brobro = theseChoices.forEach(choice => {
+  //   <p>{choice}</p>
+  //  });
  
    return (
     <>
@@ -785,31 +492,8 @@ const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
       </button>     
       <button id="some-inner-answer"
         onClick={() =>{
-          setTheInnerPlatform(theInnerPlatform.slice(0, -1))
-         // @ts-ignore comment
-
-
-        // [ZB]
-        
-          // setTheInnerPlatform.filter(theInnerPlatform =>
-          //   theInnerPlatform[-1] 
-          // )
-
-          // CHQ: bug: removes ALL added elements
-          // setTheInnerPlatform((theInnerPlatform) => theInnerPlatform.filter((radioOption, i) => i === -1) )
-
-          // CHQ: bug: does nothing
-          // setTheInnerPlatform((theInnerPlatform) => theInnerPlatform.filter((radioOption, i) => radioOption[i] === radioOption[-1]) )
-
-          // setTheInnerPlatform((theInnerPlatform) => 
-            
-          //   theInnerPlatform.concat(
-          //     createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: 'false' })
-          //   )
-          //   // theInnerPlatform.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
-          // )  
-        }
-        }
+          // [ZB]
+          setTheInnerPlatform(theInnerPlatform.slice(0, -1))} }
       >
         Remove Option (-)
       </button> 
@@ -917,9 +601,10 @@ const App3: React.FC = () => {
   
   return (
     <> 
+    
       <div className='Button-section leftside'>
         <button className='formbuttons' onClick={apiCall}>←</button>
-        <p> Form Question Types </p>
+        <p> Form Question Types - multiple select, fill in blank, and matching are missing </p>
         <button className='formbuttons' id="short-answer"
         onClick={() =>
           // @ts-ignore comment
@@ -977,23 +662,6 @@ const App3: React.FC = () => {
         Add Multiple choice
       </button>
       <br />
-
-      <button className='formbuttons' id="multi-choice"
-        onClick={() =>
-          // @ts-ignore comment
-          // CHQ: the following doesn't work.
-          setThePlatform((thePlatform) =>
-            thePlatform.concat(
-              createDynamicComponent2(DynamicMegaMultiChoice, {
-                text: "First component stored in a list",
-              })
-            )
-          )
-        }
-      >
-        Add Mega Multiple choice
-      </button>
-      <br />
       
       {/* <p>total number of questions: {thePlatform.length}</p> */}
       {/* <div>{myList3}</div> */}
@@ -1012,42 +680,17 @@ const App3: React.FC = () => {
      
            <img src={logo} className="App-logo" alt="logo" />
              <button onClick={apiCall}>Make API call</button>
-             <p>
-                 THIS IS THE HOME PAGE
-             </p>
-             {/* FIXME: inserting component here did not work */}
-             {/* Too many re-renders. React limits the number of renders to prevent an infinite loop. */}
-                          {/* <QuestionSelector2 exampleFunc={setFormArea((formArea) => formArea.concat({
-           name: "Multiple Choice",
-           component: "MC Question",
-         }))}/> */}
+             <h2>
+                 New Form
+             </h2>
 
-             {/* <App2/> */}
-             {/* <div>
-              <button onClick={() =>
-            // @ts-ignore comment
-            setThePlatform((thePlatform) =>
-              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-            )
-              }
-            >
-            Add short answer
-            </button>
-
-
-             </div>  */}
-                   <p>total number of questions: {thePlatform.length}</p>
+                   <p>Number of questions: {thePlatform.length}</p>
 
              <div>{thePlatform}</div>
-
-             {/* <p className="listWindow">{JSON.stringify(formArea)}</p>  */}
            </div>
     </>
   ); 
-};
-// function FormPage2() {
-//   return();
-// }
+}; 
 
  function FormPage1() {
    // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
@@ -1155,8 +798,7 @@ const App3: React.FC = () => {
              </div>
             
              {/* <>{compList}</> */}
-             {/* <MyComponent/> */}
-             {/* <MyComp1/> */}
+ 
              {/* <a
                className="App-link"
                href="https://reactjs.org"
@@ -1192,6 +834,7 @@ const App3: React.FC = () => {
  function FormPage() {
   // return(<FormPage1/>)
   return(<App3/>)
+  // return(<App2/>)
  }
  
  export default FormPage;
