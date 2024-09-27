@@ -450,7 +450,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
   //  const [theChoice, setTheChoice] = useState("");
    // [AU]
 
-  // CHQ: following line works without compiler errors
+  // CHQ: following line works without compiler errors 
   let myListing = [
     createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
     createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
