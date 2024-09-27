@@ -444,7 +444,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
 
 //  [ZA]
 
-const DynamicMegaMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
   //  const [truth, setTruth] = useState(false);
   //  const [theChoice, setTheChoice] = useState("");
@@ -601,9 +601,10 @@ const App3: React.FC = () => {
   
   return (
     <> 
+    
       <div className='Button-section leftside'>
         <button className='formbuttons' onClick={apiCall}>←</button>
-        <p> Form Question Types </p>
+        <p> Form Question Types - multiple select, fill in blank, and matching are missing </p>
         <button className='formbuttons' id="short-answer"
         onClick={() =>
           // @ts-ignore comment
@@ -651,7 +652,7 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             thePlatform.concat(
-              createDynamicComponent2(DynamicMegaMultiChoice, {
+              createDynamicComponent2(DynamicMultiChoice, {
                 text: "First component stored in a list",
               })
             )
@@ -857,7 +858,8 @@ const App3: React.FC = () => {
 
  function FormPage() {
   // return(<FormPage1/>)
-  return(<App3/>)
+  // return(<App3/>)
+  return(<App2/>)
  }
  
  export default FormPage;
