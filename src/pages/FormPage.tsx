@@ -369,14 +369,16 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 
 // function EditableTextModule({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
   // function EditableTextModule({myText}) {
-  // function EditableTextModule({myText, isEditing}) {
-  function EditableTextModule({isEditing}) {
+  function EditableTextModule({myText, isEditing}) {
+  // function EditableTextModule({isEditing}) {
 
   // let myArray = [0,1,2,3];
   // const [fieldText, setFieldText] = useState(""); 
   // const [isEditing, setIsEditing] = useState(true);
 
-  const [theText, setTheText] = useState("YES");
+  // const [theText, setTheText] = useState("YES");
+  const [theText, setTheText] = useState(myText);
+
   // const [field, setField] = useState('');
       
   // [AR] // [AT]
@@ -411,7 +413,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
     const [hasEditorOpen, setHasEditorOpen] = useState(false);
     
     // let myListing = [createDynamicComponent2(DynamicTextEntry)];
-    const [truth, setTruth] = useState(false); 
+    const [truth, setTruth] = useState(checkedCondition); 
     //  <Parent3 urlOfImgPassedToChildToDisplay={"https://i.imgur.com/1bX5QH6.jpg"} myWidth={50} myHeight={50}/>
   
     //  const [inputView, setInputView] = useState(myListing);
@@ -422,8 +424,8 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
   return (
     <>
     <>{text}</>
-    {/* <EditableTextModule myText={"YES"} isEditing={hasEditorOpen}/> */}
-    <EditableTextModule isEditing={hasEditorOpen}/>
+    <EditableTextModule myText={"Yes bro"} isEditing={hasEditorOpen}/>
+    {/* <EditableTextModule isEditing={hasEditorOpen}/> */}
     <input
       type="radio"
       checked={truth}
@@ -452,10 +454,10 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
 
   // CHQ: following line works without compiler errors 
   let myListing = [
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false})
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
+    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true})
   ];
   const [optionList, setOptionList] = useState(myListing);
   
@@ -482,7 +484,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
           // @ts-ignore comment
           setOptionList((optionList) =>  
             optionList.concat(
-              createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition:false })
+              createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition:true })
             )
             // optionList.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
           )
