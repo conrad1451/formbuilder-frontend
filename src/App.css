@@ -259,6 +259,13 @@
   width: auto;
 }
 
+.hasBorder {
+  border:#282c34 2px solid;
+}
+.noBorder {
+  border:transparent;
+}
+
 .isNowVisible{
   margin: 0 1.5%;
   display: inline-block;

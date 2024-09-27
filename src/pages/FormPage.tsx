@@ -389,10 +389,20 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
     <>    <div className="multiChoiceOptionSection">
       {/* <text visibility={false ? "visible" : "hidden"}> */}
       {/* <text visibility="hidden"> */}
-      <text
+      {/* Type '{ contentEditable: string; }' is not assignable to type 'SVGTextElementAttributes<SVGTextElement>'.
+ */}
+      {/* <text      contentEditable="true" */}
+       {/* <text
       className={!isEditing ? "isNowVisible" : "isNowHidden"}> {theText}
-        </text> <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} />
-{/* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */}
+        </text> <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */}
+        
+
+      {/* CHQ: the contentEditable field eilminates the need for a hidden text box altogether! */}
+        <p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>
+         {/* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */}
+      {/* [AZ] */}
+
+      {/* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */}
       {/* </text> <p>dd</p><SmallTextField isVisible={!isEditing}/> */}
     </div> 
     <div className="multiChoiceOptLayout">
@@ -501,8 +511,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
         Remove Option (-)
       </button> 
       {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-      <p contentEditable="true">total number of inner things: {optionList.length}</p>
-      {/* [AZ] */}
+      <p>total number of inner things: {optionList.length}</p>
 
      </div>
       
