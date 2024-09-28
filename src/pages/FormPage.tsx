@@ -522,7 +522,8 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(createDynamicComponent2(DynamicLongAnswer))
+            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
+          // thePlatform.concat(createDynamicComponent2(DynamicLongAnswer))
           )
         }
       >
@@ -534,9 +535,8 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             thePlatform.concat(
-              createDynamicComponent2(DynamicTrueFalse, {
-                text: "First component stored in a list",
-              })
+              thePlatform.concat(React.createElement(DynamicTrueFalse))
+              // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me"}))
             )
           )
         }
