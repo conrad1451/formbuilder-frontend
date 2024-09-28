@@ -25,6 +25,8 @@
 */
 // 
 //
+// import { createElement } from 'react';
+
  import { useState } from "react";
  import React from "react";
  // import Dialog from "./MyDialog";
@@ -387,7 +389,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
   // const [isChecked, setIsChecked] = useState(false);
   // const [isChecked, setIsChecked] = useState(checkedCondition);
   // const [optionText, setOptionText] = useState(text);
-  const [hasEditorOpen, setHasEditorOpen] = useState(false);
+  const [hasEditorOpen, setHasEditorOpen] = useState(checkedCondition);
   
   // let myListing = [createDynamicComponent2(DynamicTextEntry)];
   const [truth, setTruth] = useState(checkedCondition);   
@@ -571,6 +573,30 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
   ); 
 };
 
+// function Greeting({ name }) {
+//   return React.createElement(
+//     'h1',
+//     { className: 'greeting' },
+//     'Hello'
+//   );
+// }
+
+function Greeting({ name, age }) {
+  return React.createElement(
+    'h1',
+    { className: 'greeting' },
+    'Hello ',
+    React.createElement('i', null, name),
+    '. Welcome! You are ', React.createElement('i', null, age), ' years old.' 
+  );
+}
+
+// CHQ: this worked!
+function UseGreeting()
+{
+  return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
+}
+
 const App3: React.FC = () => {
   // const [count, setCount] = useState(0);
   // @ts-ignore comment
@@ -581,6 +607,7 @@ const App3: React.FC = () => {
   
   return (
     <> 
+    <UseGreeting/>
     
       <div className='Button-section leftside'>
         <img src={logo} width={200} className="App-logo" alt="logo"/>
