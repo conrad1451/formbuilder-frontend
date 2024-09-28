@@ -50,13 +50,17 @@ interface DynamicComponentProps {
 interface DynamicMCProps {
   text: string;
   checkedCondition: boolean;
-  checkedFunction: Function;
+  hasEditorOpened: boolean;
+  // checkedFunction: Function;
   // checkedFunction: function;
     // checkedFunction: function name(params:type) {
     
   // }
 }
-
+// function UseGreeting()
+// {
+//   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
+// }
  const createDynamicComponent2 = (
    component: React.ComponentType<any>,
    props?: any
@@ -65,6 +69,7 @@ interface DynamicMCProps {
      return React.createElement(component);
    } else {
      return React.createElement(component, props);
+    // return React.createElement(component, ...props);
    }
  };
 
@@ -217,7 +222,7 @@ interface DynamicMCProps {
   return (
     <>
     <label>
-      {/* {text}{': '} */}
+      {text}
       <br />
       <input
       type="textarea"
@@ -385,11 +390,12 @@ function EditableTextModule({myText, isEditing}) {
   return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
 }
 
-const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
+// const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
+  const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
   // const [isChecked, setIsChecked] = useState(false);
   // const [isChecked, setIsChecked] = useState(checkedCondition);
   // const [optionText, setOptionText] = useState(text);
-  const [hasEditorOpen, setHasEditorOpen] = useState(checkedCondition);
+  const [hasEditorOpen, setHasEditorOpen] = useState(hasEditorOpened);
   
   // let myListing = [createDynamicComponent2(DynamicTextEntry)];
   const [truth, setTruth] = useState(checkedCondition);   
@@ -409,7 +415,9 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
       // onChange={e => setTruth(e.target.value) }
       // onChange={e => setTruth(false) }
       onChange={() => setTruth(!truth) }
-      /><EditableTextModule myText={"Yah  "} isEditing={hasEditorOpen}/>
+      />
+      <EditableTextModule myText={text} isEditing={hasEditorOpen}/>
+      {/* <EditableTextModule myText={"Yah  "} isEditing={hasEditorOpen}/> */}
     </div>
 
       <button id="some-inner-answer"
@@ -431,12 +439,19 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
   //  const [theChoice, setTheChoice] = useState("");
    // [AU]
 
-  // CHQ: following line works without compiler errors 
+  // CHQ: using createDynamicComponent2 does NOT actually pass in the props as values
+  // using createElement does
+  // let myListing = [
+  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
+  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
+  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
+  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}) 
+  // ];
   let myListing = [
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
-    createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true})
+    React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
   ];
   const [optionList, setOptionList] = useState(myListing);
   
@@ -463,7 +478,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
           // @ts-ignore comment
           setOptionList((optionList) =>  
             optionList.concat(
-              createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition:true })
+              React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
             )
             // optionList.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
           )
@@ -509,7 +524,9 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
 }
 
  
- let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
+let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
+
+//  let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
 //  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
 
 
@@ -533,7 +550,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me"}))
           // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
           )
         }
@@ -618,7 +635,7 @@ const App3: React.FC = () => {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
+            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me"}))
           // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
           )
         }
@@ -630,7 +647,8 @@ const App3: React.FC = () => {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(createDynamicComponent2(DynamicLongAnswer))
+            thePlatform.concat(React.createElement(DynamicLongAnswer))
+            // thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
           )
         }
       >
@@ -644,9 +662,8 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             thePlatform.concat(
-              createDynamicComponent2(DynamicTrueFalse, {
-                text: "First component stored in a list",
-              })
+              thePlatform.concat(React.createElement(DynamicTrueFalse))
+              // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me"}))
             )
           )
         }
@@ -661,9 +678,8 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             thePlatform.concat(
-              createDynamicComponent2(DynamicMultiChoice, {
-                text: "First component stored in a list",
-              })
+              thePlatform.concat(React.createElement(DynamicMultiChoice))
+              // thePlatform.concat(React.createElement(DynamicMultiChoice, { text: "test me"}))
             )
           )
         }
@@ -690,10 +706,8 @@ const App3: React.FC = () => {
              <button onClick={apiCall}>Make API call</button>
              <h2>
                  New Form
-             </h2>
-
-                   <p>Number of questions: {thePlatform.length}</p>
-
+             </h2> 
+                   <p>Number of questions: {thePlatform.length}</p> 
              <div>{thePlatform}</div>
            </div>
     </>
