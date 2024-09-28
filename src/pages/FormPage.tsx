@@ -22,6 +22,8 @@
 
 [AZ]: https://www.geeksforgeeks.org/how-to-make-your-content-editable-in-html/#
 
+[AJ]: https://react.dev/reference/react/createElement#usage
+
 */
 // 
 //
@@ -416,7 +418,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
   //  const [truth, setTruth] = useState(false);
   //  const [theChoice, setTheChoice] = useState("");
-   // [AU]
+   // [AU] [AJ]
   let myListing = [
     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
