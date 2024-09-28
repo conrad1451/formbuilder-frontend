@@ -152,15 +152,7 @@ interface DynamicMCProps {
     </>
   );
 }
- 
-   function MultiChoice(){
-     return(<p>mue</p>);
-   }
- 
-   function InsertQuestion(){
- 
-   }
- 
+  
    function QuestionSelector()
    {
      return(
@@ -305,15 +297,7 @@ interface DynamicMCProps {
   );
 };
  
- 
- 
-
- 
-
-
- 
- 
-
+  
 
 function SmallTextField({isVisible}){
   const [field, setField] = useState('');
@@ -377,7 +361,6 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
     </div>)
 }
 
-// function EditableTextModule({ urlOfImgPassedToChildToDisplay, myWidth, myHeight }) {
 // function EditableTextModule({myText}) {
 function EditableTextModule({myText, isEditing}) {
   // function EditableTextModule({isEditing}) { 
@@ -405,9 +388,6 @@ function EditableTextModule({myText, isEditing}) {
   // if I click on the option and it is already selected, it is just selected - indempotent action
   return (
     <>
- 
-    {/* <EditableTextModule isEditing={hasEditorOpen}/> */}
-
     <div className="multiChoiceOptLayout">
     <input
       type="radio"
@@ -417,7 +397,6 @@ function EditableTextModule({myText, isEditing}) {
       onChange={() => setTruth(!truth) }
       />
       <EditableTextModule myText={text} isEditing={hasEditorOpen}/>
-      {/* <EditableTextModule myText={"Yah  "} isEditing={hasEditorOpen}/> */}
     </div>
 
       <button id="some-inner-answer"
@@ -438,15 +417,6 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
   //  const [truth, setTruth] = useState(false);
   //  const [theChoice, setTheChoice] = useState("");
    // [AU]
-
-  // CHQ: using createDynamicComponent2 does NOT actually pass in the props as values
-  // using createElement does
-  // let myListing = [
-  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
-  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: false}),
-  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}),
-  //   // createDynamicComponent2(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true}) 
-  // ];
   let myListing = [
     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
@@ -454,14 +424,6 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
   ];
   const [optionList, setOptionList] = useState(myListing);
-  
-  // let myChoices=["A", "B", "C", "D"];
-  
-  // let theseChoices = ["Option 1", "Option 2", "Option 3", "Option 4"];
-  
-  // let brobro = theseChoices.forEach(choice => {
-  //   <p>{choice}</p>
-  //  });
  
    return (
     <>
@@ -480,7 +442,6 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
             optionList.concat(
               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
             )
-            // optionList.concat(createDynamicComponent2(DynamicLongAnswer)) // was a placeholder
           )
         }
       >
@@ -590,13 +551,6 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
   ); 
 };
 
-// function Greeting({ name }) {
-//   return React.createElement(
-//     'h1',
-//     { className: 'greeting' },
-//     'Hello'
-//   );
-// }
 
 function Greeting({ name, age }) {
   return React.createElement(
