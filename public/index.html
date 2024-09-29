@@ -1,6 +1,7 @@
 <!-- Sources:
 [1]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP 
 [2]: https://content-security-policy.com/img-src/
+[3]: https://www.stackhawk.com/blog/react-content-security-policy-guide-what-it-is-and-how-to-enable-it/
 -->
 
 <!-- 
@@ -14,7 +15,7 @@ content="default-src 'self'; img-src https://*; child-src 'none';" /> -->
     <meta charset="utf-8" />
     <meta 
     http-equiv="Content-Security-Policy"
-    content="default-src 'self'; img-src http://localhost:3000/favicon.ico; img-src http://localhost:5000/favicon.ico;  child-src 'none';" />
+    content="default-src 'self'; img-src https://*; child-src 'none';" />
 
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
