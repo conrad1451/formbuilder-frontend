@@ -132,7 +132,61 @@ function HomePage() {
           rel="noopener noreferrer"
         >
           Learn React
-        </a>
+        </a> 
+        <div>        
+        <form id="form3" method="POST" action="/index/signup">
+        {/* <form id="form2" method="dialog"> */}
+            {/* <form method="dialog" action=""> */}
+            <br />
+            <label htmlFor="fname">Username: </label>
+            {/* <br /> */}
+            <input
+              className="formFields --nameField"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="John Doe"
+              required
+            />
+            <br />
+            <br />
+            <label htmlFor="lname">Email: </label>
+            {/* <br /> */}
+            <input
+              className="formFields --nameField"
+              type="email"
+              id="email"
+              name="email"
+              placeholder="john.doe@gmail.com"
+              required
+            />
+            <br />
+            <br />
+            <label htmlFor="DOB">Password:</label>
+            <input
+              className="formFields --nameField"
+              type="password"
+              id="password"
+              name="password"
+              // placeholder="john.doe@gmail.com"
+              required
+            />
+            {/* <input type="submit"></input> */}
+            <br />
+            <br />
+            {/* <button onclick="closeDialog()">Cancel</button> */}
+            <input className="my_button" type="submit" value="Submit" />
+  
+            {/* <button onclick="myFunc()" id="confirmBtn" value="default">
+                Confirm
+              </button> */}
+          </form>
+
+
+        </div>
+
+
+
       </div>
     </div>
   );

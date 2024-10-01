@@ -77,7 +77,8 @@
   /* width: 50%; */
   width: 20%;
   float: left;
-  margin-top: 120%;
+  /* CHQ: not sure if margin top did anything useful */
+  /* margin-top: 120%; */
 }
 
 .rightside {
@@ -251,13 +252,31 @@
   /* width: 50%; */
   /* width: 25%; */
   /* width: 12.5%; */
-  width: 20%;
+
+  /* Chose this but rethought */
+  /* width: 20%; */
+
+  width: auto;
+}
+
+.hasBorder {
+  border:#282c34 2px solid;
+}
+.noBorder {
+  border:transparent;
 }
 
 .isNowVisible{
   margin: 0 1.5%;
   display: inline-block;
-  width: 5vw;
+  /* CHQ: this width I chose but am disablingn to see how it goes. teste dna dseems it was too small */
+  /* width: 5vw; */
+  /* too large */
+  /* width: 15vw; */
+  /* just right, but not when the text is longer despiate being within the red boundary */
+  /* width: 10vw; */
+  
+
   /* font-size: 10px; */
   /* font-size: 100%; */
   font-size: 20px;
