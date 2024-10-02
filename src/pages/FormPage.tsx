@@ -432,7 +432,10 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
     <div>
       <div> 
         <br />
+        <div className="componentWidth">
+        <EditableTextModule myText={text} isEditing={true}/>
         <div>{optionList}</div>
+        </div>
         <br />
       </div>
     <div>
@@ -633,10 +636,9 @@ const App3: React.FC = () => {
           // @ts-ignore comment
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
-            thePlatform.concat(
-              thePlatform.concat(React.createElement(DynamicMultiChoice))
-              // thePlatform.concat(React.createElement(DynamicMultiChoice, { text: "test me"}))
-            )
+             
+              thePlatform.concat(React.createElement(DynamicMultiChoice, { text: 'Question Title'}))
+             
           )
         }
       >

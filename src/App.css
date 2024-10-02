@@ -227,6 +227,13 @@
   /* justify-content: center; */
 }
 
+.componentWidth{
+  /* background-color: rgb(71, 206, 41); */
+  min-width: 20%;
+  width: 30%;
+  /* width: auto;  */
+}
+
 .multiChoiceOptinnerLayout .left{
   float: left;
 }  
