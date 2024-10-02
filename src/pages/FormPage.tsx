@@ -658,10 +658,12 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
 // }
 
 const App3: React.FC = () => {
+// const App3: React.FC = ({getTheStore, setTheStore}) => {
   // const [count, setCount] = useState(0);
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
   const [thePlatform, setThePlatform] = useState(myList3);
+
   const [formName, setFormName] = useState("Untitled");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   // const [formArea, setFormArea] = useState(formField);
@@ -785,12 +787,15 @@ const App3: React.FC = () => {
            <div className="platformAlignment">
            </div>
             <div className="platformAlignment">
-              <button onClick={apiCall}>Make API call</button>
+              {/* <button onClick={apiCall}>Make API call</button> */}
+              <button onClick={apiCall}>Save Form</button>
+
               {/* <h2> New Form </h2> */}
 
+{/* FIXME: editing title isn't working */}
               <br/>
               <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} />
-              {/* <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+              <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
               {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
                <br/>
                <button id="some-inner-answer"
@@ -944,10 +949,16 @@ const App3: React.FC = () => {
        );
  }
 
+//  let globalDataStore = [];
 
  function FormPage() {
+
+  const [globalDataStore, setGlobalDataStore] = useState(0);
+
+
   // return(<FormPage1/>)
-  return(<App3/>)
+  // return(<App3 getTheStore={myList3} setTheStore={}/>)
+  return(<App3/>);
   }
  
  export default FormPage;
