@@ -55,6 +55,13 @@ interface DynamicFITB {
   isFillInTheBlank: [];
 }
 
+
+interface DynamicTF {
+  text: string;
+  isProductionState: boolean;
+}
+
+
 interface DynamicMCProps {
   text: string;
   checkedCondition: boolean;
@@ -270,15 +277,18 @@ interface DynamicMCProps {
     </>
   );
 };
-
- const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
+//  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
     const [truth, setTruth] = useState(false);
     // [AU]
   return (
     <>
-      <>{text}</>
-      <label>
+    <div className="componentWidth">
+    <EditableTextModule myText={text} isEditing={true}/>
+
+      {/* <EditableTextModule myText={text} isEditing={isProductionState}/> */}
+            <label>
       True
       <input
       type="radio"  
@@ -298,7 +308,9 @@ interface DynamicMCProps {
       // onClick={setTruth(true)} 
       />
     </label> 
-    <br />
+      </div>
+
+    {/* <br /> */}
     <br />
     
     </>
@@ -607,8 +619,9 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             thePlatform.concat(
-              thePlatform.concat(React.createElement(DynamicTrueFalse))
+              // thePlatform.concat(React.createElement(DynamicTrueFalse))
               // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me"}))
+              // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me", isProductionState=true}))
             )
           )
         }
@@ -690,16 +703,15 @@ const App3: React.FC = () => {
           // @ts-ignore comment
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
-            thePlatform.concat(
-              thePlatform.concat(React.createElement(DynamicTrueFalse))
-              // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me"}))
-            )
+            thePlatform.concat(React.createElement(DynamicTrueFalse))
+            // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
+          // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
           )
         }
       >
         Add True/False
       </button>
-      <br />
+      {/* <br /> */}
 
       <button className='formbuttons' id="multi-choice"
         onClick={() =>
