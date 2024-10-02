@@ -90,9 +90,13 @@ function FormModal3() {
   }
 
 
- 
+  // https://stackoverflow.com/questions/36517173/how-to-store-a-javascript-function-in-json
+  // CHQ: this failed when I tried it
+//  let myObj = {"function":{"arguments":"a,b,c","body":"return a*b+c;"}};
 
+//  let theParse = JSON.parse(myObj);
 
+// let myF = new Function(theParse.function.arguments, theParse.function.body);
 function HomePage() { 
 
   return (
@@ -101,8 +105,10 @@ function HomePage() {
       <div className='Button-section leftside'>
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
-          Form Question Types
+          Form sssQuestion Types
         </p>
+
+        <p>{"myF()"}</p>
  
         <div className="bottomSideBar">
           <a
