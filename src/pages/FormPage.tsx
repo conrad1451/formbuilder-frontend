@@ -24,6 +24,9 @@
 
 [AJ]: https://react.dev/reference/react/createElement#usage
 
+
+[AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
+
 */
 // 
 //
@@ -239,8 +242,16 @@ interface DynamicMCProps {
 // const DynamicShortAnswer: React.FC<{}> = () => {
   const [field, setField] = useState('');
 
+  const [randomId, setRandomId] = useState(Math.random().toString(36).substring(2,2+20))
+
+
+  // const randomIDLength = 20;
+  // const randomId = Math.random().toString(36).substring(2,2+randomIDLength); 
+  
+
   const removeComponent = () => {
     // history.push("/new-form")
+    
     // navigate("/new-form")
   }
   // [AR]
@@ -271,6 +282,8 @@ interface DynamicMCProps {
     </div>
     <div className="Component-rightside">
       <button className='compdelbutton' onClick={removeComponent}>Delete</button>
+      {/* <button onClick={removeComponent}>Delete</button> */}
+
 {/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
  */}
       {/* <button id="component-delete" onClick={removeComponent()}></button> */}
@@ -700,12 +713,72 @@ const App3: React.FC = () => {
 
   let textSnippets= ["d", "d", "de"];
   let isFillInTheBlank=[true, true, true];  
+
+  // FIXME: CHQ: uncomment when lodash is ready
+  // let firstTmpList = structuredClone(myList3);
   
   const navigate = useNavigate();
 
-  const coursesPage = () => {
-    // history.push("/new-form")
-    navigate("/new-form")
+  const RemoveComponent = (targetQuestion) => {
+      // 1. grab ID from target question 
+      // 2. compare target question ID to that of each question. If there is a match, uncouple
+
+      let questionsToKeep: boolean[] = []
+      let indicesOfQuestionsToDelete: number[] = [];
+
+      thePlatform.forEach(() => {
+        questionsToKeep.push(true);
+      });
+
+      for (let index = 0; index < thePlatform.length; ++index) {
+        const question = thePlatform[index];
+
+        // FIXME: determinen how to grab this, won't be true for all questions
+        let isQuestionToDelete = true;
+
+        if(isQuestionToDelete){
+          questionsToKeep[index] = false;
+          indicesOfQuestionsToDelete.push(index);
+        }
+      }
+//         "message": "Type 'never[]' is missing the following properties from type 'FunctionComponentElement<DynamicComponentProps>': type, props, key",
+      // let tmpList: React.FunctionComponentElement<DynamicComponentProps> = [];
+
+      let startIndex=0;
+
+      let i = 0;
+
+      // [AEG]
+      while(i < indicesOfQuestionsToDelete.length){
+        if(startIndex !== indicesOfQuestionsToDelete[i]){
+          let curKeptPortion = thePlatform.slice(startIndex, indicesOfQuestionsToDelete[i]);
+          // Property 'push' does not exist on type 'FunctionComponentElement<DynamicComponentProps>'.ts(2339)
+          // tmpList.push()
+          // let inserttionStart = firstTmpList.length;
+          /**
+           * Argument of type 'FunctionComponentElement<DynamicComponentProps>[]' is not assignable to parameter of 
+           * type 'FunctionComponentElement<DynamicComponentProps>'. Type 'FunctionComponentElement<DynamicComponentProps>[]' 
+           * is missing the following properties from type 
+           * 'FunctionComponentElement<DynamicComponentProps>': type, props, keyts(2345)
+           * */
+          
+          // firstTmpList.splice(inserttionStart, 0, curKeptPortion)
+        
+          // CHQ: yeah im modifying the orig val
+        
+          // FIXME: CHQ: uncomment when lodash is ready
+          // let tmpArr = structuredClone(firstTmpList);
+          // firstTmpList = tmpArr.concat(curKeptPortion);
+        } 
+
+        // we grab the indice of the question to be deleted, adn then add 1 so that we concat its neighbors on either 
+        // side goingn forward
+        startIndex = 1 + indicesOfQuestionsToDelete[i];
+        ++i;
+      }
+      // FIXME: CHQ: uncomment when lodash is ready
+      // setThePlatform(firstTmpList); 
+      
   }
 
   const BackToHome = () => {
