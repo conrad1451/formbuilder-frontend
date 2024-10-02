@@ -97,6 +97,13 @@
   color: black;
 } 
 
+.platformAlignment {
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+  width: auto;
+}
+
 .formbuttons {
   align-items: center;
   text-align: center; 

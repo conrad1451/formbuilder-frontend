@@ -151,6 +151,8 @@ function MyLoginForm(){
   )
 }  
 
+// function 
+
   // https://stackoverflow.com/questions/36517173/how-to-store-a-javascript-function-in-json
   // CHQ: this failed when I tried it
 //  let myObj = {"function":{"arguments":"a,b,c","body":"return a*b+c;"}};
@@ -206,6 +208,7 @@ function HomePage() {
         <p>
             Make a New Form
         </p>
+                {/* [AA] */}        {/* [AB] */} 
         <button className="btn btn-success" onClick={coursesPage}> Make a New Form </button>
         <br/>        <br/>
 
@@ -219,14 +222,7 @@ function HomePage() {
         </a> 
         <div>
           {/* <MyLoginForm/> */}
-        </div>
-        {/* [AA] */}        {/* [AB] */} 
-        <button className="btn btn-success"
-        onClick={coursesPage}>Explore Courses
-        </button>
-
-
-
+        </div>  
       </div>
     </div>
   );

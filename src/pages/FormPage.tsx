@@ -229,7 +229,7 @@ interface DynamicMCProps {
   return (
     <>
     <div className="componentWidth">
-      <EditableTextModule myText={text} isEditing={true}/>
+      <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       <label> {/* {text}{': '} */} <input
           type="textarea"
           // type="text"
@@ -258,7 +258,7 @@ interface DynamicMCProps {
   return (
     <>
     <div className="componentWidth">
-      <EditableTextModule myText={text} isEditing={true}/>
+      <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       <label> {/* {text}{': '} */} <input
           type="textarea"
           // type="text"
@@ -286,9 +286,9 @@ interface DynamicMCProps {
   return (
     <>
     <div className="componentWidth">
-    <EditableTextModule myText={text} isEditing={true}/>
+    <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
 
-      {/* <EditableTextModule myText={text} isEditing={isProductionState}/> */}
+      {/* <EditableTextModule myText={text} isEditing={isProductionState} theFontSize={"p"}/> */}
             <label>
       True
       <input
@@ -383,16 +383,41 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 }
 
 // function EditableTextModule({myText}) {
-function EditableTextModule({myText, isEditing}) {
+function EditableTextModule({myText, isEditing, theFontSize}) {
   // function EditableTextModule({isEditing}) { 
-  const [theText, setTheText] = useState(myText); 
+  // const [theText, setTheText] = useState(myText);
+
+  let theText=myText;
+
+  switch(theFontSize){
+    case "h1":
+      return (<h1 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h1>);
+    case "h2":
+      return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
+    case "h3":
+      return (<h3 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h3>);  
+    case "h4":
+      return (<h4 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h4>);  
+    case "h5":
+      return (<h5 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h5>);  
+    case "h6":
+      return (<h6 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h6>);  
+    case "p":
+      return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>); 
+    case "default":
+      return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);   
+  }
+  
+
+
   // [AR] // [AT]
 /* CHQ: the contentEditable field eilminates the need for a hidden text box altogether!
 /* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */ 
 /* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */
 /* [AZ] */
   // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
-  return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
+  // return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
+  // return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
 }
 
 // const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
@@ -418,7 +443,7 @@ function EditableTextModule({myText, isEditing}) {
       // onChange={e => setTruth(false) }
       onChange={() => setTruth(!truth) }
       />
-      <EditableTextModule myText={text} isEditing={hasEditorOpen}/>
+      <EditableTextModule myText={text} isEditing={hasEditorOpen} theFontSize={"p"}/>
     </div>
 
       <button id="some-inner-answer"
@@ -453,7 +478,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
       <div> 
         <br />
         <div className="componentWidth">
-        <EditableTextModule myText={text} isEditing={true}/>
+        <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
         <div>{optionList}</div>
         </div>
         <br />
@@ -500,9 +525,9 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
     // [AU] [AJ]
    let myListing = [
     // React.createElement(EditableTextModule, { myText: {text}, isEditing: true})
-    React.createElement(EditableTextModule, { myText: text, isEditing: true}),
-    React.createElement(EditableTextModule, { myText: text, isEditing: true}),
-    React.createElement(EditableTextModule, { myText: text, isEditing: true})
+    // React.createElement(EditableTextModule, { myText: text, isEditing: true}),
+    // React.createElement(EditableTextModule, { myText: text, isEditing: true}),
+    // React.createElement(EditableTextModule, { myText: text, isEditing: true})
    ];
    const [segmentList, setSegmentList] = useState(myListing);
    const [theTextSnippets, setTheTextSnippets] = useState(textSnippets);
@@ -514,7 +539,7 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
        <div> 
          <br />
          <div className="componentWidth">
-         <EditableTextModule myText={text} isEditing={true}/>
+         <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
          <div className="fitbComponent">{segmentList}</div>
          </div>
          <br />
@@ -700,13 +725,18 @@ const App3: React.FC = () => {
      
            </div>
            <div className='rightside'>
-     
-             <button onClick={apiCall}>Make API call</button>
-             <h2>
-                 New Form
-             </h2> 
-                   <p>Number of questions: {thePlatform.length}</p> 
-             <div>{thePlatform}</div>
+           <div className="platformAlignment">
+           </div>
+            <div className="platformAlignment">
+              <button onClick={apiCall}>Make API call</button>
+              {/* <h2> New Form </h2> */}
+              <EditableTextModule myText={"Untitled"} isEditing={true} theFontSize={"h2"}/>
+              {/* <p>Number of questions: {thePlatform.length}</p> */}
+              <div>{thePlatform}</div>
+            </div>
+            <div className="platformAlignment">
+            </div>
+
            </div>
     </>
   ); 
