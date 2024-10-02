@@ -55,9 +55,10 @@ interface DynamicComponentProps {
   // captureState?: object
 }
 
-interface TestBro {
-  theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
- }
+//neither of the below work
+// interface TestBro {
+//   theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
+//  }
 // interface Bro implements DynamicComponentProps{
   
 // }
@@ -660,7 +661,7 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
 }
 
  
-let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false, captureState:})];
+let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
 
 // 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
 // let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
