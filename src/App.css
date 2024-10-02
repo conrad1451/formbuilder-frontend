@@ -273,6 +273,11 @@
   border:transparent;
 }
 
+.fitbComponent{
+  /* width:20%; */
+  width:30%;
+}
+
 .isNowVisible{
   margin: 0 1.5%;
   display: inline-block;

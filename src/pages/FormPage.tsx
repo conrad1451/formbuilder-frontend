@@ -49,6 +49,12 @@ interface DynamicComponentProps {
   text: string;
 }
 
+interface DynamicFITB {
+  text: string;
+  textSnippets: [];
+  isFillInTheBlank: [];
+}
+
 interface DynamicMCProps {
   text: string;
   checkedCondition: boolean;
@@ -372,6 +378,7 @@ function EditableTextModule({myText, isEditing}) {
 /* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */ 
 /* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */
 /* [AZ] */
+  // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
   return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
 }
 
@@ -480,6 +487,66 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
 };
 
 
+const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFillInTheBlank }) => {
+  // const DynamicTrueFalse: React.FC<{}> = () => {
+   //  const [truth, setTruth] = useState(false);
+   //  const [theChoice, setTheChoice] = useState("");
+    // [AU] [AJ]
+   let myListing = [
+    // React.createElement(EditableTextModule, { myText: {text}, isEditing: true})
+    React.createElement(EditableTextModule, { myText: text, isEditing: true}),
+    React.createElement(EditableTextModule, { myText: text, isEditing: true}),
+    React.createElement(EditableTextModule, { myText: text, isEditing: true})
+   ];
+   const [segmentList, setSegmentList] = useState(myListing);
+   const [theTextSnippets, setTheTextSnippets] = useState(textSnippets);
+   const [theFillInTheBlank, setTheFillInTheBlank] = useState(isFillInTheBlank);
+
+    return (
+     <>
+     <div>
+       <div> 
+         <br />
+         <div className="componentWidth">
+         <EditableTextModule myText={text} isEditing={true}/>
+         <div className="fitbComponent">{segmentList}</div>
+         </div>
+         <br />
+       </div>
+     <div>
+    {/* <button className='formbuttons' id="some-inner-answer" */}
+     <button id="some-inner-answer"
+         onClick={() =>
+           // @ts-ignore comment
+           setSegmentList((segmentList) =>  
+            segmentList.concat(
+              //  React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+             )
+           )
+         }
+       >
+         Add Option (+)
+       </button>     
+       <button id="some-inner-answer"
+         onClick={() =>{
+           // [ZB]
+           setSegmentList(segmentList.slice(0, -1))} }
+       >
+         Remove Option (-)
+       </button> 
+       {/* CHQ: This is where I tested to prove that content editable would address my problems */}
+       {/* <p>total number of inner things: {segmentList.length}</p> */}
+ 
+      </div>
+       
+ </div> 
+    <br />
+    <br />
+    
+    </>
+  );
+ };
+
 
  function QuestionSelector2({ exampleFunc }) {
   const [childData, setChildData] = useState("");
@@ -580,6 +647,9 @@ const App3: React.FC = () => {
   const [thePlatform, setThePlatform] = useState(myList3);
   // const [formArea, setFormArea] = useState(formField);
 
+  let textSnippets= ["d", "d", "de"];
+  let isFillInTheBlank=[true, true, true];
+
   
   return (
     <> 
@@ -645,6 +715,27 @@ const App3: React.FC = () => {
         Add Multiple choice
       </button>
       <br />
+
+{/* No overload matches this call.
+  Overload 1 of 2, '(...items: ConcatArray<FunctionComponentElement<DynamicComponentProps>>[]): FunctionComponentElement<DynamicComponentProps>[]', gave the following error.
+    Argument of type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>' is not assignable to parameter of type 'ConcatArray<FunctionComponentElement<DynamicComponentProps>>'.
+      Type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>' is missing the following properties from type 'ConcatArray<FunctionComponentElement<DynamicComponentProps>>': length, join, slice
+  Overload 2 of 2, '(...items: (FunctionComponentElement<DynamicComponentProps> | ConcatArray<FunctionComponentElement<DynamicComponentProps>>)[]): FunctionComponentElement<...>[]', gave the following error.
+    Argument of type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>,  */}
+      {/* <button className='formbuttons' id="fill-in-blank"
+        onClick={() =>
+          // @ts-ignore comment
+          // CHQ: the following doesn't work.
+          setThePlatform((thePlatform) =>
+             
+              thePlatform.concat(React.createElement(DynamicFillInTheBlank,  {text:'d', textSnippets: textSnippets, }))
+             
+          )
+        }
+      >
+        Add Fill in the blank
+      </button>
+      <br /> */}
       
       {/* <p>total number of questions: {thePlatform.length}</p> */}
       {/* <div>{myList3}</div> */}
