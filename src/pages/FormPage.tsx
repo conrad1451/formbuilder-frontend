@@ -251,7 +251,7 @@ interface DynamicMCProps {
             aria-multiline="true"
             //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
             // rows={10}
-            maxLength={280}
+            maxLength={280} 
           />
         </label>
       </div>
