@@ -1,4 +1,13 @@
- // import Dialog from "./MyDialog";
+// [AA]: https://www.geeksforgeeks.org/how-to-navigate-on-path-by-button-click-in-react-router/#
+// [AB]: https://stackoverflow.com/questions/62861269/attempted-import-error-usehistory-is-not-exported-from-react-router-dom
+
+
+// import Dialog from "./MyDialog";
+
+import React from 'react'
+// import { useHistory } from "react-router-dom"; // depriccated and replaced by useNavigate in reactrouterv6
+import { useNavigate } from "react-router-dom";
+
 import Dialog from "../modules/MyDialog";
 
 import logo from '../logo.svg';
@@ -6,8 +15,7 @@ import '../App.css';
 // import 'axios';
 // import Axios from 'axios';
 import axios from 'axios';
-
- 
+  
 
 // CHQ: TODO: set margins between buttons
 
@@ -90,6 +98,59 @@ function FormModal3() {
   }
 
 
+
+function MyLoginForm(){
+  return(
+    <form id="form3" method="POST" action="/index/signup">
+      {/* <form id="form2" method="dialog"> */}
+      {/* <form method="dialog" action=""> */}
+      <br />
+      <label htmlFor="fname">Username: </label>
+      {/* <br /> */}
+      <input
+        className="formFields --nameField"
+        type="text"
+        id="username"
+        name="username"
+        placeholder="John Doe"
+        required
+      />
+      <br />
+      <br />
+      <label htmlFor="lname">Email: </label>
+      {/* <br /> */}
+      <input
+        className="formFields --nameField"
+        type="email"
+        id="email"
+        name="email"
+        placeholder="john.doe@gmail.com"
+        required
+      />
+      <br />
+      <br />
+      <label htmlFor="DOB">Password:</label>
+      <input
+        className="formFields --nameField"
+        type="password"
+        id="password"
+        name="password"
+        // placeholder="john.doe@gmail.com"
+        required
+      />
+      {/* <input type="submit"></input> */}
+      <br />
+      <br />
+      {/* <button onclick="closeDialog()">Cancel</button> */}
+      <input className="my_button" type="submit" value="Submit" />
+
+      {/* <button onclick="myFunc()" id="confirmBtn" value="default">
+          Confirm
+        </button> */}
+    </form>
+  )
+}  
+
   // https://stackoverflow.com/questions/36517173/how-to-store-a-javascript-function-in-json
   // CHQ: this failed when I tried it
 //  let myObj = {"function":{"arguments":"a,b,c","body":"return a*b+c;"}};
@@ -98,6 +159,19 @@ function FormModal3() {
 
 // let myF = new Function(theParse.function.arguments, theParse.function.body);
 function HomePage() { 
+  // const history = useHistory();
+  // const history = useNavigate();
+  const navigate = useNavigate();
+
+  const coursesPage = () => {
+    // history.push("/new-form")
+    navigate("/new-form")
+  }
+
+  const loggingOut = () => {
+    // history.push("/new-form")
+    navigate("/login")
+  }
 
   return (
     <div className="App"> 
@@ -119,7 +193,8 @@ function HomePage() {
           >
             Help
             </a>
-            <button className='formbuttons' onClick={apiCall}>Logout</button>
+            {/* TODO: add a popup modal asking to confirm that you really want to log out */}
+            <button className='formbuttons' onClick={loggingOut}>Logout</button>
         </div>
         
 
@@ -131,6 +206,9 @@ function HomePage() {
         <p>
             Make a New Form
         </p>
+        <button className="btn btn-success" onClick={coursesPage}> Make a New Form </button>
+        <br/>        <br/>
+
         <a
           className="App-link"
           href="https://reactjs.org"
@@ -139,57 +217,13 @@ function HomePage() {
         >
           Learn React
         </a> 
-        <div>        
-        <form id="form3" method="POST" action="/index/signup">
-        {/* <form id="form2" method="dialog"> */}
-            {/* <form method="dialog" action=""> */}
-            <br />
-            <label htmlFor="fname">Username: </label>
-            {/* <br /> */}
-            <input
-              className="formFields --nameField"
-              type="text"
-              id="username"
-              name="username"
-              placeholder="John Doe"
-              required
-            />
-            <br />
-            <br />
-            <label htmlFor="lname">Email: </label>
-            {/* <br /> */}
-            <input
-              className="formFields --nameField"
-              type="email"
-              id="email"
-              name="email"
-              placeholder="john.doe@gmail.com"
-              required
-            />
-            <br />
-            <br />
-            <label htmlFor="DOB">Password:</label>
-            <input
-              className="formFields --nameField"
-              type="password"
-              id="password"
-              name="password"
-              // placeholder="john.doe@gmail.com"
-              required
-            />
-            {/* <input type="submit"></input> */}
-            <br />
-            <br />
-            {/* <button onclick="closeDialog()">Cancel</button> */}
-            <input className="my_button" type="submit" value="Submit" />
-  
-            {/* <button onclick="myFunc()" id="confirmBtn" value="default">
-                Confirm
-              </button> */}
-          </form>
-
-
+        <div>
+          {/* <MyLoginForm/> */}
         </div>
+        {/* [AA] */}        {/* [AB] */} 
+        <button className="btn btn-success"
+        onClick={coursesPage}>Explore Courses
+        </button>
 
 
 
