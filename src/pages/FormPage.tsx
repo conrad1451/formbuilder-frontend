@@ -460,7 +460,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
         Remove Option (-)
       </button> 
       {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-      <p>total number of inner things: {optionList.length}</p>
+      {/* <p>total number of inner things: {optionList.length}</p> */}
 
      </div>
       
