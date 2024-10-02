@@ -483,19 +483,12 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
       {/* <p>total number of inner things: {optionList.length}</p> */}
 
      </div>
-      
-</div>
-
-
- 
-
-
-
-
-   <br />
-   <br />
-   
-   </>
+     
+     </div> 
+     
+     <br /> 
+     <br />
+  </>
  );
 };
 
@@ -580,21 +573,21 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
 //  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
 
  
-function Greeting({ name, age }) {
-  return React.createElement(
-    'h1',
-    { className: 'greeting' },
-    'Hello ',
-    React.createElement('i', null, name),
-    '. Welcome! You are ', React.createElement('i', null, age), ' years old.' 
-  );
-}
+// function Greeting({ name, age }) {
+//   return React.createElement(
+//     'h1',
+//     { className: 'greeting' },
+//     'Hello ',
+//     React.createElement('i', null, name),
+//     '. Welcome! You are ', React.createElement('i', null, age), ' years old.' 
+//   );
+// }
 
-// CHQ: this worked!
-function UseGreeting()
-{
-  return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
-}
+// CHQ: t his worked!
+// function UseGreeting()
+// {
+//   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
+// }
 
 const App3: React.FC = () => {
   // const [count, setCount] = useState(0);
@@ -609,7 +602,7 @@ const App3: React.FC = () => {
   
   return (
     <> 
-    <UseGreeting/>
+    {/* <UseGreeting/> */}
     
       <div className='Button-section leftside'>
         <img src={logo} width={200} className="App-logo" alt="logo"/>
