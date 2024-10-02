@@ -258,9 +258,7 @@ interface DynamicMCProps {
       <br />
     </div>
     <div className="Component-rightside">
-      <button className='formbuttons' onClick={apiCall}>Matching</button>
-
-      <button id="component-delete" onClick={removeComponent}>Delete</button>
+      <button className='compdelbutton' onClick={removeComponent}>Delete</button>
 {/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
  */}
       {/* <button id="component-delete" onClick={removeComponent()}></button> */}
