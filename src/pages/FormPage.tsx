@@ -366,22 +366,24 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
   // [VB]
   return(    
   <div className="testMe">
+          <h1 className="hasBorder"  contentEditable={isVisible}> {setThisText} </h1>
+
   {/* <p>dddd</p> */}
-    <label>
+    {/* <label> */}
       {/* {text}{': '} */}
-      {/* <br /> */}
-      <input 
-      type = {isVisible ? "textarea" : "hidden"}
+       {/* <input 
+      // type = {isVisible ? "textarea" : "hidden"}
+      type =  "textarea" 
       value={thisText}
       onChange={e => setThisText(e.target.value) }
       size={10}
       // contentEditable="true"
       aria-multiline="true"
       maxLength={280} 
-      />
-    </label> 
-    {/* <br /> */}
-    </div>)
+      /> */}
+    {/* </label>  */}
+     </div>
+    )
 }
 
 // function EditableTextModule({myText}) {
@@ -787,9 +789,11 @@ const App3: React.FC = () => {
               {/* <h2> New Form </h2> */}
 
               <br/>
+              <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} />
               {/* <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
-              <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/>
-                               <button id="some-inner-answer"
+              {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+               <br/>
+               <button id="some-inner-answer"
                 onClick={() => { setIsEditingTitle(!isEditingTitle) }}
                 >
                   {isEditingTitle ? "Save Changes": "Edit Title"}

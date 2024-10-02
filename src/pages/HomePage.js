@@ -181,10 +181,10 @@ function HomePage() {
       <div className='Button-section leftside'>
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
-          Form sssQuestion Types
+          Saved Forms
         </p>
 
-        <p>{"myF()"}</p>
+        {/* <p>{"myF()"}</p> */}
  
         <div className="bottomSideBar">
           <a
