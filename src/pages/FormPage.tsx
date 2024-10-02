@@ -48,8 +48,19 @@
  // CHQ: TODO: set margins between buttons
 
 interface DynamicComponentProps {
-  text: string;
+  text: string;  
+  isProductionState: boolean;
+  captureState?: object
+  // isProductionState?: boolean;
+  // captureState?: object
 }
+
+interface TestBro {
+  theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
+ }
+// interface Bro implements DynamicComponentProps{
+  
+// }
 
 interface DynamicFITB {
   text: string;
@@ -221,7 +232,7 @@ interface DynamicMCProps {
   };
   
 
- const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 // Property 'text' does not exist on type '{}'.ts(2339)
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
@@ -271,7 +282,7 @@ interface DynamicMCProps {
 
 // [AV]
 
- const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+ const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
   // const DynamicLongAnswer: React.FC<{}> = () => {
     const [field, setField] = useState('');
     
@@ -298,7 +309,7 @@ interface DynamicMCProps {
   );
 };
 // const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
-   const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
+   const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
     const [truth, setTruth] = useState(false);
@@ -520,7 +531,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 
 //  [ZA]
 
-const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
   //  const [truth, setTruth] = useState(false);
   //  const [theChoice, setTheChoice] = useState("");
@@ -649,7 +660,7 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
 }
 
  
-let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
+let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false, captureState:})];
 
 // 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
 // let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
@@ -716,7 +727,7 @@ const App3: React.FC = () => {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me"}))
+            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false}))
           // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
           )
         }
@@ -729,7 +740,7 @@ const App3: React.FC = () => {
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
             // thePlatform.concat(React.createElement(DynamicLongAnswer))
-            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
+            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me", isProductionState: false}))
           )
         }
       >
@@ -743,7 +754,7 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             // thePlatform.concat(React.createElement(DynamicTrueFalse))
-            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
+            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title', isProductionState: false}))
           // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
           )
         }
@@ -758,7 +769,7 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
              
-              thePlatform.concat(React.createElement(DynamicMultiChoice, { text: 'Question Title'}))
+              thePlatform.concat(React.createElement(DynamicMultiChoice, { text: 'Question Title', isProductionState: false}))
              
           )
         }
