@@ -118,6 +118,17 @@
   width: auto;
 }
 
+.platformContent { 
+  width: 80%;
+  display: inline-block;
+}
+.platformMargin {
+  /* width: 15%; */
+  width: auto;
+  display: inline-block;
+}
+ 
+
 .formbuttons {
   align-items: center;
   text-align: center; 

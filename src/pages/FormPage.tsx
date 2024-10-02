@@ -802,21 +802,23 @@ const App3: React.FC = () => {
      
            </div>
            <div className='App-rightside'>
-           <div className="platformAlignment">
-           </div>
+            <div className="platformMargin">
+            <p className={false ? "hasBorder" : "noBorder"} contentEditable={false}> {"."} </p>
+              <button disabled={true} onClick={apiCall}>This button is actually meant to force  .</button>
+            </div>
+            <div className="platformContent">
+               
             <div className="platformAlignment">
               {/* <button onClick={apiCall}>Make API call</button> */}
-              <button onClick={apiCall}>Save Form</button>
-
-              {/* <h2> New Form </h2> */}
-
-{/* FIXME: editing title isn't working */}
-              <br/>
-              <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} />
-              <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
-              {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
-               <br/>
-               <button id="some-inner-answer"
+            <button onClick={apiCall}>Save Form</button>
+            {/* <h2> New Form </h2> */}
+            {/* FIXME: editing title isn't working */}
+            <br/>
+            {/* <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} /> */}
+            <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
+            {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+            <br/>
+            <button id="some-inner-answer"
                 onClick={() => { setIsEditingTitle(!isEditingTitle) }}
                 >
                   {isEditingTitle ? "Save Changes": "Edit Title"}
@@ -826,6 +828,12 @@ const App3: React.FC = () => {
             </div>
             <div className="platformAlignment">
             </div>
+
+            </div>
+            {/* <div className="platformMargin">
+              <p color="red">dddd</p>
+            </div> */}
+
 
            </div>
     </>
