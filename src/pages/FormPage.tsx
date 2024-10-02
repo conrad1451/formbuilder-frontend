@@ -226,27 +226,47 @@ interface DynamicMCProps {
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
   const [field, setField] = useState('');
-    
+
+  const removeComponent = () => {
+    // history.push("/new-form")
+    // navigate("/new-form")
+  }
   // [AR]
   return (
     <>
-    <div className="componentWidth">
-      <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
-      <label> {/* {text}{': '} */} <input
-          type="textarea"
-          // type="text"
-          value={field}
-          onChange={e => setField(e.target.value) }
-          size={50}
-          // contentEditable="true"
-          aria-multiline="true"
-          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
-          // rows={10}
-          maxLength={280}
-        />
-      </label> 
+
+    <div className="Component-leftside">
+      {/* CHQ: not doing much useful so removing use of class componentWidth */}
+      {/* <div className="componentWidth"> */}
+      <div>
+        <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
+        <label> {/* {text}{': '} */} 
+          <input
+            type="textarea"
+            // type="text"
+            value={field}
+            onChange={e => setField(e.target.value) }
+            size={50}
+            // contentEditable="true"
+            aria-multiline="true"
+            //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+            // rows={10}
+            maxLength={280}
+          />
+        </label>
+      </div>
+      <br />
     </div>
-    <br />
+    <div className="Component-rightside">
+      <button className='formbuttons' onClick={apiCall}>Matching</button>
+
+      <button id="component-delete" onClick={removeComponent}>Delete</button>
+{/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
+ */}
+      {/* <button id="component-delete" onClick={removeComponent()}></button> */}
+
+    </div>
+
     </>
   ); 
 };
@@ -688,7 +708,7 @@ const App3: React.FC = () => {
     <> 
     {/* <UseGreeting/> */}
     
-      <div className='Button-section leftside'>
+      <div className='Button-section App-leftside'>
         <img src={logo} width={200} className="App-logo" alt="logo"/>
         {/* <img src={logo} width={20} className="App-logo" alt="logo"/> */}
         
@@ -783,7 +803,7 @@ const App3: React.FC = () => {
              </a>
      
            </div>
-           <div className='rightside'>
+           <div className='App-rightside'>
            <div className="platformAlignment">
            </div>
             <div className="platformAlignment">

@@ -63,7 +63,7 @@
   }
 }
 /* CHQ: live reload? let's go */
-.leftside {
+.App-leftside {
   /* width: 50%; */
   width: 20%;
   float: left;
@@ -75,7 +75,7 @@
 
 
 /* CHQ: the below worked in inheriting from Button-section: NICE */
-.Button-section .leftside {
+.Button-section .App-leftside {
   /* width: 50%; */
   width: 20%;
   float: left;
@@ -83,7 +83,7 @@
   /* margin-top: 120%; */
 }
 
-.rightside {
+.App-rightside {
   /* width: 50%; */
   width: 80%;
   /* height: 100%; */
@@ -95,6 +95,20 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
+} 
+
+.Component-leftside {
+  width: 80%;
+  float: left;
+}
+
+.Component-rightside {
+  width: 20%;
+  float: right;
+  align-items: center;
+  justify-content: center;
+  /* font-size: calc(10px + 2vmin); */
+  /* color: black; */
 } 
 
 .platformAlignment {
