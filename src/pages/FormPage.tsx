@@ -228,25 +228,25 @@ interface DynamicMCProps {
   // [AR]
   return (
     <>
-    <label>
-      {text}
-      <br />
-      <input
-      type="textarea"
-      // type="text"
-      value={field}
-      onChange={e => setField(e.target.value) }
-      size={50}
-      // contentEditable="true"
-      aria-multiline="true"
-      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
-      // rows={10}
-      maxLength={280} 
-      />
-    </label> 
+    <div className="componentWidth">
+      <EditableTextModule myText={text} isEditing={true}/>
+      <label> {/* {text}{': '} */} <input
+          type="textarea"
+          // type="text"
+          value={field}
+          onChange={e => setField(e.target.value) }
+          size={50}
+          // contentEditable="true"
+          aria-multiline="true"
+          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+          // rows={10}
+          maxLength={280}
+        />
+      </label> 
+    </div>
     <br />
     </>
-  );
+  ); 
 };
 
 // [AV]
@@ -257,27 +257,28 @@ interface DynamicMCProps {
     
   return (
     <>
-    <label>
-      {/* {text}{': '} */}
-      <br />
-      <input
-      type="textarea"
-      // type="text"
-      value={field}
-      onChange={e => setField(e.target.value) }
-      size={50}
-      // contentEditable="true"
-      aria-multiline="true"
-      //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
-      // rows={10}
-      maxLength={560} 
-      />
-    </label> 
+    <div className="componentWidth">
+      <EditableTextModule myText={text} isEditing={true}/>
+      <label> {/* {text}{': '} */} <input
+          type="textarea"
+          // type="text"
+          value={field}
+          onChange={e => setField(e.target.value) }
+          size={50}
+          // contentEditable="true"
+          aria-multiline="true"
+          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+          // rows={10}
+          maxLength={560}
+        />
+      </label> 
+    </div>
     <br />
     </>
   );
 };
-const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
+// const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
+   const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
     const [truth, setTruth] = useState(false);
@@ -571,72 +572,14 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
  
 let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
 
+// 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
+// let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
+
+
 //  let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
 //  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
 
-
- const App2: React.FC = () => {
-  const [count, setCount] = useState(0);
-  // @ts-ignore comment
-  //   const [thePlatform, setThePlatform] = [];
-  const [thePlatform, setThePlatform] = useState(myList3);
-  
-  return (
-    <>
-      {" "}
-      {/* <button
-        // className="formbuttons"
-        onClick={() => setCount((count) => count + 1)}
-      >
-        count is {count}
-      </button>{" "} */}
-      <button
-        // className="formbuttons"
-        onClick={() =>
-          // @ts-ignore comment
-          setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me"}))
-          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-          )
-        }
-      >
-        Add short answer
-      </button>
-      <button
-        onClick={() =>
-          // @ts-ignore comment
-          setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
-          // thePlatform.concat(createDynamicComponent2(DynamicLongAnswer))
-          )
-        }
-      >
-        Add long answer
-      </button> 
-      <button
-        onClick={() =>
-          // @ts-ignore comment
-          // CHQ: the following doesn't work.
-          setThePlatform((thePlatform) =>
-            thePlatform.concat(
-              // thePlatform.concat(React.createElement(DynamicTrueFalse))
-              // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me"}))
-              // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: "test me", isProductionState=true}))
-            )
-          )
-        }
-      >
-        Add True/False
-      </button>
-      
-      <p>total number of questions: {thePlatform.length}</p>
-      {/* <div>{myList3}</div> */}
-      <div>{thePlatform}</div>
-    </>
-  ); 
-};
-
-
+ 
 function Greeting({ name, age }) {
   return React.createElement(
     'h1',
@@ -670,9 +613,10 @@ const App3: React.FC = () => {
     
       <div className='Button-section leftside'>
         <img src={logo} width={200} className="App-logo" alt="logo"/>
-
+        {/* <img src={logo} width={20} className="App-logo" alt="logo"/> */}
+        
         <button className='formbuttons' onClick={apiCall}>←</button>
-        <p> Form Question Types - multiple select, fill in blank, and matching are missing </p>
+        <p> Form Question Types</p>
         <button className='formbuttons' id="short-answer"
         onClick={() =>
           // @ts-ignore comment
@@ -689,8 +633,8 @@ const App3: React.FC = () => {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicLongAnswer))
-            // thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
+            // thePlatform.concat(React.createElement(DynamicLongAnswer))
+            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
           )
         }
       >
@@ -703,8 +647,8 @@ const App3: React.FC = () => {
           // @ts-ignore comment
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicTrueFalse))
-            // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
+            // thePlatform.concat(React.createElement(DynamicTrueFalse))
+            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
           // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
           )
         }
@@ -815,16 +759,14 @@ const App3: React.FC = () => {
        return (
          <div className="App"> 
            <FormModal3 />
-           <App2/>
-           <div className='Button-section leftside'>
+            <div className='Button-section leftside'>
            {/* <img src={logo} className="App-logo" alt="logo" /> */}
                  <button className='formbuttons' onClick={apiCall}>←</button>
  
              <p>
                  Form Question Types
              </p>      
-             {/* <App2/> */}
-             <div>
+              <div>
                  {/* <button className='formbuttons' onClick={() => setCompList((compList) => compList.concat(<MyComponent/>))}>Test button</button> */}
  
                  <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[0]))}>Multiple Choice</button>
@@ -864,8 +806,7 @@ const App3: React.FC = () => {
            component: "MC Question",
          }))}/> */}
 
-             <App2/>
-             <div>
+              <div>
               <button onClick={() =>
             // @ts-ignore comment
             setThePlatform((thePlatform) =>
@@ -917,8 +858,7 @@ const App3: React.FC = () => {
  function FormPage() {
   // return(<FormPage1/>)
   return(<App3/>)
-  // return(<App2/>)
- }
+  }
  
  export default FormPage;
  
