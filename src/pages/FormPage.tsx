@@ -28,9 +28,11 @@
 // 
 //
 // import { createElement } from 'react';
+ import React from "react";
 
  import { useState } from "react";
- import React from "react";
+ import { useNavigate } from "react-router-dom";
+
  // import Dialog from "./MyDialog";
  import Dialog from "../modules/MyDialog";
  
@@ -383,6 +385,45 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 }
 
 // function EditableTextModule({myText}) {
+  function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
+    // function EditableTextModule({isEditing}) { 
+    // const [theText, setTheText] = useState(myText);
+  
+    let theText=myText;
+  
+    switch(theFontSize){
+      case "h1":
+        return (<h1 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h1>);
+      case "h2":
+        return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
+      case "h3":
+        return (<h3 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h3>);  
+      case "h4":
+        return (<h4 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h4>);  
+      case "h5":
+        return (<h5 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h5>);  
+      case "h6":
+        return (<h6 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h6>);  
+      case "p":
+        return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>); 
+      case "default":
+        return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);   
+    }
+    
+  
+  
+    // [AR] // [AT]
+  /* CHQ: the contentEditable field eilminates the need for a hidden text box altogether!
+  /* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */ 
+  /* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */
+  /* [AZ] */
+    // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
+    // return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
+    // return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
+  }
+  
+
+// function EditableTextModule({myText}) {
 function EditableTextModule({myText, isEditing, theFontSize}) {
   // function EditableTextModule({isEditing}) { 
   // const [theText, setTheText] = useState(myText);
@@ -619,10 +660,24 @@ const App3: React.FC = () => {
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
   const [thePlatform, setThePlatform] = useState(myList3);
+  const [formName, setFormName] = useState("Untitled");
+  const [isEditingTitle, setIsEditingTitle] = useState(false);
   // const [formArea, setFormArea] = useState(formField);
 
   let textSnippets= ["d", "d", "de"];
-  let isFillInTheBlank=[true, true, true];
+  let isFillInTheBlank=[true, true, true];  
+  
+  const navigate = useNavigate();
+
+  const coursesPage = () => {
+    // history.push("/new-form")
+    navigate("/new-form")
+  }
+
+  const BackToHome = () => {
+    // history.push("/new-form")
+    navigate("/")
+  }
 
   
   return (
@@ -633,7 +688,7 @@ const App3: React.FC = () => {
         <img src={logo} width={200} className="App-logo" alt="logo"/>
         {/* <img src={logo} width={20} className="App-logo" alt="logo"/> */}
         
-        <button className='formbuttons' onClick={apiCall}>←</button>
+        <button className='formbuttons' onClick={BackToHome}>←</button>
         <p> Form Question Types</p>
         <button className='formbuttons' id="short-answer"
         onClick={() =>
@@ -730,8 +785,16 @@ const App3: React.FC = () => {
             <div className="platformAlignment">
               <button onClick={apiCall}>Make API call</button>
               {/* <h2> New Form </h2> */}
-              <EditableTextModule myText={"Untitled"} isEditing={true} theFontSize={"h2"}/>
-              {/* <p>Number of questions: {thePlatform.length}</p> */}
+
+              <br/>
+              {/* <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+              <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/>
+                               <button id="some-inner-answer"
+                onClick={() => { setIsEditingTitle(!isEditingTitle) }}
+                >
+                  {isEditingTitle ? "Save Changes": "Edit Title"}
+                </button>
+                {/* <p>Number of questions: {thePlatform.length}</p> */}
               <div>{thePlatform}</div>
             </div>
             <div className="platformAlignment">
