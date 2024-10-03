@@ -27,11 +27,8 @@
 
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
-*/
-// 
-//
-// import { createElement } from 'react';
- import React from "react";
+*/ 
+import React from "react";
 
  import { useState } from "react";
  import { useNavigate } from "react-router-dom";
@@ -71,14 +68,10 @@ interface DynamicFITB {
   textSnippets: [];
   isFillInTheBlank: [];
 }
-
-
 interface DynamicTF {
   text: string;
   isProductionState: boolean;
-}
-
-
+} 
 interface DynamicMCProps {
   text: string;
   checkedCondition: boolean;
@@ -183,29 +176,9 @@ interface DynamicMCProps {
       </Dialog>
     </>
   );
-}
-  
-   function QuestionSelector()
-   {
-     return(
-       <div>
-         <button className='formbuttons' onClick={apiCall}>Multiple Choice</button>
-         <br/>
-         <button className='formbuttons' onClick={apiCall}>Short Answer</button>
-         <br/>
-         <button className='formbuttons' onClick={apiCall}>Long Answer</button>
-         <button className='formbuttons' onClick={apiCall}>True/False</button>
-         <br/>
-         <button className='formbuttons' onClick={apiCall}>Multiple Select</button>
-         <button className='formbuttons' onClick={apiCall}>Fill in the blank</button>
-         <button className='formbuttons' onClick={apiCall}>Matching</button>
-         </div> 
-         );
-   }
+} 
  
-  
- 
- const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
   // Property 'text' does not exist on type '{}'.ts(2339)
   // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
   // const DynamicShortAnswer: React.FC<{}> = () => {
@@ -236,14 +209,13 @@ interface DynamicMCProps {
   };
   
 
- const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 // Property 'text' does not exist on type '{}'.ts(2339)
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
   const [field, setField] = useState('');
 
   const [randomId, setRandomId] = useState(Math.random().toString(36).substring(2,2+20))
-
 
   // const randomIDLength = 20;
   // const randomId = Math.random().toString(36).substring(2,2+randomIDLength); 
@@ -324,43 +296,42 @@ interface DynamicMCProps {
     </>
   );
 };
+
 // const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
-   const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
-    const [truth, setTruth] = useState(false);
+  const [truth, setTruth] = useState(false);
     // [AU]
   return (
     <>
     <div className="componentWidth">
-    <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
-
+      <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       {/* <EditableTextModule myText={text} isEditing={isProductionState} theFontSize={"p"}/> */}
-            <label>
-      True
-      <input
-      type="radio"  
-      checked={truth} 
-      onChange={e => setTruth(true) }
-      // onClick={setTruth(true)} 
-      />
-    </label>  
-
-    <br/>
-    <label>
-      False
-      <input
-      type="radio"  
-      checked={!truth}
-      onChange={e => setTruth(false) }
-      // onClick={setTruth(true)} 
-      />
-    </label> 
-      </div>
+      <label>
+        True
+        <input
+          type="radio"
+          checked={truth}
+          onChange={e => setTruth(true) }
+          // onClick={setTruth(true)}
+        />
+      </label>
+      <br/>
+      
+      <label>
+        False
+        <input
+          type="radio"
+          checked={!truth}
+          onChange={e => setTruth(false) }
+          // onClick={setTruth(true)}
+        />
+      </label>
+    </div>
 
     {/* <br /> */}
     <br />
-    
     </>
   );
 };
@@ -432,7 +403,7 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 }
 
 // function EditableTextModule({myText}) {
-  function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
+function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
     // function EditableTextModule({isEditing}) { 
     // const [theText, setTheText] = useState(myText);
   
@@ -467,7 +438,7 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
     // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
     // return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
     // return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
-  }
+}
   
 
 // function EditableTextModule({myText}) {
@@ -509,7 +480,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 }
 
 // const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
-  const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
+const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
   // const [isChecked, setIsChecked] = useState(false);
   // const [isChecked, setIsChecked] = useState(checkedCondition);
   // const [optionText, setOptionText] = useState(text);
@@ -605,7 +576,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
  );
 };
 
-
+// FIXME: CHQ: fix on another day
 const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFillInTheBlank }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
    //  const [truth, setTruth] = useState(false);
@@ -666,14 +637,7 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
   );
  };
 
-
- function QuestionSelector2({ exampleFunc }) {
-  const [childData, setChildData] = useState("");
-
-  return(
-    <div> <button className='formbuttons' onClick={exampleFunc}>Multiple Choice</button> </div>
-      );
-}
+ 
 
  
 let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
@@ -907,11 +871,7 @@ const App3: React.FC = () => {
       >
         Add Fill in the blank
       </button>
-      <br /> */}
-      
-      {/* <p>total number of questions: {thePlatform.length}</p> */}
-      {/* <div>{myList3}</div> */}
-           {/* <QuestionSelector/> */}
+      <br /> */}      
              <a
                className="App-link"
                href="https://reactjs.org"
