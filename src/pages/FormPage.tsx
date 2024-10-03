@@ -253,6 +253,7 @@ interface DynamicMCProps {
     // history.push("/new-form")
     
     // navigate("/new-form")
+    
   }
   // [AR]
   return (
@@ -281,7 +282,8 @@ interface DynamicMCProps {
       <br />
     </div>
     <div className="Component-rightside">
-      <button className='compdelbutton' onClick={removeComponent}>Delete</button>
+      {/* <button className='compdelbutton' onClick={removeComponent}>Delete</button> */}
+      <button className='compdelbutton' onClick={ConfirmComponentDeletion(randomId, d)}>Delete</button>
       {/* <button onClick={removeComponent}>Delete</button> */}
 
 {/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
@@ -699,6 +701,40 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProd
 // {
 //   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
 // }
+
+
+function ConfirmComponentDeletion(componentID, deletionFunction) {
+  const [open, setOpen] = useState(true);
+
+  // CHQ: caused the page to break and not load
+  // if (open) {
+  //   // whether I called the method on thedialog or just as a function
+  //   showTheDialog();
+  //   thedialog.showTheDialog();
+  // }
+  // const    [open, setOpen] = useState(false);
+
+  const myFunc = () =>{
+    setOpen(false)
+  }
+
+  return (
+    <>
+      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
+      <Dialog id="dialog2" open={open}>
+
+      {/* <Dialog id="dialog2" open={open}> */}
+      <p>Are you sure you want to delete the component?</p>
+          <button onClick={myFunc} id="confirmBtn" value="default">
+              No, nevermind
+            </button> 
+            <button onClick={deletionFunction(componentID)} id="confirmBtn" value="default">
+              Yes, Delete
+            </button>  
+      </Dialog>
+    </>
+  );
+}
 
 const App3: React.FC = () => {
 // const App3: React.FC = ({getTheStore, setTheStore}) => {
