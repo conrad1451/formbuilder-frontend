@@ -928,8 +928,6 @@ const App3: React.FC = () => {
 
   const [globalDataStore, setGlobalDataStore] = useState(0);
 
-
-  // return(<FormPage1/>)
   // return(<App3 getTheStore={myList3} setTheStore={}/>)
   return(<App3/>);
   }
