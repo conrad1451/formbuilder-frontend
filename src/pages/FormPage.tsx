@@ -24,6 +24,8 @@
 
 [AJ]: https://react.dev/reference/react/createElement#usage
 
+[AM]: https://stackoverflow.com/questions/46230992/html-placing-headers-side-by-side
+
 
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
@@ -185,7 +187,7 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
     </div>
     <div className="Component-rightside">
       {/* <button className='compdelbutton' onClick={removeComponent}>Delete</button> */}
-      <button className='compdelbutton' onClick={ConfirmComponentDeletion(randomId, d)}>Delete</button>
+      {/* <button className='compdelbutton' onClick={ConfirmComponentDeletion(randomId, d)}>Delete</button> */}
       {/* <button onClick={removeComponent}>Delete</button> */}
 
 {/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
@@ -388,7 +390,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
     case "h4":
       return (<h4 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h4>);  
     case "h5":
-      return (<h5 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h5>);  
+      return (<h5 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h5>); 
     case "h6":
       return (<h6 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h6>);  
     case "p":
@@ -424,6 +426,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
   // if I click on the option and it is already selected, it is just selected - indempotent action
   return (
     <>
+    {/* [AM] */}
     <div className="multiChoiceOptLayout">
     <input
       type="radio"
@@ -439,8 +442,8 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
         onClick={() => { setHasEditorOpen(!hasEditorOpen) }}
         >
           {hasEditorOpen ? "Save Changes": "Edit Option"}
-          </button>
-          <br/>
+          </button>  
+          {/* <br/> */}
     </>
   );
 };
@@ -461,14 +464,22 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
   ];
   const [optionList, setOptionList] = useState(myListing);
  
+  // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
    return (
     <>
     <div>
       <div> 
         <br />
         <div className="componentWidth">
+        {/* <div > */}
         <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
-        <div>{optionList}</div>
+
+        {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+        {/* <div>{optionList}</div> */}
+
+        <ul className="box">
+          {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
+        </ul> 
         </div>
         <br />
       </div>
