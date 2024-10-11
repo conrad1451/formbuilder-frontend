@@ -35,7 +35,10 @@ export function Counter() {
           -
         </button>
       </div>
-      <div>
+      <div> 
+        {Array(count-1).fill().map(( ) => {
+                return (<><span>Bro</span><text> | </text></>)
+            })} Bro 
         <ul> 
             {Array(count).fill().map(( ) => {
                 return (<li>Hi</li>)
