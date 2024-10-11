@@ -178,7 +178,7 @@ function HomePage() {
   return (
     <div className="App"> 
       <FormModal3 />
-      <div className='Button-section leftside'>
+      <div className='Button-section App-leftside'>
         {/* <img src={logo} className="App-logo" alt="logo" /> */}
         <p>
           Saved Forms
@@ -201,7 +201,7 @@ function HomePage() {
         
 
       </div>
-      <div className='rightside'>
+      <div className='App-rightside'>
 
       <img src={logo} className="App-logo" alt="logo" />
         <button onClick={apiCall}>Make API call</button>

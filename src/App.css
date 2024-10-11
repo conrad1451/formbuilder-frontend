@@ -118,6 +118,17 @@
   width: auto;
 }
 
+.platformContent { 
+  width: 80%;
+  display: inline-block;
+}
+.platformMargin {
+  /* width: 15%; */
+  width: auto;
+  display: inline-block;
+}
+ 
+
 .formbuttons {
   align-items: center;
   text-align: center; 
@@ -164,6 +175,56 @@
   } */
 }
 
+.compdelbutton {
+   /* align-items: center; */
+  /* text-align: center;  */
+
+  transition: all 0.1s linear;
+  -webkit-appearance: none;
+  border-radius: 4px;
+  color: black;
+  /* display: inline-block; */
+  font-weight: bold;
+  background-color: lightcoral;
+  font-size: calc(var(--form-button-size) * (12/20) * 1px); 
+  padding: calc(var(--form-button-size) * (5/20) * 1px); 
+  margin: calc(var(--form-button-size) * (8/20) * 1px);
+ 
+  line-height: 1em;
+  text-decoration: none;
+
+  position: relative;
+  /* CHQ: experimenting - I like it */
+  /* bottom: -10vh; */
+  /* CHQ: the best manual position wrt vh */
+  /* bottom: -2vh; */
+  bottom: calc(var(--form-button-size) * -1*(10/20) * 1px);
+  
+ 
+  width: 100%; 
+
+  cursor: pointer;  
+  /* &--reset button {
+    @extend .formButton;
+
+    font-weight: 800;
+    font-style: normal;
+    border: solid 2px var(--color-env);
+    line-height: 1em;
+    text-decoration: none;
+    min-width: 120px;
+    cursor: pointer;
+
+    width: 100%; 
+     font-size: (var(--form-button-size) * (12/20) * 1px);
+   
+    }
+  &--reset button:hover {
+    background-color: var(--color-env);
+    color: #fff;
+  } */
+}
+ 
 /* .formbuilderspace { */
   /* display: flex;
   flex-direction: column; */

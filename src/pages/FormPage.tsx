@@ -24,11 +24,11 @@
 
 [AJ]: https://react.dev/reference/react/createElement#usage
 
-*/
-// 
-//
-// import { createElement } from 'react';
- import React from "react";
+
+[AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
+
+*/ 
+import React from "react";
 
  import { useState } from "react";
  import { useNavigate } from "react-router-dom";
@@ -48,22 +48,30 @@
  // CHQ: TODO: set margins between buttons
 
 interface DynamicComponentProps {
-  text: string;
+  text: string;  
+  isProductionState: boolean;
+  captureState?: object
+  // isProductionState?: boolean;
+  // captureState?: object
 }
+
+//neither of the below work
+// interface TestBro {
+//   theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
+//  }
+// interface Bro implements DynamicComponentProps{
+  
+// }
 
 interface DynamicFITB {
   text: string;
   textSnippets: [];
   isFillInTheBlank: [];
 }
-
-
 interface DynamicTF {
   text: string;
   isProductionState: boolean;
-}
-
-
+} 
 interface DynamicMCProps {
   text: string;
   checkedCondition: boolean;
@@ -93,104 +101,14 @@ interface DynamicMCProps {
 // [AP]
 
  
- const apiCall = () => {
+const apiCall = () => {
    axios.get('http://localhost:5000').then((data) => {
      // this console.log will be in our frontend console
      console.log(data)
    })
- };
- function FormModal3() {
-  // const [open, setOpen] = useState(true);
-
-  // CHQ: caused the page to break and not load
-  // if (open) {
-  //   // whether I called the method on thedialog or just as a function
-  //   showTheDialog();
-  //   thedialog.showTheDialog();
-  // }
-  // const [open, setOpen] = useState(false);
-
-  return (
-    <>
-      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
-      <Dialog id="dialog2" open={true}>
-
-      {/* <Dialog id="dialog2" open={open}> */}
-
-        <form id="form2" method="dialog">
-          {/* <form method="dialog" action=""> */}
-          <br />
-          <label htmlFor="fname">Name: </label>
-          {/* <br /> */}
-          <input
-            className="formFields --nameField"
-            type="text"
-            id="name"
-            name="name"
-            placeholder="John Doe"
-            required
-          />
-          <br />
-          <br />
-          <label htmlFor="lname">Email: </label>
-          {/* <br /> */}
-          <input
-            className="formFields --nameField"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="john.doe@gmail.com"
-            required
-          />
-          <br />
-          <br />
-          <label htmlFor="DOB">Date of Birth:</label>
-          <input
-            className="formFields --nameField"
-            type="date"
-            id="dob"
-            name="dob"
-            max="2006-09-11"
-            // I won't allow anyone to say they are 200 years old
-            min="1806-09-11"
-            required
-          />
-          {/* <input type="submit"></input> */}
-          <br />
-          <br />
-          {/* <button onclick="closeDialog()">Cancel</button> */}
-          <input className="my_button" type="submit" value="Submit" />
-
-          {/* <button onclick="myFunc()" id="confirmBtn" value="default">
-              Confirm
-            </button> */}
-        </form>
-      </Dialog>
-    </>
-  );
-}
-  
-   function QuestionSelector()
-   {
-     return(
-       <div>
-         <button className='formbuttons' onClick={apiCall}>Multiple Choice</button>
-         <br/>
-         <button className='formbuttons' onClick={apiCall}>Short Answer</button>
-         <br/>
-         <button className='formbuttons' onClick={apiCall}>Long Answer</button>
-         <button className='formbuttons' onClick={apiCall}>True/False</button>
-         <br/>
-         <button className='formbuttons' onClick={apiCall}>Multiple Select</button>
-         <button className='formbuttons' onClick={apiCall}>Fill in the blank</button>
-         <button className='formbuttons' onClick={apiCall}>Matching</button>
-         </div> 
-         );
-   }
+}; 
  
-  
- 
- const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
   // Property 'text' does not exist on type '{}'.ts(2339)
   // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
   // const DynamicShortAnswer: React.FC<{}> = () => {
@@ -221,15 +139,23 @@ interface DynamicMCProps {
   };
   
 
- const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 // Property 'text' does not exist on type '{}'.ts(2339)
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
   const [field, setField] = useState('');
 
+  const [randomId, setRandomId] = useState(Math.random().toString(36).substring(2,2+20))
+
+  // const randomIDLength = 20;
+  // const randomId = Math.random().toString(36).substring(2,2+randomIDLength); 
+  
+
   const removeComponent = () => {
     // history.push("/new-form")
+    
     // navigate("/new-form")
+    
   }
   // [AR]
   return (
@@ -251,16 +177,17 @@ interface DynamicMCProps {
             aria-multiline="true"
             //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
             // rows={10}
-            maxLength={280}
+            maxLength={280} 
           />
         </label>
       </div>
       <br />
     </div>
     <div className="Component-rightside">
-      <button className='formbuttons' onClick={apiCall}>Matching</button>
+      {/* <button className='compdelbutton' onClick={removeComponent}>Delete</button> */}
+      <button className='compdelbutton' onClick={ConfirmComponentDeletion(randomId, d)}>Delete</button>
+      {/* <button onClick={removeComponent}>Delete</button> */}
 
-      <button id="component-delete" onClick={removeComponent}>Delete</button>
 {/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
  */}
       {/* <button id="component-delete" onClick={removeComponent()}></button> */}
@@ -273,7 +200,7 @@ interface DynamicMCProps {
 
 // [AV]
 
- const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text }) => {
+ const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
   // const DynamicLongAnswer: React.FC<{}> = () => {
     const [field, setField] = useState('');
     
@@ -299,43 +226,42 @@ interface DynamicMCProps {
     </>
   );
 };
+
 // const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
-   const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
-    const [truth, setTruth] = useState(false);
+  const [truth, setTruth] = useState(false);
     // [AU]
   return (
     <>
     <div className="componentWidth">
-    <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
-
+      <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       {/* <EditableTextModule myText={text} isEditing={isProductionState} theFontSize={"p"}/> */}
-            <label>
-      True
-      <input
-      type="radio"  
-      checked={truth} 
-      onChange={e => setTruth(true) }
-      // onClick={setTruth(true)} 
-      />
-    </label>  
-
-    <br/>
-    <label>
-      False
-      <input
-      type="radio"  
-      checked={!truth}
-      onChange={e => setTruth(false) }
-      // onClick={setTruth(true)} 
-      />
-    </label> 
-      </div>
+      <label>
+        True
+        <input
+          type="radio"
+          checked={truth}
+          onChange={e => setTruth(true) }
+          // onClick={setTruth(true)}
+        />
+      </label>
+      <br/>
+      
+      <label>
+        False
+        <input
+          type="radio"
+          checked={!truth}
+          onChange={e => setTruth(false) }
+          // onClick={setTruth(true)}
+        />
+      </label>
+    </div>
 
     {/* <br /> */}
     <br />
-    
     </>
   );
 };
@@ -407,7 +333,7 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
 }
 
 // function EditableTextModule({myText}) {
-  function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
+function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
     // function EditableTextModule({isEditing}) { 
     // const [theText, setTheText] = useState(myText);
   
@@ -442,7 +368,7 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
     // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
     // return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
     // return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
-  }
+}
   
 
 // function EditableTextModule({myText}) {
@@ -484,7 +410,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 }
 
 // const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
-  const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
+const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
   // const [isChecked, setIsChecked] = useState(false);
   // const [isChecked, setIsChecked] = useState(checkedCondition);
   // const [optionText, setOptionText] = useState(text);
@@ -522,7 +448,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 
 //  [ZA]
 
-const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
  // const DynamicTrueFalse: React.FC<{}> = () => {
   //  const [truth, setTruth] = useState(false);
   //  const [theChoice, setTheChoice] = useState("");
@@ -580,7 +506,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text }) => {
  );
 };
 
-
+// FIXME: CHQ: fix on another day
 const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFillInTheBlank }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
    //  const [truth, setTruth] = useState(false);
@@ -641,17 +567,10 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
   );
  };
 
-
- function QuestionSelector2({ exampleFunc }) {
-  const [childData, setChildData] = useState("");
-
-  return(
-    <div> <button className='formbuttons' onClick={exampleFunc}>Multiple Choice</button> </div>
-      );
-}
+ 
 
  
-let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
+let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
 
 // 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
 // let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
@@ -677,6 +596,40 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me"})];
 //   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
 // }
 
+
+function ConfirmComponentDeletion(componentID, deletionFunction) {
+  const [open, setOpen] = useState(true);
+
+  // CHQ: caused the page to break and not load
+  // if (open) {
+  //   // whether I called the method on thedialog or just as a function
+  //   showTheDialog();
+  //   thedialog.showTheDialog();
+  // }
+  // const    [open, setOpen] = useState(false);
+
+  const myFunc = () =>{
+    setOpen(false)
+  }
+
+  return (
+    <>
+      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
+      <Dialog id="dialog2" open={open}>
+
+      {/* <Dialog id="dialog2" open={open}> */}
+      <p>Are you sure you want to delete the component?</p>
+          <button onClick={myFunc} id="confirmBtn" value="default">
+              No, nevermind
+            </button> 
+            <button onClick={deletionFunction(componentID)} id="confirmBtn" value="default">
+              Yes, Delete
+            </button>  
+      </Dialog>
+    </>
+  );
+}
+
 const App3: React.FC = () => {
 // const App3: React.FC = ({getTheStore, setTheStore}) => {
   // const [count, setCount] = useState(0);
@@ -690,12 +643,72 @@ const App3: React.FC = () => {
 
   let textSnippets= ["d", "d", "de"];
   let isFillInTheBlank=[true, true, true];  
+
+  // FIXME: CHQ: uncomment when lodash is ready
+  // let firstTmpList = structuredClone(myList3);
   
   const navigate = useNavigate();
 
-  const coursesPage = () => {
-    // history.push("/new-form")
-    navigate("/new-form")
+  const RemoveComponent = (targetQuestion) => {
+      // 1. grab ID from target question 
+      // 2. compare target question ID to that of each question. If there is a match, uncouple
+
+      let questionsToKeep: boolean[] = []
+      let indicesOfQuestionsToDelete: number[] = [];
+
+      thePlatform.forEach(() => {
+        questionsToKeep.push(true);
+      });
+
+      for (let index = 0; index < thePlatform.length; ++index) {
+        const question = thePlatform[index];
+
+        // FIXME: determinen how to grab this, won't be true for all questions
+        let isQuestionToDelete = true;
+
+        if(isQuestionToDelete){
+          questionsToKeep[index] = false;
+          indicesOfQuestionsToDelete.push(index);
+        }
+      }
+//         "message": "Type 'never[]' is missing the following properties from type 'FunctionComponentElement<DynamicComponentProps>': type, props, key",
+      // let tmpList: React.FunctionComponentElement<DynamicComponentProps> = [];
+
+      let startIndex=0;
+
+      let i = 0;
+
+      // [AEG]
+      while(i < indicesOfQuestionsToDelete.length){
+        if(startIndex !== indicesOfQuestionsToDelete[i]){
+          let curKeptPortion = thePlatform.slice(startIndex, indicesOfQuestionsToDelete[i]);
+          // Property 'push' does not exist on type 'FunctionComponentElement<DynamicComponentProps>'.ts(2339)
+          // tmpList.push()
+          // let inserttionStart = firstTmpList.length;
+          /**
+           * Argument of type 'FunctionComponentElement<DynamicComponentProps>[]' is not assignable to parameter of 
+           * type 'FunctionComponentElement<DynamicComponentProps>'. Type 'FunctionComponentElement<DynamicComponentProps>[]' 
+           * is missing the following properties from type 
+           * 'FunctionComponentElement<DynamicComponentProps>': type, props, keyts(2345)
+           * */
+          
+          // firstTmpList.splice(inserttionStart, 0, curKeptPortion)
+        
+          // CHQ: yeah im modifying the orig val
+        
+          // FIXME: CHQ: uncomment when lodash is ready
+          // let tmpArr = structuredClone(firstTmpList);
+          // firstTmpList = tmpArr.concat(curKeptPortion);
+        } 
+
+        // we grab the indice of the question to be deleted, adn then add 1 so that we concat its neighbors on either 
+        // side goingn forward
+        startIndex = 1 + indicesOfQuestionsToDelete[i];
+        ++i;
+      }
+      // FIXME: CHQ: uncomment when lodash is ready
+      // setThePlatform(firstTmpList); 
+      
   }
 
   const BackToHome = () => {
@@ -718,7 +731,7 @@ const App3: React.FC = () => {
         onClick={() =>
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me"}))
+            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false}))
           // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
           )
         }
@@ -731,7 +744,7 @@ const App3: React.FC = () => {
           // @ts-ignore comment
           setThePlatform((thePlatform) =>
             // thePlatform.concat(React.createElement(DynamicLongAnswer))
-            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me"}))
+            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me", isProductionState: false}))
           )
         }
       >
@@ -745,7 +758,7 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
             // thePlatform.concat(React.createElement(DynamicTrueFalse))
-            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
+            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title', isProductionState: false}))
           // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
           )
         }
@@ -760,7 +773,7 @@ const App3: React.FC = () => {
           // CHQ: the following doesn't work.
           setThePlatform((thePlatform) =>
              
-              thePlatform.concat(React.createElement(DynamicMultiChoice, { text: 'Question Title'}))
+              thePlatform.concat(React.createElement(DynamicMultiChoice, { text: 'Question Title', isProductionState: false}))
              
           )
         }
@@ -788,11 +801,7 @@ const App3: React.FC = () => {
       >
         Add Fill in the blank
       </button>
-      <br /> */}
-      
-      {/* <p>total number of questions: {thePlatform.length}</p> */}
-      {/* <div>{myList3}</div> */}
-           {/* <QuestionSelector/> */}
+      <br /> */}      
              <a
                className="App-link"
                href="https://reactjs.org"
@@ -804,21 +813,23 @@ const App3: React.FC = () => {
      
            </div>
            <div className='App-rightside'>
-           <div className="platformAlignment">
-           </div>
+            <div className="platformMargin">
+            <p className={false ? "hasBorder" : "noBorder"} contentEditable={false}> {"."} </p>
+              <button disabled={true} onClick={apiCall}>This button is actually meant to force  .</button>
+            </div>
+            <div className="platformContent">
+               
             <div className="platformAlignment">
               {/* <button onClick={apiCall}>Make API call</button> */}
-              <button onClick={apiCall}>Save Form</button>
-
-              {/* <h2> New Form </h2> */}
-
-{/* FIXME: editing title isn't working */}
-              <br/>
-              <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} />
-              <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
-              {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
-               <br/>
-               <button id="some-inner-answer"
+            <button onClick={apiCall}>Save Form</button>
+            {/* <h2> New Form </h2> */}
+            {/* FIXME: editing title isn't working */}
+            <br/>
+            {/* <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} /> */}
+            <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
+            {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+            <br/>
+            <button id="some-inner-answer"
                 onClick={() => { setIsEditingTitle(!isEditingTitle) }}
                 >
                   {isEditingTitle ? "Save Changes": "Edit Title"}
@@ -829,145 +840,17 @@ const App3: React.FC = () => {
             <div className="platformAlignment">
             </div>
 
+            </div>
+            {/* <div className="platformMargin">
+              <p color="red">dddd</p>
+            </div> */}
+
+
            </div>
     </>
   ); 
 }; 
 
- function FormPage1() {
-   // const [formArea, setFormArea] = useState(String[]); // CHQ: didn't work
-   // const [formArea, setFormArea] = useState(Array<String>); // CHQ: didn't work
-       const [formArea, setFormArea] = useState(formField);
-      //  const [compList, setCompList] = [];
- 
-       const theFormOptions = [
-         {
-           name: "Multiple Choice",
-           component: "MC Question",
-         },
-         {
-           name: "Short Answer",
-           component: "Short Answer",
-         },
-         {
-           name: "Long Answer",
-           component: "Long Answer",
-         },
-         {
-           name: "True/False",
-           component: "True/False",
-         },
-         {
-           name: "Multiple Select",
-           component: "Multiple Select",
-         },
-         {
-           name: "Fill in the blank",
-           component: "Fill in the blank",
-         },
-         {
-           name: "Matching",
-           component: "Matching",
-         },
-       ];
-       
-       return (
-         <div className="App"> 
-           <FormModal3 />
-            <div className='Button-section leftside'>
-           {/* <img src={logo} className="App-logo" alt="logo" /> */}
-                 <button className='formbuttons' onClick={apiCall}>←</button>
- 
-             <p>
-                 Form Question Types
-             </p>      
-              <div>
-                 {/* <button className='formbuttons' onClick={() => setCompList((compList) => compList.concat(<MyComponent/>))}>Test button</button> */}
- 
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[0]))}>Multiple Choice</button>
-                 <br/>
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[1]))}>Short Answer</button>
-                 <br/>
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[2]))}>Long Answer</button>
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[3]))}>True/False</button>
-                 <br/>
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[4]))}>Multiple Select</button>
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[5]))}>Fill in the blank</button>
-                 <button className='formbuttons' onClick={() => setFormArea((formArea) => formArea.concat(theFormOptions[6]))}>Matching</button>
-                 </div> 
-     
-           {/* <QuestionSelector/> */}
-             <a
-               className="App-link"
-               href="https://reactjs.org"
-               target="_blank"
-               rel="noopener noreferrer"
-             >
-               Help
-             </a>
-     
-           </div>
-           <div className='rightside'>
-     
-           <img src={logo} className="App-logo" alt="logo" />
-             <button onClick={apiCall}>Make API call</button>
-             <p>
-                 THIS IS THE HOME PAGE
-             </p>
-             {/* FIXME: inserting component here did not work */}
-             {/* Too many re-renders. React limits the number of renders to prevent an infinite loop. */}
-                          {/* <QuestionSelector2 exampleFunc={setFormArea((formArea) => formArea.concat({
-           name: "Multiple Choice",
-           component: "MC Question",
-         }))}/> */}
-
-              <div>
-              <button onClick={() =>
-            // @ts-ignore comment
-            setThePlatform((thePlatform) =>
-              thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
-            // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer))
-            )
-              }
-            >
-            Add short answer
-            </button>
-
-
-             </div>
-            
-             {/* <>{compList}</> */}
- 
-             {/* <a
-               className="App-link"
-               href="https://reactjs.org"
-               target="_blank"
-               rel="noopener noreferrer"
-             >
-               Learn React
-             </a> */}
-             <p className="listWindow">{JSON.stringify(formArea)}</p>
-             
-              
-             {/* <p>{(formArea => {})}</p> */}
-             {/* <>
-             {formArea.map(function(element) {
-               return (
-                 <li>
-                   {element.name}
-                   </li>
-                   )
-                 })}
-             </> */}
-             {/* <>{formArea.forEach(element => {
-               <li>element</li>
-             })}</> */}
-             
- 
-           </div>
-         </div>
-       );
- }
 
 //  let globalDataStore = [];
 
@@ -975,8 +858,6 @@ const App3: React.FC = () => {
 
   const [globalDataStore, setGlobalDataStore] = useState(0);
 
-
-  // return(<FormPage1/>)
   // return(<App3 getTheStore={myList3} setTheStore={}/>)
   return(<App3/>);
   }
