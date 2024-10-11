@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import App from './App';
+import App from './App';
 import AppAlt from './AppAlt';
 import store from './app/store';
 import { Provider } from 'react-redux';
@@ -9,11 +9,24 @@ import * as serviceWorker from './serviceWorker';
 
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+function Choice1(){
+  return(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  )
+}
+function Choice2(){
+  return(  
   <Provider store={store}>
     <AppAlt />
   </Provider>
+  )
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  // <Choice1/>
+  <Choice2/>
 );
 
 // If you want to start measuring performance in your app, pass a function
