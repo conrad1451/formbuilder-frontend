@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "./logo.svg";
-import { Counter } from "./features/counter/Counter";
+// import { Counter } from "./features/counter/Counter";
+import { Counter } from "./features/counter/CounterAlt";
 import "./App.css";
 
 function ExplainerText(){
