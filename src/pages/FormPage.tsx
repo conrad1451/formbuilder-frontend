@@ -314,7 +314,7 @@ function SmallTextFieldAlt({isVisible, thisText, setThisText}){
   // [VB]
   return(    
   <div className="testMe">
-          <h1 className="hasBorder"  contentEditable={isVisible}> {setThisText} </h1>
+          <h1 className="hasBorder1"  contentEditable={isVisible}> {setThisText} </h1>
 
   {/* <p>dddd</p> */}
     {/* <label> */}
@@ -343,21 +343,21 @@ function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
   
     switch(theFontSize){
       case "h1":
-        return (<h1 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h1>);
+        return (<h1 className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </h1>);
       case "h2":
-        return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
+        return (<h2 className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </h2>);
       case "h3":
-        return (<h3 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h3>);  
+        return (<h3 className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </h3>);  
       case "h4":
-        return (<h4 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h4>);  
+        return (<h4 className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </h4>);  
       case "h5":
-        return (<h5 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h5>);  
+        return (<h5 className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </h5>);  
       case "h6":
-        return (<h6 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h6>);  
+        return (<h6 className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </h6>);  
       case "p":
-        return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>); 
+        return (<p className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </p>); 
       case "default":
-        return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);   
+        return (<p className={isEditing ? "hasBorder2" : "noBorder2"} contentEditable={isEditing}> {theText} </p>);   
     }
     
   
@@ -367,9 +367,9 @@ function EditableTextModuleTitle({myText, setMyText, isEditing, theFontSize}) {
   /* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */ 
   /* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */
   /* [AZ] */
-    // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
-    // return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
-    // return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
+    // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </p>);
+    // return (<h2 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h2>);
+    // return (<p className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </p>);
 }
   
 
@@ -382,21 +382,21 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 
   switch(theFontSize){
     case "h1":
-      return (<h1 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h1>);
+      return (<h1 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h1>);
     case "h2":
-      return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
+      return (<h2 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h2>);
     case "h3":
-      return (<h3 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h3>);  
+      return (<h3 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h3>);  
     case "h4":
-      return (<h4 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h4>);  
+      return (<h4 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h4>);  
     case "h5":
-      return (<h5 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h5>); 
+      return (<h5 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h5>); 
     case "h6":
-      return (<h6 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h6>);  
+      return (<h6 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h6>);  
     case "p":
-      return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>); 
+      return (<p className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </p>); 
     case "default":
-      return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);   
+      return (<p className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </p>);   
   }
   
 
@@ -406,9 +406,9 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 /* <SmallTextFieldAlt isVisible={isEditing} thisText={theText} setThisText={setTheText} /> */ 
 /* CHQ: using a callback function is how the visitor pattern is implemented in functional programming */
 /* [AZ] */
-  // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
-  // return (<h2 className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </h2>);
-  // return (<p className={isEditing ? "hasBorder" : "noBorder"} contentEditable={isEditing}> {theText} </p>);
+  // return (<p color="white" text-indent="30px" className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </p>);
+  // return (<h2 className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </h2>);
+  // return (<p className={isEditing ? "hasBorder1" : "noBorder1"} contentEditable={isEditing}> {theText} </p>);
 }
 
 // const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
@@ -428,6 +428,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
     <>
     {/* [AM] */}
     <div className="multiChoiceOptLayout">
+      {/* <div>  */}
     <input
       type="radio"
       checked={truth}
@@ -472,12 +473,12 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
         <br />
         <div className="componentWidth">
         {/* <div > */}
-        <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
+        <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
 
         {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
         {/* <div>{optionList}</div> */}
 
-        <ul className="box">
+        <ul>
           {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
         </ul> 
         </div>
@@ -825,7 +826,7 @@ const App3: React.FC = () => {
            </div>
            <div className='App-rightside'>
             <div className="platformMargin">
-            <p className={false ? "hasBorder" : "noBorder"} contentEditable={false}> {"."} </p>
+            <p className={false ? "hasBorder1" : "noBorder1"} contentEditable={false}> {"."} </p>
               <button disabled={true} onClick={apiCall}>This button is actually meant to force  .</button>
             </div>
             <div className="platformContent">

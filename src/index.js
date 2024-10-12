@@ -25,8 +25,8 @@ function Choice2(){
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  // <Choice1/>
-  <Choice2/>
+  <Choice1/>
+  // <Choice2/>
 );
 
 // If you want to start measuring performance in your app, pass a function
