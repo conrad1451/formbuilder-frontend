@@ -139,5 +139,5 @@ function SecondCounter()  {
   }
 export function Counter() 
 {
-    return(<FirstCounter/>)
+    return(<><FirstCounter/><SecondCounter/></>)
 }
