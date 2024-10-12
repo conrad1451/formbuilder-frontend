@@ -435,7 +435,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
       // onChange={e => setTruth(false) }
       onChange={() => setTruth(!truth) }
       />
-      <EditableTextModule myText={text} isEditing={hasEditorOpen} theFontSize={"p"}/>
+      <EditableTextModule myText={text} isEditing={hasEditorOpen} theFontSize={"h6"}/>
     </div>
 
       <button id="some-inner-answer"
