@@ -57,6 +57,15 @@ interface DynamicComponentProps {
   // captureState?: object
 }
 
+interface DynamicComponentPropsAlt {
+  componentID: string;
+  text: string;  
+  isProductionState: boolean;
+  captureState?: object
+  // isProductionState?: boolean;
+  // captureState?: object
+}
+
 //neither of the below work
 // interface TestBro {
 //   theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
@@ -518,6 +527,80 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
  );
 };
 
+
+const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+  // const DynamicTrueFalse: React.FC<{}> = () => {
+   //  const [truth, setTruth] = useState(false);
+   //  const [theChoice, setTheChoice] = useState("");
+    // [AU] [AJ]
+   let myListing = [
+     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+   ];
+   const [optionList, setOptionList] = useState(myListing);
+
+   const [myCompID, setMyCompID] = useState(componentID);
+
+  
+   // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
+    return (
+     <>
+     <div>
+       <div> 
+         <br />
+         <div className="componentWidth">
+         {/* <div > */}
+         {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
+                  <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
+         {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
+
+ 
+         {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+         {/* <div>{optionList}</div> */}
+ 
+         <ul>
+           {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
+         </ul> 
+         </div>
+         <br />
+       </div>
+     <div>
+    {/* <button className='formbuttons' id="some-inner-answer" */}
+     <button id="some-inner-answer"
+         onClick={() =>
+           // @ts-ignore comment
+           setOptionList((optionList) =>  
+             optionList.concat(
+               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+             )
+           )
+         }
+       >
+         Add Option (+)
+       </button>     
+       <button id="some-inner-answer"
+         onClick={() =>{
+           // [ZB]
+           setOptionList(optionList.slice(0, -1))} }
+       >
+         Remove Option (-)
+       </button> 
+       {/* CHQ: This is where I tested to prove that content editable would address my problems */}
+       {/* <p>total number of inner things: {optionList.length}</p> */}
+ 
+      </div>
+      
+      </div> 
+      
+      <br /> 
+      <br />
+   </>
+  );
+ };
+
+ 
 // FIXME: CHQ: fix on another day
 const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFillInTheBlank }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
@@ -584,6 +667,22 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
  
 let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
 
+
+// CHQ
+// Cannot find name 'compId'.ts(2304)
+// let myList4 = [
+
+//   {
+//     compId: Math.random().toString(36).substring(2,2+20),
+//     comp: React.createElement(DynamicMultiChoiceAlt, { componentID:compId, text: "test me", isProductionState: false})
+//   } 
+// ];
+
+let myList4 = [
+  React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: "test me", isProductionState: false})
+       ];
+
+
 // 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
 // let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
 
@@ -648,6 +747,7 @@ const App3: React.FC = () => {
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
   const [thePlatform, setThePlatform] = useState(myList3);
+  const [thePlatform2, setThePlatform2] = useState(myList4);
 
   const [formName, setFormName] = useState("Untitled");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
@@ -792,6 +892,19 @@ const App3: React.FC = () => {
       >
         Add Multiple choice
       </button>
+      <button className='formbuttons' id="multi-choice"
+        onClick={() =>
+          // @ts-ignore comment
+          // CHQ: the following doesn't work.
+          setThePlatform2((thePlatform2) =>
+             
+              thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false}))
+             
+          )
+        }
+      >
+        Add Multiple choice Alt
+      </button>
       <br />
 
 {/* No overload matches this call.
@@ -847,7 +960,9 @@ const App3: React.FC = () => {
                   {isEditingTitle ? "Save Changes": "Edit Title"}
                 </button>
                 {/* <p>Number of questions: {thePlatform.length}</p> */}
-              <div>{thePlatform}</div>
+              {/* <div>{thePlatform}</div> */}
+              <div>{thePlatform2}</div>
+
             </div>
             <div className="platformAlignment">
             </div>
