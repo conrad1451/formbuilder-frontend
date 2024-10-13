@@ -32,7 +32,15 @@ function FirstCounter()  {
           <button
             className={styles.button}
             aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
+            onClick={() =>  
+                { if(count - 1 > 0){
+                    // a conditional of false disables the decrement button, and rightly so
+                    // a condtional of if count>=1 does nothing
+                    // a condtional of if count %3 === 0 works as intended
+                    // a condtional of if count - 1 === 0 works as intended
+                    // a condtional of if count - 1 > 0 works as intended  
+                            dispatch(decrement())
+                        }  }}
           >
             -
           </button>
@@ -97,7 +105,16 @@ function SecondCounter()  {
           <button
             className={styles.button}
             aria-label="Decrement value"
-            onClick={() => dispatch(decrement())}
+            onClick={() => 
+                    { if(count - 1 > 0){
+                        // a conditional of false disables the decrement button, and rightly so
+                        // a condtional of if count>=1 does nothing
+                        // a condtional of if count %3 === 0 works as intended
+                        // a condtional of if count - 1 === 0 works as intended
+                        // a condtional of if count - 1 > 0 works as intended  
+                                dispatch(decrement())
+                            }  }
+            }
           >
             -
           </button>
