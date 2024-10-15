@@ -49,10 +49,16 @@ import React from "react";
  
  // CHQ: TODO: set margins between buttons
 
+ 
+interface IDeleteHandler {
+  onWorkDone(): void;
+  onError(message: string): void;
+  // ...
+}
 interface DynamicComponentProps {
   text: string;  
   isProductionState: boolean;
-  captureState?: object
+  captureState?: any
   // isProductionState?: boolean;
   // captureState?: object
 }
@@ -118,6 +124,12 @@ const apiCall = () => {
      console.log(data)
    })
 }; 
+
+
+const randNum = () => {
+  return Math.random().toString(36).substring(2,2+20);
+}
+
  
 const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
   // Property 'text' does not exist on type '{}'.ts(2339)
@@ -556,7 +568,27 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
                   <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
          {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
 
- 
+         <button id="some-inner-answer"
+         onClick={() =>
+           // @ts-ignore comment
+           setOptionList((optionList) =>  
+             optionList.concat(
+               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+             )
+           )
+         }
+       >
+         Insert Question above (+)
+       </button>  
+       <button id="some-inner-answer"
+         onClick={() =>
+           // @ts-ignore comment
+
+           makeWorkerCallback2(componentID)
+         }
+       >
+         Remove Question (-)
+       </button>  
          {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
          {/* <div>{optionList}</div> */}
  
@@ -678,11 +710,25 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProd
 //   } 
 // ];
 
+let myFirstId = randNum();
+
 let myList4 = [
-  React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: "test me", isProductionState: false})
+  React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
        ];
 
-
+       
+let myList5 = [
+  [
+    myFirstId, 
+    React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
+  ],   [
+    myFirstId, 
+    React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
+  ],   [
+    myFirstId, 
+    React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
+  ]         
+];
 // 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
 // let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
 
@@ -741,6 +787,23 @@ function ConfirmComponentDeletion(componentID, deletionFunction) {
   );
 }
 
+
+// //function to call when pressing button to make a new mutliple choice
+// const apiCall = () => {
+//   axios.get('http://localhost:5000').then((data) => {
+//     // this console.log will be in our frontend console
+//     console.log(data)
+//   })
+// }; 
+
+// [Axy] https://stackoverflow.com/questions/58482738/react-typescript-javascript-interface-as-callback-and-accessing-state
+interface IWorkerCallback {
+  onWorkDone(): void;
+  onError(message: string): void;
+  // ...
+}
+
+
 const App3: React.FC = () => {
 // const App3: React.FC = ({getTheStore, setTheStore}) => {
   // const [count, setCount] = useState(0);
@@ -748,10 +811,13 @@ const App3: React.FC = () => {
   //   const [thePlatform, setThePlatform] = [];
   const [thePlatform, setThePlatform] = useState(myList3);
   const [thePlatform2, setThePlatform2] = useState(myList4);
+  const [thePlatform3, setThePlatform3] = useState(myList5); 
 
   const [formName, setFormName] = useState("Untitled");
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   // const [formArea, setFormArea] = useState(formField);
+
+  const [targetIDForDeletion, setTargetIDForDeletion] = useState("");
 
   let textSnippets= ["d", "d", "de"];
   let isFillInTheBlank=[true, true, true];  
@@ -827,8 +893,31 @@ const App3: React.FC = () => {
     // history.push("/new-form")
     navigate("/")
   }
-
   
+  let newID = randNum();
+
+
+  // [Axy]
+  // Option 1: using object literals
+  function makeWorkerCallback(state): IWorkerCallback  {
+  // function makeWorkerCallback(state: SomeState): IWorkerCallback  {
+  return {
+      onWorkDone: () => {
+          state.update();
+      },
+      onError: () => { }
+  }
+}
+
+function makeWorkerCallback2(targetID: string): IWorkerCallback  {
+    return {
+      onWorkDone: () => {
+        setTargetIDForDeletion(targetID);
+      },
+      onError: () => { }
+  }
+}
+
   return (
     <> 
     {/* <UseGreeting/> */}
@@ -895,15 +984,48 @@ const App3: React.FC = () => {
       <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
-          // CHQ: the following doesn't work.
-          setThePlatform2((thePlatform2) =>
-             
-              thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false}))
-             
+          // CHQ: the following works.
+          // setThePlatform2((thePlatform2) => 
+          //     thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false, captureState: {bro: "ues"}}))
+          // )
+          
+          
+          /**
+           * No overload matches this call.
+  Overload 1 of 2, '(...items: ConcatArray<FunctionComponentElement<DynamicComponentPropsAlt>>[]): FunctionComponentElement<DynamicComponentPropsAlt>[]', gave the following error.
+    Argument of type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>' is not assignable to parameter of type 'ConcatArray<FunctionComponentElement<DynamicComponentPropsAlt>>'.
+      Type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>' is missing the following properties from type 'ConcatArray<FunctionComponentElement<DynamicComponentPropsAlt>>': length, join, slice
+  Overload 2 of 2, '(...items: (FunctionComponentElement<DynamicComponentPropsAlt> | ConcatArray<FunctionComponentElement<DynamicComponentPropsAlt>>)[]): FunctionComponentElement<...>[]', gave the following error.
+    Argument of type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>' is not assignable to parameter of type 'FunctionComponentElement<DynamicComponentPropsAlt> | ConcatArray<FunctionComponentElement<DynamicComponentPropsAlt>>'.
+      Type 'DetailedReactHTMLElement<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>' is not assignable to type 'FunctionComponentElement<DynamicComponentPropsAlt>'.
+        Types of property 'ref' are incompatible.
+          Type 'LegacyRef<HTMLInputElement>' is not assignable to type 'undefined'.
+            Type 'null' is not assignable to type 'undefined'.ts(2769)
+           */
+          setThePlatform2((thePlatform2) => 
+            thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false, captureState: {function() {
+             setTargetIDForDeletion("d")
+           }}}))
           )
         }
       >
         Add Multiple choice Alt
+      </button>
+      <button className='formbuttons' id="multi-choice"
+        onClick={() =>
+          // @ts-ignore comment
+          // CHQ: the following doesn't work.
+          setThePlatform3((thePlatform3) =>
+            {
+
+              thePlatform3.concat([
+                newID, 
+              React.createElement(DynamicMultiChoiceAlt, { componentID: newID, text: "test me", isProductionState: false})
+            ]) }
+          )
+        }
+      >
+        Add Multiple choice Alt 2
       </button>
       <br />
 
@@ -962,7 +1084,7 @@ const App3: React.FC = () => {
                 {/* <p>Number of questions: {thePlatform.length}</p> */}
               {/* <div>{thePlatform}</div> */}
               <div>{thePlatform2}</div>
-
+              {/* <div>{thePlatform3}</div> */}
             </div>
             <div className="platformAlignment">
             </div>
