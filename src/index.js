@@ -3,17 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import AppAlt from './AppAlt';
-import store from './app/store';
+// import store from './app/store';
+import store from './app/store2';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
 import reportWebVitals from './reportWebVitals';
 
-function Choice1(){
+function Choice1Old(){
   return(
     <React.StrictMode>
       <App />
     </React.StrictMode>
+  )
+}
+function Choice1New(){
+  return(
+    <Provider store={store}>
+      <App />
+    </Provider>
   )
 }
 function Choice2(){
@@ -25,7 +33,7 @@ function Choice2(){
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Choice1/>
+  <Choice1New/>
   // <Choice2/>
 );
 

@@ -30,9 +30,16 @@
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
 */ 
-import React from "react";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+ 
+import {
+  updatingID,
+  selectCompIDToDelete,
+  } from '../features/counter/newSlice';
 
- import { useState } from "react";
+import styles from './Counter.module.css';
+
  import { useNavigate } from "react-router-dom";
 
  // import Dialog from "./MyDialog";
@@ -554,8 +561,10 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    const [optionList, setOptionList] = useState(myListing);
 
    const [myCompID, setMyCompID] = useState(componentID);
+   const targetComponentToDelete = useSelector(selectCompIDToDelete);
 
-  
+   const dispatch = useDispatch();
+
    // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
     return (
      <>
@@ -582,9 +591,9 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
        </button>  
        <button id="some-inner-answer"
          onClick={() =>
-           // @ts-ignore comment
-
-           makeWorkerCallback2(componentID)
+           // @ts-ignore  
+           dispatch(updatingID())   
+          //  makeWorkerCallback2(componentID)
          }
        >
          Remove Question (-)
@@ -1004,7 +1013,7 @@ function makeWorkerCallback2(targetID: string): IWorkerCallback  {
            */
           setThePlatform2((thePlatform2) => 
             thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false, captureState: {function() {
-             setTargetIDForDeletion("d")
+              setTargetIDForDeletion("d")
            }}}))
           )
         }
