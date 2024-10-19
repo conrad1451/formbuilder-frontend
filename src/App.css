@@ -421,11 +421,14 @@ p
 
 .hasBorder1 {
   border:#282c34 2px solid;
-  height: 1.25vh;
+  /* height: 1.25vh; */
+  /* height: 12.5vh; */
+  /* CHQ: height auto works SO much better than setting it to a specific height */
+  height: auto;
 }
 .noBorder1 {
   border:transparent;
-  height: 0.125vh;
+  /* height: 0.125vh; */
 }
 .hasBorder2 {
   border:#282c34 2px solid;
