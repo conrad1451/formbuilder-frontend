@@ -321,6 +321,11 @@ ul {
   text-align: center;
 }
 
+div
+{
+  word-wrap: break-word;
+}
+
 h1
 {
   display: inline-block;
@@ -340,6 +345,7 @@ h4
 {
   display: inline-block;
   text-align: center;
+  word-wrap: break-word;
 }
 h5
 {
@@ -364,6 +370,8 @@ p
   text-align: center;
 }
 
+
+
 .multichoiceBlock{
   border-radius: 2%;
   border-color: #282c34;
@@ -371,6 +379,9 @@ p
   margin: 0%;
   padding: 4%;
   background-color: white;
+  width: 50vw;
+  /* word-break: normal; */
+  word-wrap: break-word;
   /* background-color: rgb(71, 206, 41); */
   /* min-width: 20%; */
   /* width: 30%; */
