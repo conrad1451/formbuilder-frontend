@@ -4,6 +4,7 @@ export const newSlice = createSlice({
   name: 'compIDToDelete',
   initialState: {
     value: "",
+    // value: "testme",
   },
   reducers: {
     updatingID: (state) => {
@@ -11,6 +12,8 @@ export const newSlice = createSlice({
       // doesn't actually mutate the state because it uses the immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
+
+      //CHQ: the below line worked!
       state.value += "compIDToDelete11"
     }, 
   },
