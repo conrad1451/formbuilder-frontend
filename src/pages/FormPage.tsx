@@ -567,74 +567,84 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
    // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
     return (
-     <>
-     <div>
-       <div> 
-         <br />
-         <div className="componentWidth">
-         {/* <div > */}
-         {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
-                  <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
-         {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
+      <>
+      <div className="multichoiceBlock">
+        <div>
+          <div>
+            {/* <br /> */}
+            <div className="componentWidth">
+              <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
+              <br/><br/>
+              {/* <div > */}
+              {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
+              <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
+              {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
+                        <br/>          
+              <button id="some-inner-answer"
+              onClick={() =>
+                // @ts-ignore comment
+                setOptionList((optionList) =>
+                  optionList.concat(
+                    React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+                  )
+                )
+              }
+              >
+                Insert Question above (+)
+              </button>
+              
+              <button id="some-inner-answer"
+              onClick={() =>
+                // @ts-ignore
+                dispatch(updatingID())
+                //  makeWorkerCallback2(componentID)
+              }
+              > 
+              Remove Question (-)
+              </button>
+              
+              {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+              {/* <div>{optionList}</div> */}
+              
+              <ul>
+                {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
+              </ul>
+              
+            </div>
+            {/* <br /> */}
+          </div>
 
-         <button id="some-inner-answer"
-         onClick={() =>
-           // @ts-ignore comment
-           setOptionList((optionList) =>  
-             optionList.concat(
-               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-             )
-           )
-         }
-       >
-         Insert Question above (+)
-       </button>  
-       <button id="some-inner-answer"
-         onClick={() =>
-           // @ts-ignore  
-           dispatch(updatingID())   
-          //  makeWorkerCallback2(componentID)
-         }
-       >
-         Remove Question (-)
-       </button>  
-         {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
-         {/* <div>{optionList}</div> */}
- 
-         <ul>
-           {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
-         </ul> 
-         </div>
-         <br />
-       </div>
-     <div>
-    {/* <button className='formbuttons' id="some-inner-answer" */}
-     <button id="some-inner-answer"
-         onClick={() =>
-           // @ts-ignore comment
-           setOptionList((optionList) =>  
-             optionList.concat(
-               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-             )
-           )
-         }
-       >
-         Add Option (+)
-       </button>     
-       <button id="some-inner-answer"
-         onClick={() =>{
-           // [ZB]
-           setOptionList(optionList.slice(0, -1))} }
-       >
-         Remove Option (-)
-       </button> 
-       {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-       {/* <p>total number of inner things: {optionList.length}</p> */}
- 
+          {/* <br/>          <br/>          <br/> */}
+          
+          <div>
+            {/* <button className='formbuttons' id="some-inner-answer" */}
+            <button id="some-inner-answer"
+            onClick={() =>
+              // @ts-ignore comment
+              setOptionList((optionList) =>
+                optionList.concat(
+                  React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+                )
+              )
+            }
+            >
+              Add Option (+)
+            </button>
+            
+            <button id="some-inner-answer"
+            onClick={() =>{
+              // [ZB]
+              setOptionList(optionList.slice(0, -1))} }
+            >
+              Remove Option (-)
+            </button> 
+            {/* CHQ: This is where I tested to prove that content editable would address my problems */}
+            {/* <p>total number of inner things: {optionList.length}</p> */}
+          </div>
+        </div>
       </div>
-      
-      </div> 
-      
+
+       {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
       <br /> 
       <br />
    </>
