@@ -4,7 +4,9 @@ import './index.css';
 import App from './App';
 import AppAlt from './AppAlt';
 // import store from './app/store';
-import store from './app/store2';
+import store1 from './app/store';
+import store2 from './app/store2';
+import store3 from './app/store3';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
@@ -19,14 +21,21 @@ function Choice1Old(){
 }
 function Choice1New(){
   return(
-    <Provider store={store}>
+    <Provider store={store2}>
+      <App />
+    </Provider>
+  )
+}
+function Choice1Newer(){
+  return(
+    <Provider store={store3}>
       <App />
     </Provider>
   )
 }
 function Choice2(){
   return(  
-  <Provider store={store}>
+  <Provider store={store1}>
     <AppAlt />
   </Provider>
   )
