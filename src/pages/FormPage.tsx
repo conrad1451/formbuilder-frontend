@@ -36,6 +36,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   updatingID,
   selectCompIDToDelete,
+  updatingID2,
+  modifyTheArr,
+  selectCompIDToDelete2,
+  updateArr,
+  selectArr,
   } from '../features/counter/newSlice';
 
 import styles from './Counter.module.css';
@@ -562,6 +567,9 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
    const [myCompID, setMyCompID] = useState(componentID);
    const targetComponentToDelete = useSelector(selectCompIDToDelete);
+   const otherText = useSelector(selectCompIDToDelete2);
+   const arrThings = useSelector(selectArr);
+
 
    const dispatch = useDispatch();
 
@@ -574,6 +582,10 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
             {/* <br /> */}
             <div className="componentWidth">
               <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
+              <br/>
+              <h4>other text is {otherText}</h4>
+              <br/>
+              <h5>arrThings is {JSON.stringify(arrThings)}</h5>
               <br/><br/>
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
@@ -582,12 +594,13 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
                         <br/>          
               <button id="some-inner-answer"
               onClick={() =>
-                // @ts-ignore comment
-                setOptionList((optionList) =>
-                  optionList.concat(
-                    React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-                  )
-                )
+                // @ts-ignore
+                // myCompID
+                dispatch(modifyTheArr(myCompID))
+                // dispatch(modifyTheArr("incrementValue"))
+                // dispatch(updateArr())
+                // dispatch(updatingID2())
+                //  makeWorkerCallback2(componentID)
               }
               >
                 Insert Question above (+)
