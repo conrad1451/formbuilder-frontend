@@ -1,5 +1,7 @@
 /* Sources
 [1]: https://www.geeksforgeeks.org/how-to-position-a-div-at-the-bottom-of-its-container-using-css/#
+[2]: https://zhangpascal.medium.com/how-to-keep-text-from-overflow-a-parent-element-width-f6877462d14 
+
  */
 
 .App {
@@ -320,7 +322,7 @@ ul {
   display: block;
   text-align: center;
 }
-
+/* [2] */
 div
 {
   word-wrap: break-word;
