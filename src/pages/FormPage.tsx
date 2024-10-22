@@ -38,13 +38,6 @@ import {
   selectCompIDToDelete,
   } from '../features/counter/newSlice';
 
-
-  import {
-    displayThisText,
-    selectInputText,
-    } from '../features/counter/inputTextSlice';
-  
-
 import styles from './Counter.module.css';
 
  import { useNavigate } from "react-router-dom";
@@ -553,12 +546,6 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
  );
 };
 
-function addTodo(text) {
-  return {
-    type: 'ADD_TODO',
-    payload: text
-  };
-}
 
 const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
@@ -575,7 +562,6 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
    const [myCompID, setMyCompID] = useState(componentID);
    const targetComponentToDelete = useSelector(selectCompIDToDelete);
-   const myNewInput = useSelector(selectInputText);
 
    const dispatch = useDispatch();
 
@@ -589,23 +575,21 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
             <div className="componentWidth">
               <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
               <br/><br/>
-              <h5>myNewInput is {myNewInput}</h5>
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
               <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
               {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
-                        <br/>
+                        <br/>          
               <button id="some-inner-answer"
               onClick={() =>
-                // @ts-ignore
-                // dispatch(secondReducer)
-                // dispatch(addTodo('Learn Redux'))
-              dispatch(displayThisText("Input text"))
-
-                // secondReducer
-                //  makeWorkerCallback2(componentID)
+                // @ts-ignore comment
+                setOptionList((optionList) =>
+                  optionList.concat(
+                    React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+                  )
+                )
               }
-              > 
+              >
                 Insert Question above (+)
               </button>
               
