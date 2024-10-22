@@ -37,11 +37,12 @@ import {
   updatingID,
   selectCompIDToDelete,
   updatingID2,
-  modifyTheArr,
+  addToDeletList,
+  removeFromDeletList,
   selectCompIDToDelete2,
   updateArr,
   selectArr,
-  } from '../features/counter/newSlice';
+  } from '../features/counter/deleteComponentSlice';
 
 import styles from './Counter.module.css';
 
@@ -568,7 +569,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    const [myCompID, setMyCompID] = useState(componentID);
    const targetComponentToDelete = useSelector(selectCompIDToDelete);
    const otherText = useSelector(selectCompIDToDelete2);
-   const arrThings = useSelector(selectArr);
+   const deletionIDs = useSelector(selectArr);
 
 
    const dispatch = useDispatch();
@@ -585,7 +586,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               <br/>
               <h4>other text is {otherText}</h4>
               <br/>
-              <h5>arrThings is {JSON.stringify(arrThings)}</h5>
+              <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5>
               <br/><br/>
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
@@ -596,8 +597,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               onClick={() =>
                 // @ts-ignore
                 // myCompID
-                dispatch(modifyTheArr(myCompID))
-                // dispatch(modifyTheArr("incrementValue"))
+                dispatch(addToDeletList(myCompID))
+                // dispatch(addToDeletList("incrementValue"))
                 // dispatch(updateArr())
                 // dispatch(updatingID2())
                 //  makeWorkerCallback2(componentID)
@@ -609,7 +610,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               <button id="some-inner-answer"
               onClick={() =>
                 // @ts-ignore
-                dispatch(updatingID())
+                dispatch(removeFromDeletList())
+                // dispatch(updatingID())
                 //  makeWorkerCallback2(componentID)
               }
               > 
