@@ -552,7 +552,12 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
  );
 };
 
-
+// Anytime "Add multiple choice alt" is hit, a function should be called that generates a random ID. an useEffect
+// should be called afterwards that takes the randomID generated and creates a component to pass in that ID into it
+// AND stores that ID in a global list in redux. Redux must store the global list of components (meaning redux)
+// will store the component IDs of platform2
+// everytime a new component is dynamically created and stored in platform2, its ID should be stored
+// in the global list5 
 const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
    //  const [truth, setTruth] = useState(false);
