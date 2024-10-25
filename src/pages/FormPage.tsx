@@ -30,7 +30,7 @@
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
 */ 
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
  
 import {
@@ -78,8 +78,8 @@ interface DynamicComponentProps {
 
 interface DynamicComponentPropsAlt {
   componentID: string;
-  text: string;  
-  isProductionState: boolean;
+  text?: string;  
+  isProductionState?: boolean;
   captureState?: object
   // isProductionState?: boolean;
   // captureState?: object
@@ -755,7 +755,7 @@ let myList4 = [
   React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
        ];
 
-       
+// let myList4 = [ ];    
 let myList5 = [
   [
     myFirstId, 
@@ -768,6 +768,12 @@ let myList5 = [
     React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
   ]         
 ];
+// let myList5 = [[
+//       myFirstId, 
+//       React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
+//     ]];
+
+
 // 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
 // let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
 
@@ -858,8 +864,56 @@ const App3: React.FC = () => {
 
   const [targetIDForDeletion, setTargetIDForDeletion] = useState("");
 
+  // const theCurID = genNewID();
+  const [theCurID, setTheCurID] = useState(randNum());
+  
+  const targetComponentToDelete = useSelector(selectCompIDToDelete);
+  const otherText = useSelector(selectCompIDToDelete2);
+  const deletionIDs = useSelector(selectArr);
+
+  const dispatch = useDispatch();
+
+  // CHQ: method 1 of using useEffect (works but technically produces errors)
+  // useEffect(() => {
+
+  //   // setThePlatform2((thePlatform2) => 
+  //   //   thePlatform2.concat( 
+        
+  //   //     React.createElement(DynamicMultiChoiceAlt, { componentID: theCurID, text: "test me", isProductionState: false})
+
+  //   //      )
+  //   // )
+ 
+  // }, [theCurID]); // The dependency array ensures the effect runs only when firstName changes
+
+  // useEffect(() => {
+
+  //   // dispatch(addToDeletList(myCompID))
+
+  //   // dispatch(addToDeletList(randNum()))
+  //   dispatch(addToDeletList(theCurID))
+ 
+  // }, [thePlatform3]); 
+ 
+
+  useEffect(() => {
+
+    // dispatch(addToDeletList(myCompID))
+
+    // dispatch(addToDeletList(randNum()))
+    dispatch(addToDeletList(theCurID));
+
+    // CHQ: didn't update anything
+    setTheCurID(randNum());
+
+  }, [thePlatform2]); 
+
   let textSnippets= ["d", "d", "de"];
   let isFillInTheBlank=[true, true, true];  
+
+
+  let curID;
+
 
   // FIXME: CHQ: uncomment when lodash is ready
   // let firstTmpList = structuredClone(myList3);
@@ -957,6 +1011,23 @@ function makeWorkerCallback2(targetID: string): IWorkerCallback  {
   }
 }
 
+function addQuesID() {
+
+}
+
+// function addQuesComponent(givenID: number) {
+//   setThePlatform2((thePlatform2) => 
+//     thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID: 5, text: 'Question Title', isProductionState: false, captureState: {function() {
+//       setTargetIDForDeletion("d")
+//    }}}))
+//   )
+// }
+
+function genNewID()
+{
+  return (Math.random().toString(36).substring(2,2+20));
+}
+
   return (
     <> 
     {/* <UseGreeting/> */}
@@ -1024,10 +1095,16 @@ function makeWorkerCallback2(targetID: string): IWorkerCallback  {
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following works.
-          // setThePlatform2((thePlatform2) => 
-          //     thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false, captureState: {bro: "ues"}}))
-          // )
-          
+          setThePlatform2((thePlatform2) => 
+              thePlatform2.concat(
+                React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false})
+              
+              
+              )
+          )
+          // addQuesComponent(genNewID())
+          // addQuesComponent(77)
+          // setTheCurID(randNum())
           
           /**
            * No overload matches this call.
@@ -1041,11 +1118,7 @@ function makeWorkerCallback2(targetID: string): IWorkerCallback  {
           Type 'LegacyRef<HTMLInputElement>' is not assignable to type 'undefined'.
             Type 'null' is not assignable to type 'undefined'.ts(2769)
            */
-          setThePlatform2((thePlatform2) => 
-            thePlatform2.concat(React.createElement(DynamicMultiChoiceAlt, { componentID:Math.random().toString(36).substring(2,2+20), text: 'Question Title', isProductionState: false, captureState: {function() {
-              setTargetIDForDeletion("d")
-           }}}))
-          )
+         
         }
       >
         Add Multiple choice Alt
@@ -1058,8 +1131,8 @@ function makeWorkerCallback2(targetID: string): IWorkerCallback  {
             {
 
               thePlatform3.concat([
-                newID, 
-              React.createElement(DynamicMultiChoiceAlt, { componentID: newID, text: "test me", isProductionState: false})
+                theCurID, 
+              React.createElement(DynamicMultiChoiceAlt, { componentID: theCurID, text: "test me", isProductionState: false})
             ]) }
           )
         }
@@ -1067,6 +1140,7 @@ function makeWorkerCallback2(targetID: string): IWorkerCallback  {
         Add Multiple choice Alt 2
       </button>
       <br />
+{/* the code around mC alt 2 is broken so i will just do the alt */}
 
 {/* No overload matches this call.
   Overload 1 of 2, '(...items: ConcatArray<FunctionComponentElement<DynamicComponentProps>>[]): FunctionComponentElement<DynamicComponentProps>[]', gave the following error.
