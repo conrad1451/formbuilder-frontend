@@ -576,6 +576,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    const otherText = useSelector(selectCompIDToDelete2);
    const deletionIDs = useSelector(selectArr);
 
+  //  let correctedDeletionIDs = deletionIDs.slice(1);
 
    const dispatch = useDispatch();
 
@@ -588,10 +589,13 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
             {/* <br /> */}
             <div className="componentWidth">
               <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
-              <br/>
+              <br/> 
               <h4>other text is {otherText}</h4>
               <br/>
               <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5>
+              {/* <h5>the corrected component IDs for deletionID are {JSON.stringify(correctedDeletionIDs)}</h5> */}
+ 
+              {/* correctedDeletionIDs */}
               <br/><br/>
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
@@ -602,7 +606,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               onClick={() =>
                 // @ts-ignore
                 // myCompID
-                dispatch(addToDeletList(myCompID))
+                alert("This is broken, surprise")
+                // dispatch(addToDeletList(myCompID))
                 // dispatch(addToDeletList("incrementValue"))
                 // dispatch(updateArr())
                 // dispatch(updatingID2())
@@ -751,6 +756,8 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProd
 
 let myFirstId = randNum();
 
+let myList4Alt: React.FC<DynamicComponentPropsAlt>[] = [];
+
 let myList4 = [
   React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
        ];
@@ -855,7 +862,8 @@ const App3: React.FC = () => {
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
   const [thePlatform, setThePlatform] = useState(myList3);
-  const [thePlatform2, setThePlatform2] = useState(myList4);
+  // const [thePlatform2, setThePlatform2] = useState(myList4);
+  const [thePlatform2, setThePlatform2] = useState(myList4Alt);
   const [thePlatform3, setThePlatform3] = useState(myList5); 
 
   const [formName, setFormName] = useState("Untitled");
@@ -871,7 +879,11 @@ const App3: React.FC = () => {
   const otherText = useSelector(selectCompIDToDelete2);
   const deletionIDs = useSelector(selectArr);
 
+
   const dispatch = useDispatch();
+
+  // CHQ: didn't get updated in UI when mutated in the useEffect
+  // let broski = "yes";
 
   // CHQ: method 1 of using useEffect (works but technically produces errors)
   // useEffect(() => {
@@ -906,6 +918,9 @@ const App3: React.FC = () => {
     // CHQ: didn't update anything
     setTheCurID(randNum());
 
+    // CHQ: didn't update anything in UI 
+    // broski = broski += "YO";
+
   }, [thePlatform2]); 
 
   let textSnippets= ["d", "d", "de"];
@@ -913,6 +928,8 @@ const App3: React.FC = () => {
 
 
   let curID;
+
+ 
 
 
   // FIXME: CHQ: uncomment when lodash is ready
@@ -1189,6 +1206,13 @@ function genNewID()
             <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
             <br/>
+
+            <h5>        
+              <ul>
+                {deletionIDs.map((theSelectedID) => { return (<li>{theSelectedID}</li>) })}
+              </ul>
+            </h5>
+
             <button id="some-inner-answer"
                 onClick={() => { setIsEditingTitle(!isEditingTitle) }}
                 >
@@ -1197,6 +1221,8 @@ function genNewID()
                 {/* <p>Number of questions: {thePlatform.length}</p> */}
               {/* <div>{thePlatform}</div> */}
               <div>{thePlatform2}</div>
+              {/*     // CHQ: didn't update anything in UI  */}
+              {/* <div>{broski}</div> */}
               {/* <div>{thePlatform3}</div> */}
             </div>
             <div className="platformAlignment">
