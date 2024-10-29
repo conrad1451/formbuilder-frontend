@@ -1228,9 +1228,10 @@ function genNewID()
             <br/>
 
             {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
-
+{/* className='listAlt' */}
             <h5>        
-              <ul>
+            <ul className='listAlt'>
+              {/* <ul className='listAlt'> */}
                 The componentIDS of the Question Components
                 {deletionIDs.map((theSelectedID) => { return (<li>{theSelectedID}</li>) })}
               </ul>

@@ -296,6 +296,18 @@ ul {
   list-style-type: none;
 }
 
+.componentIDListing{
+  /* max-width: 40%; */
+  width: 80%;
+}
+
+/* https://stackoverflow.com/questions/2347060/how-to-create-a-multi-column-list */
+/* .listAlt {
+  display: block;
+  width: 100;
+  float: left;
+} */
+
 
 .multiChoiceOptLayout{
   background-color: rgb(219, 56, 31);
