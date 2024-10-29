@@ -30,7 +30,7 @@
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
 */ 
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
  
 import {
@@ -874,6 +874,8 @@ const App3: React.FC = () => {
 
   // const theCurID = genNewID();
   const [theCurID, setTheCurID] = useState(randNum());
+
+  const hasPageBeenRendered = useRef(false);
   
   const targetComponentToDelete = useSelector(selectCompIDToDelete);
   const otherText = useSelector(selectCompIDToDelete2);
@@ -910,16 +912,20 @@ const App3: React.FC = () => {
 
   useEffect(() => {
 
-    // dispatch(addToDeletList(myCompID))
+    if(hasPageBeenRendered.current)
+    {
+      // dispatch(addToDeletList(myCompID))
 
-    // dispatch(addToDeletList(randNum()))
-    dispatch(addToDeletList(theCurID));
+      // dispatch(addToDeletList(randNum()))
+      dispatch(addToDeletList(theCurID));
 
-    // CHQ: didn't update anything
-    setTheCurID(randNum());
+      // CHQ: didn't update anything
+      setTheCurID(randNum());
 
-    // CHQ: didn't update anything in UI 
-    // broski = broski += "YO";
+      // CHQ: didn't update anything in UI 
+      // broski = broski += "YO";
+    }
+    hasPageBeenRendered.current = true;
 
   }, [thePlatform2]); 
 
@@ -930,6 +936,7 @@ const App3: React.FC = () => {
   let curID;
 
  
+
 
 
   // FIXME: CHQ: uncomment when lodash is ready
