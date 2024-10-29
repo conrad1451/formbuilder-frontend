@@ -33,16 +33,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
  
-import {
-  updatingID,
-  selectCompIDToDelete,
-  updatingID2,
-  addToDeletList,
-  removeFromDeletList,
-  selectCompIDToDelete2,
-  updateArr,
-  selectArr,
-  } from '../features/counter/deleteComponentSlice';
+// import {
+//   updatingID,
+//   selectCompIDToDelete,
+//   updatingID2,
+//   addToDeletList,
+//   removeFromDeletList,
+//   selectCompIDToDelete2,
+//   updateArr,
+//   selectArr,
+//   } from '../features/counter/deleteComponentSlice';
+
+import { 
+  addToList,
+  removeFromList,
+  selectMyArr,
+  } from '../features/counter/questionComponentSlice';
 
 import styles from './Counter.module.css';
 
@@ -574,9 +580,11 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    const [showContent, setShowContent] = useState(true);
 
    const [myCompID, setMyCompID] = useState(componentID);
-   const targetComponentToDelete = useSelector(selectCompIDToDelete);
-   const otherText = useSelector(selectCompIDToDelete2);
-   const deletionIDs = useSelector(selectArr);
+  //  const targetComponentToDelete = useSelector(selectCompIDToDelete);
+  //  const otherText = useSelector(selectCompIDToDelete2);
+  //  const deletionIDs = useSelector(selectArr);
+  const deletionIDs = useSelector(selectMyArr);
+
 
   //  let correctedDeletionIDs = deletionIDs.slice(1);
 
@@ -632,7 +640,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               <button id="some-inner-answer"
               onClick={() =>
                 // @ts-ignore
-                dispatch(removeFromDeletList())
+                // dispatch(removeFromDeletList())
+                dispatch(removeFromList())
                 // dispatch(updatingID())
                 //  makeWorkerCallback2(componentID)
               }
@@ -891,9 +900,9 @@ const App3: React.FC = () => {
   const hasPageBeenRendered = useRef(false);
   
   // const targetComponentToDelete = useSelector(selectCompIDToDelete);
-  const otherText = useSelector(selectCompIDToDelete2);
-  const deletionIDs = useSelector(selectArr);
-
+  // const otherText = useSelector(selectCompIDToDelete2);
+  //  const deletionIDs = useSelector(selectArr);
+  const deletionIDs = useSelector(selectMyArr);
 
   const dispatch = useDispatch();
 
@@ -930,7 +939,8 @@ const App3: React.FC = () => {
       // dispatch(addToDeletList(myCompID))
 
       // dispatch(addToDeletList(randNum()))
-      dispatch(addToDeletList(theCurID));
+      // dispatch(addToDeletList(theCurID));
+      dispatch(addToList(theCurID));
 
       // CHQ: didn't update anything
       setTheCurID(randNum());

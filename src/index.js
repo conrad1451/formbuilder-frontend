@@ -6,6 +6,7 @@ import AppAlt from './AppAlt';
 // import store from './app/store';
 import store from './app/store2';
 import store3 from './app/store3';
+import store4 from './app/store4';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 
@@ -16,6 +17,13 @@ function Choice1Old(){
     <React.StrictMode>
       <App />
     </React.StrictMode>
+  )
+}
+function ChoiceInsertDelete(){
+  return(
+    <Provider store={store4}>
+      <App />
+    </Provider>
   )
 }
 function Choice1New(){
@@ -34,7 +42,8 @@ function Choice2(){
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Choice1New/>
+  <ChoiceInsertDelete/>
+  // <Choice1New/>
   // <Choice2/>
 );
 
