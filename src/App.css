@@ -365,6 +365,15 @@ p
   text-align: center;
 }
 
+.displayList
+{
+  display: block;
+}
+.hideList
+{
+  display: none;
+}
+
 
 .myText
 {

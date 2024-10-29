@@ -571,6 +571,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    ];
    const [optionList, setOptionList] = useState(myListing);
 
+   const [showContent, setShowContent] = useState(true);
+
    const [myCompID, setMyCompID] = useState(componentID);
    const targetComponentToDelete = useSelector(selectCompIDToDelete);
    const otherText = useSelector(selectCompIDToDelete2);
@@ -588,19 +590,29 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
           <div>
             {/* <br /> */}
             <div className="componentWidth">
-              <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
-              <br/> 
-              <h4>other text is {otherText}</h4>
-              <br/>
-              <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5>
+              {/* <h4>targetComponentToDelete is {targetComponentToDelete}</h4> */}
+              {/* <br/>  */}
+              {/* <h4>other text is {otherText}</h4> */}
+              {/* <br/> */}
+              {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
               {/* <h5>the corrected component IDs for deletionID are {JSON.stringify(correctedDeletionIDs)}</h5> */}
  
               {/* correctedDeletionIDs */}
-              <br/><br/>
+              {/* <br/><br/> */}
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
               <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
               {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
+                     
+              <button id="some-inner-answer"
+              onClick={() =>
+                // @ts-ignore 
+                setShowContent(!showContent) 
+              }
+              >
+                {showContent ? "Collapse Question" : "Expand Question" }
+              </button>
+                     
                         <br/>          
               <button id="some-inner-answer"
               onClick={() =>
@@ -631,7 +643,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
               {/* <div>{optionList}</div> */}
               
-              <ul>
+              <ul className={showContent ? "displayList" : "hideList" }
+              >
                 {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
               </ul>
               
@@ -641,7 +654,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
           {/* <br/>          <br/>          <br/> */}
           
-          <div>
+          <div className={showContent ? "displayList" : "hideList" }>
             {/* <button className='formbuttons' id="some-inner-answer" */}
             <button id="some-inner-answer"
             onClick={() =>
@@ -877,7 +890,7 @@ const App3: React.FC = () => {
 
   const hasPageBeenRendered = useRef(false);
   
-  const targetComponentToDelete = useSelector(selectCompIDToDelete);
+  // const targetComponentToDelete = useSelector(selectCompIDToDelete);
   const otherText = useSelector(selectCompIDToDelete2);
   const deletionIDs = useSelector(selectArr);
 
@@ -1214,8 +1227,11 @@ function genNewID()
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
             <br/>
 
+            {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
+
             <h5>        
               <ul>
+                The componentIDS of the Question Components
                 {deletionIDs.map((theSelectedID) => { return (<li>{theSelectedID}</li>) })}
               </ul>
             </h5>
