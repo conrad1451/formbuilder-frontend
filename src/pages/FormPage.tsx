@@ -641,7 +641,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               onClick={() =>
                 // @ts-ignore
                 // dispatch(removeFromDeletList())
-                dispatch(removeFromList())
+                dispatch(removeFromList(myCompID))
                 // dispatch(updatingID())
                 //  makeWorkerCallback2(componentID)
               }

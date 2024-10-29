@@ -23,7 +23,8 @@ export const questionComponentSlice = createSlice({
         //    let bro = [...state.myArr]
 
             // state.myArr.pop()
-            state.myArr = copiedPart;
+            // state.myArr = copiedPart;
+            state.myArr = [];
         }
     },
     removeLastComponent: (state) => {
@@ -55,22 +56,45 @@ export default questionComponentSlice.reducer
 // that has access to both `dispatch` and `getState`. They can be dispatched like
 // a regular action: `dispatch(incrementIfOdd(10))`.
 // Here's an example of conditionally dispatching actions based on current state.
-export const addToList = (amount) => {
+export const addToList = (theCompID) => {
   return (dispatch, getState) => {
     const currentValue = selectMyArr(getState())
     if (21 % 2 === 1) {
-      dispatch(addComponent(amount))
+      dispatch(addComponent(theCompID))
     }
   }
 }
 
-export const removeFromList = (amount) => {
+export const removeFromListOld = (theIndex) => {
     return (dispatch, getState) => {
       const currentValue = selectMyArr(getState())
     //   CHQ: failed line below since currentValue.myArr is undefined
     //   if (currentValue.myArr.length > 1) {
-    //     dispatch(removeComponent(amount))
+    //     dispatch(removeComponent(theIndex))
     //   }
-    dispatch(removeComponent())
+    dispatch(removeComponent(theIndex))
+    }
+  }
+  
+  export const removeFromList = (theCompID) => {
+    return (dispatch, getState) => {
+      const currentValue = selectMyArr(getState())
+       
+      let indexOfTheTarget
+
+      for (let index = 0; index < currentValue.length && true; index++) {
+        const element = currentValue[index];
+
+        // CHQ: if the current element equals the compID, grab the index it is sitting 
+        // at and pass it into the removeComponent function
+        if(element === theCompID )
+        {
+          indexOfTheTarget = index;
+        }
+        
+      }
+
+
+    dispatch(removeComponent(indexOfTheTarget))
     }
   }
