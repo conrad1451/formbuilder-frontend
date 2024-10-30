@@ -50,7 +50,7 @@ import {
   selectDeletionID,
   updateDeletionTarget,
   selectModalOpen,
-  // updateModalDisplaying,
+  updateModalDisplaying,
   toggleModalDisplaying,
   selectMyArr,
   selectDummyVar,
@@ -644,25 +644,26 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
   const myOwnDummyVar1 = useSelector(selectDummyVar);
 
   const mustModalAppear = useRef(false);
+  const dispatch2 = useDispatch();
 
 
   // const DeleteComponent = (targetQuestion) => {}
 
   const deleteComponent = () => {
-    dispatch(updateDeletionTarget(myCompID));
-    // dispatch(updateModalDisplaying(true));
+    dispatch2(updateDeletionTarget(myCompID));
+    dispatch2(updateModalDisplaying(true));
 
     // FIXME: CHQ: this is having trouble updating a boolean global state but I don't understand why
 
     // this isn't occuring right after updating the deletiontarget with the componentID
-    // dispatch(toggleModalDisplaying());
+    // dispatch2(toggleModalDisplaying());
 
 
-    dispatch(updateDummyVar(myOwnDummyVar1+"dd"));
+    dispatch2(updateDummyVar(myOwnDummyVar1+"dd"));
     // updateDummyVarHelper();
-    // dispatch(updateDummyVarHelper());
+    // dispatch2(updateDummyVarHelper());
     
-    bro();
+    // bro();
     // toggleModalDisplaying
   }
 
@@ -670,17 +671,17 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 // selectDeletionID
 
 useEffect(() => {
-  // dispatch(toggleModalDisplaying());
+  // dispatch2(toggleModalDisplaying());
 
   if(mustModalAppear.current)
   {
-    dispatch(toggleModalDisplaying());
+    // dispatch2(toggleModalDisplaying());
   }
   mustModalAppear.current = true;
 
 }, [targetComponentToDelete]); 
 
-   const dispatch = useDispatch();
+  //  const dispatch = useDispatch();
 
    // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
     return (
@@ -983,8 +984,8 @@ const App3: React.FC = () => {
 
   const [targetIDForDeletion, setTargetIDForDeletion] = useState("");
 
-  // const hasModalBeenOpened = useSelector(selectModalOpen);
-  const [hasModalBeenOpened, setHasModalBeenOpened] = useState(false);
+  const hasModalBeenOpened = useSelector(selectModalOpen);
+  // const [hasModalBeenOpened, setHasModalBeenOpened] = useState(false);
 
   // const theCurID = genNewID();
   const [theCurID, setTheCurID] = useState(randNum());
@@ -1302,9 +1303,9 @@ function genNewID()
             <button onClick={apiCall}>Save Form</button>
 
             {/*CHQ: learned the hard way that I cannot have two reducer functions editing the same state variable  */}
-            <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(toggleModalDisplaying()) }/>
+            {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(toggleModalDisplaying()) }/> */}
             {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={() => setHasModalBeenOpened(false)}/> */}
-            {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(updateModalDisplaying(false))}/> */}
+            <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(updateModalDisplaying(false))}/>
             {/* <h2> New Form </h2> */}
             {/* FIXME: editing title isn't working */}
             <br/>
