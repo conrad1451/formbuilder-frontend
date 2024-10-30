@@ -47,7 +47,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { 
   addToList,
   removeFromList,
+  selectDeletionID,
+  updateDeletionTarget,
+  selectModalOpen,
+  // updateModalDisplaying,
+  toggleModalDisplaying,
   selectMyArr,
+  selectDummyVar,
+  updateDummyVar,
+  updateDummyVarHelper,
   } from '../features/counter/questionComponentSlice';
 
 import styles from './Counter.module.css';
@@ -118,6 +126,46 @@ interface DynamicMCProps {
     
   // }
 }
+
+
+function ConfirmationModal({isModalOpen, confirmText, cancelText, confirmAction, cancelAction}) {
+  // const [open, setOpen] = useState(true);
+
+  // CHQ: caused the page to break and not load
+  // if (open) {
+  //   // whether I called the method on thedialog or just as a function
+  //   showTheDialog();
+  //   thedialog.showTheDialog();
+  // }
+  // const    [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
+      <Dialog id="dialog2" open={isModalOpen}>
+
+      {/* <Dialog id="dialog2" open={open}> */}
+
+        <form id="form2" method="dialog">
+          {/* <form method="dialog" action=""> */}
+          <br />
+          <label htmlFor="fname">Are you sure?: </label>
+          {/* <input type="submit"></input> */}
+          <br />
+          <br />
+          {/* <button onclick="closeDialog()">Cancel</button> */}
+          <input className="my_button" type="submit" onSubmit={confirmAction} value={confirmText} />
+          <input className="my_button" type="submit" onSubmit={cancelAction} value={cancelText} />
+          {/* <button onclick="myFunc()" id="confirmBtn" value="default">
+              Confirm
+            </button> */}
+        </form>
+      </Dialog>
+    </>
+  );
+}
+
+
 // function UseGreeting()
 // {
 //   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
@@ -558,6 +606,13 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
  );
 };
 
+function bro()
+{
+  return 2;
+}
+
+
+
 // Anytime "Add multiple choice alt" is hit, a function should be called that generates a random ID. an useEffect
 // should be called afterwards that takes the randomID generated and creates a component to pass in that ID into it
 // AND stores that ID in a global list in redux. Redux must store the global list of components (meaning redux)
@@ -580,13 +635,50 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    const [showContent, setShowContent] = useState(true);
 
    const [myCompID, setMyCompID] = useState(componentID);
+   const targetComponentToDelete = useSelector(selectDeletionID);
   //  const targetComponentToDelete = useSelector(selectCompIDToDelete);
-  //  const otherText = useSelector(selectCompIDToDelete2);
+  //  const otherText = useSelector(selectC ompIDToDelete2);
   //  const deletionIDs = useSelector(selectArr);
-  const deletionIDs = useSelector(selectMyArr);
+  // const deletionIDs = useSelector(selectMyArr);
+
+  const myOwnDummyVar1 = useSelector(selectDummyVar);
+
+  const mustModalAppear = useRef(false);
 
 
-  //  let correctedDeletionIDs = deletionIDs.slice(1);
+  // const DeleteComponent = (targetQuestion) => {}
+
+  const deleteComponent = () => {
+    dispatch(updateDeletionTarget(myCompID));
+    // dispatch(updateModalDisplaying(true));
+
+    // FIXME: CHQ: this is having trouble updating a boolean global state but I don't understand why
+
+    // this isn't occuring right after updating the deletiontarget with the componentID
+    // dispatch(toggleModalDisplaying());
+
+
+    dispatch(updateDummyVar(myOwnDummyVar1+"dd"));
+    // updateDummyVarHelper();
+    // dispatch(updateDummyVarHelper());
+    
+    bro();
+    // toggleModalDisplaying
+  }
+
+  // useEffect
+// selectDeletionID
+
+useEffect(() => {
+  // dispatch(toggleModalDisplaying());
+
+  if(mustModalAppear.current)
+  {
+    dispatch(toggleModalDisplaying());
+  }
+  mustModalAppear.current = true;
+
+}, [targetComponentToDelete]); 
 
    const dispatch = useDispatch();
 
@@ -598,15 +690,9 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
           <div>
             {/* <br /> */}
             <div className="componentWidth">
-              {/* <h4>targetComponentToDelete is {targetComponentToDelete}</h4> */}
+              <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
               {/* <br/>  */}
               {/* <h4>other text is {otherText}</h4> */}
-              {/* <br/> */}
-              {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
-              {/* <h5>the corrected component IDs for deletionID are {JSON.stringify(correctedDeletionIDs)}</h5> */}
- 
-              {/* correctedDeletionIDs */}
-              {/* <br/><br/> */}
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
               <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
@@ -640,8 +726,11 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               <button id="some-inner-answer"
               onClick={() =>
                 // @ts-ignore
+
+                deleteComponent()
+ 
                 // dispatch(removeFromDeletList())
-                dispatch(removeFromList(myCompID))
+                // dispatch(removeFromList(myCompID))
                 // dispatch(updatingID())
                 //  makeWorkerCallback2(componentID)
               }
@@ -894,6 +983,9 @@ const App3: React.FC = () => {
 
   const [targetIDForDeletion, setTargetIDForDeletion] = useState("");
 
+  // const hasModalBeenOpened = useSelector(selectModalOpen);
+  const [hasModalBeenOpened, setHasModalBeenOpened] = useState(false);
+
   // const theCurID = genNewID();
   const [theCurID, setTheCurID] = useState(randNum());
 
@@ -904,34 +996,13 @@ const App3: React.FC = () => {
   //  const deletionIDs = useSelector(selectArr);
   const deletionIDs = useSelector(selectMyArr);
 
+  const myOwnDummyVar = useSelector(selectDummyVar);
+
   const dispatch = useDispatch();
-
-  // CHQ: didn't get updated in UI when mutated in the useEffect
-  // let broski = "yes";
-
-  // CHQ: method 1 of using useEffect (works but technically produces errors)
-  // useEffect(() => {
-
-  //   // setThePlatform2((thePlatform2) => 
-  //   //   thePlatform2.concat( 
-        
-  //   //     React.createElement(DynamicMultiChoiceAlt, { componentID: theCurID, text: "test me", isProductionState: false})
-
-  //   //      )
-  //   // )
  
-  // }, [theCurID]); // The dependency array ensures the effect runs only when firstName changes
-
-  // useEffect(() => {
-
-  //   // dispatch(addToDeletList(myCompID))
-
-  //   // dispatch(addToDeletList(randNum()))
-  //   dispatch(addToDeletList(theCurID))
- 
-  // }, [thePlatform3]); 
- 
-
+    // const hasModalBeenOpened = useSelector(selectModalOpen);
+// issue with above line  
+    // Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
   useEffect(() => {
 
     if(hasPageBeenRendered.current)
@@ -1229,6 +1300,11 @@ function genNewID()
             <div className="platformAlignment">
               {/* <button onClick={apiCall}>Make API call</button> */}
             <button onClick={apiCall}>Save Form</button>
+
+            {/*CHQ: learned the hard way that I cannot have two reducer functions editing the same state variable  */}
+            <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(toggleModalDisplaying()) }/>
+            {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={() => setHasModalBeenOpened(false)}/> */}
+            {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(updateModalDisplaying(false))}/> */}
             {/* <h2> New Form </h2> */}
             {/* FIXME: editing title isn't working */}
             <br/>
@@ -1236,6 +1312,8 @@ function genNewID()
             <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
             <br/>
+
+            <h5>{myOwnDummyVar}</h5><br/>
 
             {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
 {/* className='listAlt' */}

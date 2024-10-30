@@ -308,6 +308,10 @@ ul {
   float: left;
 } */
 
+.my_button{
+  margin: 2%;
+  padding: 5%;
+}
 
 .multiChoiceOptLayout{
   background-color: rgb(219, 56, 31);
