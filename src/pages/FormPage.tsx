@@ -168,10 +168,6 @@ function ConfirmationModal({isModalOpen, confirmText, cancelText, confirmAction,
 }
 
 
-// function UseGreeting()
-// {
-//   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
-// }
  const createDynamicComponent2 = (
    component: React.ComponentType<any>,
    props?: any
@@ -240,26 +236,13 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, t
   const [myCompID, setMyCompID] = useState(componentID);
 
   const [randomId, setRandomId] = useState(Math.random().toString(36).substring(2,2+20))
-
-  // const randomIDLength = 20;
-  // const randomId = Math.random().toString(36).substring(2,2+randomIDLength); 
-  
-
-  const removeComponent = () => {
-    // history.push("/new-form")
-    
-    // navigate("/new-form")
-    
-  }
+ 
   // [AR]
   return (
-    <>
-{/* className="multichoiceBlock" */}
+    <> 
 <div className="multichoiceBlock"> 
 {/* <div> */}
     {/* <div className="Component-leftside"> */}
-      {/* CHQ: not doing much useful so removing use of class componentWidth */}
-      {/* <div className="componentWidth"> */}
       <div>
         <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
         <br/>
@@ -568,7 +551,6 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
   ];
   const [optionList, setOptionList] = useState(myListing);
  
-  // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
    return (
     <>
     <div>
@@ -608,9 +590,6 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
       >
         Remove Option (-)
       </button> 
-      {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-      {/* <p>total number of inner things: {optionList.length}</p> */}
-
      </div>
      
      </div> 
@@ -620,13 +599,7 @@ const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductio
   </>
  );
 };
-
-function bro()
-{
-  return 2;
-}
-
-
+ 
 
 // Anytime "Add multiple choice alt" is hit, a function should be called that generates a random ID. an useEffect
 // should be called afterwards that takes the randomID generated and creates a component to pass in that ID into it
@@ -651,11 +624,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
    const [myCompID, setMyCompID] = useState(componentID);
    const targetComponentToDelete = useSelector(selectDeletionID);
-  //  const targetComponentToDelete = useSelector(selectCompIDToDelete);
-  //  const otherText = useSelector(selectC ompIDToDelete2);
-  //  const deletionIDs = useSelector(selectArr);
-  // const deletionIDs = useSelector(selectMyArr);
-
+ 
   const myOwnDummyVar1 = useSelector(selectDummyVar);
 
   const myInputText = useSelector(selectInputText)
@@ -682,13 +651,9 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
     // updateDummyVarHelper();
     // dispatch2(updateDummyVarHelper());
     
-    // bro();
     // toggleModalDisplaying
   }
-
-  // useEffect
-// selectDeletionID
-
+ 
 useEffect(() => {
   // dispatch2(toggleModalDisplaying());
 
@@ -699,10 +664,6 @@ useEffect(() => {
   mustModalAppear.current = true;
 
 }, [targetComponentToDelete]); 
-
-  //  const dispatch = useDispatch();
-
-   // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
     return (
       <>
       <div className="multichoiceBlock">
@@ -793,15 +754,12 @@ useEffect(() => {
               setOptionList(optionList.slice(0, -1))} }
             >
               Remove Option (-)
-            </button> 
-            {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-            {/* <p>total number of inner things: {optionList.length}</p> */}
+            </button>  
           </div>
           <p>{"component ID: "+myCompID}</p>
         </div>
       </div>
-
-
+ 
        {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
       <br /> 
       <br />
@@ -908,35 +866,6 @@ let myList5 = [
     React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
   ]         
 ];
-// let myList5 = [[
-//       myFirstId, 
-//       React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
-//     ]];
-
-
-// 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
-// let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
-
-
-//  let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
-//  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
-
- 
-// function Greeting({ name, age }) {
-//   return React.createElement(
-//     'h1',
-//     { className: 'greeting' },
-//     'Hello ',
-//     React.createElement('i', null, name),
-//     '. Welcome! You are ', React.createElement('i', null, age), ' years old.' 
-//   );
-// }
-
-// CHQ: t his worked!
-// function UseGreeting()
-// {
-//   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
-// }
 
 
 function ConfirmComponentDeletion(componentID, deletionFunction) {
@@ -1207,8 +1136,6 @@ function addComponent2(questionType){
 
   return (
     <> 
-    {/* <UseGreeting/> */}
-    
       <div className='Button-section App-leftside'>
         <img src={logo} width={200} className="App-logo" alt="logo"/>
         {/* <img src={logo} width={20} className="App-logo" alt="logo"/> */}
