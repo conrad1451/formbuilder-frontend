@@ -237,6 +237,7 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, t
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
   const [field, setField] = useState('');
+  const [myCompID, setMyCompID] = useState(componentID);
 
   const [randomId, setRandomId] = useState(Math.random().toString(36).substring(2,2+20))
 
@@ -277,7 +278,8 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, t
           />
         </label>
       </div>
-      <br />
+      {/* <br /> */}
+      <p>{"component ID: "+myCompID}</p>
     </div>        
     {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
       <br /> 
@@ -293,6 +295,7 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, te
 //  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
   // const DynamicLongAnswer: React.FC<{}> = () => {
     const [field, setField] = useState('');
+    const [myCompID, setMyCompID] = useState(componentID);
     
   return (
     <>
@@ -313,6 +316,8 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, te
           maxLength={560}
         />
       </label> 
+      <br/>
+      <p>{"component ID: "+myCompID}</p>
     </div>
     <br />
     </>
@@ -326,6 +331,8 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({ componentID, tex
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
   const [truth, setTruth] = useState(false);
+  const [myCompID, setMyCompID] = useState(componentID);
+
     // [AU]
   return (
     <>
@@ -354,7 +361,9 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({ componentID, tex
           // onClick={setTruth(true)}
         />
       </label>
-    </div>
+      <br/>
+      <p>{"component ID: "+myCompID}</p>
+      </div> 
 
     {/* <br /> */}
     <br />
@@ -701,13 +710,13 @@ useEffect(() => {
           <div>
             {/* <br /> */}
             <div className="componentWidth">
-              <h4>targetComponentToDelete is {targetComponentToDelete}</h4>
+              {/* <h4>targetComponentToDelete is {targetComponentToDelete}</h4> */}
               {/* <br/>  */}
               {/* <h4>other text is {otherText}</h4> */}
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
-              <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
-              {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
+              {/* <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/> */}
+              <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
                      
               <button id="some-inner-answer"
               onClick={() =>
@@ -788,8 +797,10 @@ useEffect(() => {
             {/* CHQ: This is where I tested to prove that content editable would address my problems */}
             {/* <p>total number of inner things: {optionList.length}</p> */}
           </div>
+          <p>{"component ID: "+myCompID}</p>
         </div>
       </div>
+
 
        {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
       <br /> 
@@ -1004,7 +1015,7 @@ const App3: React.FC = () => {
 
   const hasButtonBeenPressed = useRef(false);
   
-  // const targetComponentToDelete = useSelector(selectCompIDToDelete);
+  const componentToDelete = useSelector(selectDeletionID);
   // const otherText = useSelector(selectCompIDToDelete2);
   //  const deletionIDs = useSelector(selectArr);
   const deletionIDs = useSelector(selectMyArr);
@@ -1218,7 +1229,8 @@ function addComponent2(questionType){
           Add short answer
         </button>
         <br />
-      <button className='formbuttons' id="long-answer"
+        
+        <button className='formbuttons' id="long-answer"
         onClick={() =>
           // @ts-ignore comment
           // setThePlatform((thePlatform) =>
@@ -1228,12 +1240,12 @@ function addComponent2(questionType){
           setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("1") ))
           // setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("LongAnswer") ))
         }
-      >
+        >
         Add long answer
-      </button> 
-      <br />
-
-     <button className='formbuttons' id="true-false"
+        </button>
+        <br />
+        
+        <button className='formbuttons' id="true-false"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1244,11 +1256,12 @@ function addComponent2(questionType){
           // )
           setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("TrueFalse") ))
         }
-      >
+        >
         Add True/False
-      </button>
-      {/* <br /> */}
-      <button className='formbuttons' id="multi-choice"
+        </button>
+        {/* <br /> */}
+        
+        <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1258,10 +1271,10 @@ function addComponent2(questionType){
              
           )
         }
-      >
-        Add Multiple choice
-      </button>
-      <button className='formbuttons' id="multi-choice"
+        >
+          Add Multiple choice
+        </button>
+        <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following works.
@@ -1293,10 +1306,10 @@ function addComponent2(questionType){
            */
          
         }
-      >
+        >
         Add Multiple choice Alt
-      </button>
-      <button className='formbuttons' id="multi-choice"
+        </button>
+        <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1309,10 +1322,10 @@ function addComponent2(questionType){
             ]) }
           )
         }
-      >
-        Add Multiple choice Alt 2
-      </button>
-      <br />
+        >
+          Add Multiple choice Alt 2
+        </button>
+        <br />
 {/* the code around mC alt 2 is broken so i will just do the alt */}
 
 {/* No overload matches this call.
@@ -1368,8 +1381,9 @@ function addComponent2(questionType){
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
             <br/>
 
-            <h5>hasModalBeenOpened is of type "{typeof(hasModalBeenOpened)}" and hasss the value "{String(hasModalBeenOpened)}"</h5><br/>
-            <h5>{myOwnDummyVar}</h5><br/>
+            <h5>hasModalBeenOpened is of type "{typeof(hasModalBeenOpened)}" and has the value "{String(hasModalBeenOpened)}"</h5><br/>
+            <h5>myOwnDummyVar is {myOwnDummyVar}</h5><br/>
+            <h5>the ID of the component to delete is {componentToDelete}</h5><br/>
 
             {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
 {/* className='listAlt' */}
