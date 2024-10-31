@@ -329,7 +329,8 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({ componentID, tex
     // [AU]
   return (
     <>
-    <div className="componentWidth">
+    {/* <div className="componentWidth"> */}
+    <div className="multichoiceBlock"> 
       <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       {/* <EditableTextModule myText={text} isEditing={isProductionState} theFontSize={"p"}/> */}
       <br/> 
