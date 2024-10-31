@@ -55,6 +55,8 @@ import {
   selectMyArr,
   selectDummyVar,
   updateDummyVar,
+  selectInputText,
+  updateInputText,
   updateDummyVarHelper,
   } from '../features/counter/questionComponentSlice';
 
@@ -228,8 +230,9 @@ const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
     );
   };
   
-
-const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+  
+const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+// const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 // Property 'text' does not exist on type '{}'.ts(2339)
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
@@ -250,12 +253,15 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
   // [AR]
   return (
     <>
-
-    <div className="Component-leftside">
+{/* className="multichoiceBlock" */}
+<div className="multichoiceBlock"> 
+{/* <div> */}
+    {/* <div className="Component-leftside"> */}
       {/* CHQ: not doing much useful so removing use of class componentWidth */}
       {/* <div className="componentWidth"> */}
       <div>
         <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
+        <br/>
         <label> {/* {text}{': '} */} 
           <input
             type="textarea"
@@ -272,17 +278,10 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
         </label>
       </div>
       <br />
-    </div>
-    <div className="Component-rightside">
-      {/* <button className='compdelbutton' onClick={removeComponent}>Delete</button> */}
-      {/* <button className='compdelbutton' onClick={ConfirmComponentDeletion(randomId, d)}>Delete</button> */}
-      {/* <button onClick={removeComponent}>Delete</button> */}
-
-{/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
- */}
-      {/* <button id="component-delete" onClick={removeComponent()}></button> */}
-
-    </div>
+    </div>        
+    {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
+      <br /> 
+      <br />
 
     </>
   ); 
@@ -290,14 +289,17 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
 
 // [AV]
 
- const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+//  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
   // const DynamicLongAnswer: React.FC<{}> = () => {
     const [field, setField] = useState('');
     
   return (
     <>
-    <div className="componentWidth">
+    {/* <div className="componentWidth"> */}
+    <div className="multichoiceBlock"> 
       <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
+      <br/>
       <label> {/* {text}{': '} */} <input
           type="textarea"
           // type="text"
@@ -318,7 +320,9 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
 };
 
 // const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
-const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+// const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
   const [truth, setTruth] = useState(false);
@@ -328,6 +332,7 @@ const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionS
     <div className="componentWidth">
       <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       {/* <EditableTextModule myText={text} isEditing={isProductionState} theFontSize={"p"}/> */}
+      <br/> 
       <label>
         True
         <input
@@ -643,6 +648,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
   const myOwnDummyVar1 = useSelector(selectDummyVar);
 
+  const myInputText = useSelector(selectInputText)
+
   const mustModalAppear = useRef(false);
   const dispatch2 = useDispatch();
 
@@ -660,6 +667,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
 
     dispatch2(updateDummyVar(myOwnDummyVar1+"dd"));
+      // dispatch2(updateInputText("BRO")),
+
     // updateDummyVarHelper();
     // dispatch2(updateDummyVarHelper());
     
@@ -853,7 +862,7 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
  
 
  
-let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
+// let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
 
 
 // CHQ
@@ -973,7 +982,7 @@ const App3: React.FC = () => {
   // const [count, setCount] = useState(0);
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
-  const [thePlatform, setThePlatform] = useState(myList3);
+  // const [thePlatform, setThePlatform] = useState(myList3);
   // const [thePlatform2, setThePlatform2] = useState(myList4);
   const [thePlatform2, setThePlatform2] = useState(myList4Alt);
   const [thePlatform3, setThePlatform3] = useState(myList5); 
@@ -991,6 +1000,8 @@ const App3: React.FC = () => {
   const [theCurID, setTheCurID] = useState(randNum());
 
   const hasPageBeenRendered = useRef(false);
+
+  const hasButtonBeenPressed = useRef(false);
   
   // const targetComponentToDelete = useSelector(selectCompIDToDelete);
   // const otherText = useSelector(selectCompIDToDelete2);
@@ -1028,78 +1039,73 @@ const App3: React.FC = () => {
   let isFillInTheBlank=[true, true, true];  
 
 
-  let curID;
-
- 
-
-
-
+  let curID; 
   // FIXME: CHQ: uncomment when lodash is ready
   // let firstTmpList = structuredClone(myList3);
   
   const navigate = useNavigate();
 
-  const RemoveComponent = (targetQuestion) => {
-      // 1. grab ID from target question 
-      // 2. compare target question ID to that of each question. If there is a match, uncouple
+//   const RemoveComponent = (targetQuestion) => {
+//       // 1. grab ID from target question 
+//       // 2. compare target question ID to that of each question. If there is a match, uncouple
 
-      let questionsToKeep: boolean[] = []
-      let indicesOfQuestionsToDelete: number[] = [];
+//       let questionsToKeep: boolean[] = []
+//       let indicesOfQuestionsToDelete: number[] = [];
 
-      thePlatform.forEach(() => {
-        questionsToKeep.push(true);
-      });
+//       thePlatform.forEach(() => {
+//         questionsToKeep.push(true);
+//       });
 
-      for (let index = 0; index < thePlatform.length; ++index) {
-        const question = thePlatform[index];
+//       for (let index = 0; index < thePlatform.length; ++index) {
+//         const question = thePlatform[index];
 
-        // FIXME: determinen how to grab this, won't be true for all questions
-        let isQuestionToDelete = true;
+//         // FIXME: determinen how to grab this, won't be true for all questions
+//         let isQuestionToDelete = true;
 
-        if(isQuestionToDelete){
-          questionsToKeep[index] = false;
-          indicesOfQuestionsToDelete.push(index);
-        }
-      }
-//         "message": "Type 'never[]' is missing the following properties from type 'FunctionComponentElement<DynamicComponentProps>': type, props, key",
-      // let tmpList: React.FunctionComponentElement<DynamicComponentProps> = [];
+//         if(isQuestionToDelete){
+//           questionsToKeep[index] = false;
+//           indicesOfQuestionsToDelete.push(index);
+//         }
+//       }
+// //         "message": "Type 'never[]' is missing the following properties from type 'FunctionComponentElement<DynamicComponentProps>': type, props, key",
+//       // let tmpList: React.FunctionComponentElement<DynamicComponentProps> = [];
 
-      let startIndex=0;
+//       let startIndex=0;
 
-      let i = 0;
+//       let i = 0;
 
-      // [AEG]
-      while(i < indicesOfQuestionsToDelete.length){
-        if(startIndex !== indicesOfQuestionsToDelete[i]){
-          let curKeptPortion = thePlatform.slice(startIndex, indicesOfQuestionsToDelete[i]);
-          // Property 'push' does not exist on type 'FunctionComponentElement<DynamicComponentProps>'.ts(2339)
-          // tmpList.push()
-          // let inserttionStart = firstTmpList.length;
-          /**
-           * Argument of type 'FunctionComponentElement<DynamicComponentProps>[]' is not assignable to parameter of 
-           * type 'FunctionComponentElement<DynamicComponentProps>'. Type 'FunctionComponentElement<DynamicComponentProps>[]' 
-           * is missing the following properties from type 
-           * 'FunctionComponentElement<DynamicComponentProps>': type, props, keyts(2345)
-           * */
+//       // [AEG]
+//       while(i < indicesOfQuestionsToDelete.length){
+//         if(startIndex !== indicesOfQuestionsToDelete[i]){
+//           let curKeptPortion = thePlatform.slice(startIndex, indicesOfQuestionsToDelete[i]);
+//           // Property 'push' does not exist on type 'FunctionComponentElement<DynamicComponentProps>'.ts(2339)
+//           // tmpList.push()
+//           // let inserttionStart = firstTmpList.length;
+//           /**
+//            * Argument of type 'FunctionComponentElement<DynamicComponentProps>[]' is not assignable to parameter of 
+//            * type 'FunctionComponentElement<DynamicComponentProps>'. Type 'FunctionComponentElement<DynamicComponentProps>[]' 
+//            * is missing the following properties from type 
+//            * 'FunctionComponentElement<DynamicComponentProps>': type, props, keyts(2345)
+//            * */
           
-          // firstTmpList.splice(inserttionStart, 0, curKeptPortion)
+//           // firstTmpList.splice(inserttionStart, 0, curKeptPortion)
         
-          // CHQ: yeah im modifying the orig val
+//           // CHQ: yeah im modifying the orig val
         
-          // FIXME: CHQ: uncomment when lodash is ready
-          // let tmpArr = structuredClone(firstTmpList);
-          // firstTmpList = tmpArr.concat(curKeptPortion);
-        } 
+//           // FIXME: CHQ: uncomment when lodash is ready
+//           // let tmpArr = structuredClone(firstTmpList);
+//           // firstTmpList = tmpArr.concat(curKeptPortion);
+//         } 
 
-        // we grab the indice of the question to be deleted, adn then add 1 so that we concat its neighbors on either 
-        // side goingn forward
-        startIndex = 1 + indicesOfQuestionsToDelete[i];
-        ++i;
-      }
-      // FIXME: CHQ: uncomment when lodash is ready
-      // setThePlatform(firstTmpList); 
+//         // we grab the indice of the question to be deleted, adn then add 1 so that we concat its neighbors on either 
+//         // side goingn forward
+//         startIndex = 1 + indicesOfQuestionsToDelete[i];
+//         ++i;
+//       }
+//       // FIXME: CHQ: uncomment when lodash is ready
+//       // setThePlatform(firstTmpList); 
       
-  }
+//   }
 
   const BackToHome = () => {
     // history.push("/new-form")
@@ -1147,6 +1153,46 @@ function genNewID()
   return (Math.random().toString(36).substring(2,2+20));
 }
 
+function addComponent(questionType){
+  switch(questionType){
+    case "ShortAnswer":
+      // code block
+      break;
+    case "shortAnswer":
+      // code block
+      break;
+    case "LongAnswer":
+      // code block
+      break;
+    case "True-False":
+      // code block
+      break;
+    case "Multiple-Choice":
+      // code block
+      break;
+    default:
+      // code block
+  }
+  return 0;
+}
+
+// addComponent2("Multiple-Choice")
+
+function addComponent2(questionType){
+  switch(questionType){
+    case "ShortAnswer":
+      return (React.createElement(DynamicShortAnswer, { componentID:theCurID, text: 'Short Answer Question', isProductionState: false}));
+    case "1":
+      return (React.createElement(DynamicLongAnswer, { componentID:theCurID, text: 'Long Answer Question', isProductionState: false}));
+    case "TrueFalse":
+      return (React.createElement(DynamicTrueFalse, { componentID:theCurID, text: 'True/False Question', isProductionState: false}));
+    case "Multiple-Choice":
+      return (React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Multiple Choice Question', isProductionState: false}));
+    default:
+      return (React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false}));
+  } 
+}
+
   return (
     <> 
     {/* <UseGreeting/> */}
@@ -1160,10 +1206,12 @@ function genNewID()
         <button className='formbuttons' id="short-answer"
         onClick={() =>
           // @ts-ignore comment
-          setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false}))
-          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
-          )
+          // setThePlatform((thePlatform) =>
+          //   thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false}))
+          // // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+          // )
+          // setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("0") ))
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("ShortAnswer") ))
         }
         >
           Add short answer
@@ -1172,10 +1220,12 @@ function genNewID()
       <button className='formbuttons' id="long-answer"
         onClick={() =>
           // @ts-ignore comment
-          setThePlatform((thePlatform) =>
-            // thePlatform.concat(React.createElement(DynamicLongAnswer))
-            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me", isProductionState: false}))
-          )
+          // setThePlatform((thePlatform) =>
+          //   // thePlatform.concat(React.createElement(DynamicLongAnswer))
+          //   thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me", isProductionState: false}))
+          // )
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("1") ))
+          // setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("LongAnswer") ))
         }
       >
         Add long answer
@@ -1186,17 +1236,17 @@ function genNewID()
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
-          setThePlatform((thePlatform) =>
-            // thePlatform.concat(React.createElement(DynamicTrueFalse))
-            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title', isProductionState: false}))
-          // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
-          )
+          // setThePlatform((thePlatform) =>
+          //   // thePlatform.concat(React.createElement(DynamicTrueFalse))
+          //   thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title', isProductionState: false}))
+          // // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
+          // )
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("TrueFalse") ))
         }
       >
         Add True/False
       </button>
       {/* <br /> */}
-
       <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
@@ -1214,13 +1264,16 @@ function genNewID()
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following works.
-          setThePlatform2((thePlatform2) => 
-              thePlatform2.concat(
-                React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false})
+          // setThePlatform2((thePlatform2) => 
+          //     thePlatform2.concat(
+          //       React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false})
               
               
-              )
-          )
+          //     )
+          // )
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("Multiple-Choice") ))
+ 
+
           // addQuesComponent(genNewID())
           // addQuesComponent(77)
           // setTheCurID(randNum())
@@ -1314,6 +1367,7 @@ function genNewID()
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
             <br/>
 
+            <h5>hasModalBeenOpened is of type "{typeof(hasModalBeenOpened)}" and hasss the value "{String(hasModalBeenOpened)}"</h5><br/>
             <h5>{myOwnDummyVar}</h5><br/>
 
             {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}

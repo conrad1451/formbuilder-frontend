@@ -10,6 +10,7 @@ export const questionComponentSlice = createSlice({
     compIDToDelete: "",
     modalOpen:false,
     dummyVar: "",
+    myInputText: "",
     myArr:[],
     // value: "testme",
   },
@@ -65,11 +66,14 @@ export const questionComponentSlice = createSlice({
     }, 
     updateDummyVar: (state, action) =>{
       state.dummyVar = action.payload;
+    }, 
+    updateInputText: (state, action) =>{
+      state.myInputText = action.payload;
     }
   },
 })
  
-
+// myInputText
 export const { addComponent } = questionComponentSlice.actions
 export const { removeComponent } = questionComponentSlice.actions
 export const { removeLastComponent } = questionComponentSlice.actions
@@ -77,7 +81,8 @@ export const { updateDeletionTarget } = questionComponentSlice.actions
 export const { updateModalDisplaying } = questionComponentSlice.actions
 export const { toggleModalDisplaying } = questionComponentSlice.actions
 export const { updateDummyVar } = questionComponentSlice.actions
- 
+ export const { updateInputText } = questionComponentSlice.actions
+
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
@@ -85,6 +90,8 @@ export const selectDeletionID = (state) => state.compID.compIDToDelete;
 export const selectModalOpen = (state) => state.compID.modalOpen; 
 export const selectMyArr = (state) => state.compID.myArr; 
 export const selectDummyVar = (state) => state.compID.dummyVar; 
+export const selectInputText = (state) => state.compID.myInputText; 
+
 // export const selectMyArrAlt = (state) => state.compID.myArr; 
 
 export default questionComponentSlice.reducer
