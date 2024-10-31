@@ -29,6 +29,9 @@
 
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
+[QB]: https://www.google.com/search?q=use+map+to+concatenate+elements+of+a+list+into+string+-+js&client=firefox-b-1-d&sca_esv=d8dc71a00e7da157&ei=12YjZ-7RBdiKptQPpdGQMQ&ved=0ahUKEwiumd7_vriJAxVYhYkEHaUoJAYQ4dUDCBA&oq=use+map+to+concatenate+elements+of+a+list+intoa+string+-+js&gs_lp=Egxnd3Mtd2l6LXNlcnAiO3VzZSBtYXAgdG8gY29uY2F0ZW5hdGUgZWxlbWVudHMgb2YgYSBsaXN0IGludG9hIHN0cmluZyAtIGpzSABQAFgAcAB4AZABAJgBAKABAKoBALgBDMgBAJgCAKACAJgDAOIDBRIBMSBAkgcAoAcA&sclient=gws-wiz-serp
+
+
 */ 
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -919,6 +922,32 @@ interface IWorkerCallback {
 }
 
 
+// CHQ: it took me over 80 minutes, while the solution was a simple join - wow
+const FormatList = ({theList, theSeparator}) => {
+
+  let firstPartOfList = (theList.length >= 1) ? theList[0]: "";
+
+  // CHQ: results in a bunch of "[object Object]" being printed
+  // let restOfList = (theList.length > 1) ? (
+  //   theList.slice(1).map((elem) => { return (<p> | {elem}</p>) })
+  // ): "";
+
+  // [QB]:
+  let restOfList = (theList.length > 1) ? (theList.slice(1).join(theSeparator)) : "";
+
+  // {(theList.slice(1).map((elem) => { return (<p> | {elem}</p>) }))}
+
+  // let theWholeList = firstPartOfList+restOfList;
+
+  let theWholeList = (theList.join(theSeparator));
+
+  return(
+    <>
+    <h5> {theWholeList} </h5> 
+    </>
+  )
+}
+
 const App3: React.FC = () => {
 // const App3: React.FC = ({getTheStore, setTheStore}) => {
   // const [count, setCount] = useState(0);
@@ -1307,6 +1336,11 @@ function addComponent2(questionType){
             {/* <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} /> */}
             <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+            
+            <button id="some-inner-answer"
+            onClick={() => { setIsEditingTitle(!isEditingTitle) }} >
+              {isEditingTitle ? "Save Changes": "Edit Title"}
+            </button> 
             <br/>
 
             <h5>hasModalBeenOpened is of type "{typeof(hasModalBeenOpened)}" and has the value "{String(hasModalBeenOpened)}"</h5><br/>
@@ -1315,19 +1349,12 @@ function addComponent2(questionType){
 
             {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
 {/* className='listAlt' */}
-            <h5>        
-            <ul className='listAlt'>
-              {/* <ul className='listAlt'> */}
-                The componentIDS of the Question Components
-                {deletionIDs.map((theSelectedID) => { return (<li>{theSelectedID}</li>) })}
-              </ul>
-            </h5>
 
-            <button id="some-inner-answer"
-                onClick={() => { setIsEditingTitle(!isEditingTitle) }}
-                >
-                  {isEditingTitle ? "Save Changes": "Edit Title"}
-                </button>
+            <h5>The componentIDS of the Question Components {"   --> "}</h5>
+            {/* <br/> */}
+            <FormatList theList={deletionIDs} theSeparator=" | "/>
+
+
                 {/* <p>Number of questions: {thePlatform.length}</p> */}
               {/* <div>{thePlatform}</div> */}
               <div>{thePlatform2}</div>
