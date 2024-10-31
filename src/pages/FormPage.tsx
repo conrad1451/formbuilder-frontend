@@ -119,6 +119,7 @@ interface DynamicTF {
   isProductionState: boolean;
 } 
 interface DynamicMCProps {
+  optionID: string;
   text: string;
   checkedCondition: boolean;
   hasEditorOpened: boolean;
@@ -498,7 +499,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 }
 
 // const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
-const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
+const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ optionID, text, checkedCondition, hasEditorOpened }) => {
   // const [isChecked, setIsChecked] = useState(false);
   // const [isChecked, setIsChecked] = useState(checkedCondition);
   // const [optionText, setOptionText] = useState(text);
@@ -538,67 +539,67 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
 
 //  [ZA]
 
-const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
- // const DynamicTrueFalse: React.FC<{}> = () => {
-  //  const [truth, setTruth] = useState(false);
-  //  const [theChoice, setTheChoice] = useState("");
-   // [AU] [AJ]
-  let myListing = [
-    React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
-  ];
-  const [optionList, setOptionList] = useState(myListing);
+// const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+//  // const DynamicTrueFalse: React.FC<{}> = () => {
+//   //  const [truth, setTruth] = useState(false);
+//   //  const [theChoice, setTheChoice] = useState("");
+//    // [AU] [AJ]
+//   let myListing = [
+//     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+//   ];
+//   const [optionList, setOptionList] = useState(myListing);
  
-   return (
-    <>
-    <div>
-      <div> 
-        <br />
-        <div className="componentWidth">
-        {/* <div > */}
-        <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
+//    return (
+//     <>
+//     <div>
+//       <div> 
+//         <br />
+//         <div className="componentWidth">
+//         {/* <div > */}
+//         <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
 
-        {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
-        {/* <div>{optionList}</div> */}
+//         {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+//         {/* <div>{optionList}</div> */}
 
-        <ul>
-          {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
-        </ul> 
-        </div>
-        <br />
-      </div>
-    <div>
-   {/* <button className='formbuttons' id="some-inner-answer" */}
-    <button id="some-inner-answer"
-        onClick={() =>
-          // @ts-ignore comment
-          setOptionList((optionList) =>  
-            optionList.concat(
-              React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-            )
-          )
-        }
-      >
-        Add Option (+)
-      </button>     
-      <button id="some-inner-answer"
-        onClick={() =>{
-          // [ZB]
-          setOptionList(optionList.slice(0, -1))} }
-      >
-        Remove Option (-)
-      </button> 
-     </div>
+//         <ul>
+//           {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
+//         </ul> 
+//         </div>
+//         <br />
+//       </div>
+//     <div>
+//    {/* <button className='formbuttons' id="some-inner-answer" */}
+//     <button id="some-inner-answer"
+//         onClick={() =>
+//           // @ts-ignore comment
+//           setOptionList((optionList) =>  
+//             optionList.concat(
+//               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+//             )
+//           )
+//         }
+//       >
+//         Add Option (+)
+//       </button>     
+//       <button id="some-inner-answer"
+//         onClick={() =>{
+//           // [ZB]
+//           setOptionList(optionList.slice(0, -1))} }
+//       >
+//         Remove Option (-)
+//       </button> 
+//      </div>
      
-     </div> 
+//      </div> 
      
-     <br /> 
-     <br />
-  </>
- );
-};
+//      <br /> 
+//      <br />
+//   </>
+//  );
+// };
  
 
 // Anytime "Add multiple choice alt" is hit, a function should be called that generates a random ID. an useEffect
@@ -613,10 +614,10 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    //  const [theChoice, setTheChoice] = useState("");
     // [AU] [AJ]
    let myListing = [
-     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+     React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+     ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+     ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+     ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
    ];
    const [optionList, setOptionList] = useState(myListing);
 
@@ -1188,7 +1189,7 @@ function addComponent2(questionType){
         </button>
         {/* <br /> */}
         
-        <button className='formbuttons' id="multi-choice"
+        {/* <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1200,7 +1201,7 @@ function addComponent2(questionType){
         }
         >
           Add Multiple choice
-        </button>
+        </button> */}
         <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
@@ -1234,9 +1235,9 @@ function addComponent2(questionType){
          
         }
         >
-        Add Multiple choice Alt
+        Add Multiple choice
         </button>
-        <button className='formbuttons' id="multi-choice"
+        {/* <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1251,7 +1252,7 @@ function addComponent2(questionType){
         }
         >
           Add Multiple choice Alt 2
-        </button>
+        </button> */}
         <br />
 {/* the code around mC alt 2 is broken so i will just do the alt */}
 
