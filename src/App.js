@@ -10,14 +10,15 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 // import FormPage from "./pages/FormPage";
 import FormPage from "./pages/FormPage.tsx";
-
+import LoginForm from "./pages/TestLogin.js";
 
 const App = () => {
   return (
         <Router>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<LoginPage />} />
+                <Route path="/login" element={<LoginForm />} />
+                {/* <Route path="/login" element={<LoginPage />} /> */}
                 <Route path="/new-form" element={<FormPage />} />
                 {/* <Route path="/path_name/:dynamic" element={<Component_Name />} /> //dynamic route */}
                 {/* <Route path="/*" element={<Component_Name />} />  */}

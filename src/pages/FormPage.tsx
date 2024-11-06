@@ -29,20 +29,39 @@
 
 [AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
 
+[QB]: https://www.google.com/search?q=use+map+to+concatenate+elements+of+a+list+into+string+-+js&client=firefox-b-1-d&sca_esv=d8dc71a00e7da157&ei=12YjZ-7RBdiKptQPpdGQMQ&ved=0ahUKEwiumd7_vriJAxVYhYkEHaUoJAYQ4dUDCBA&oq=use+map+to+concatenate+elements+of+a+list+intoa+string+-+js&gs_lp=Egxnd3Mtd2l6LXNlcnAiO3VzZSBtYXAgdG8gY29uY2F0ZW5hdGUgZWxlbWVudHMgb2YgYSBsaXN0IGludG9hIHN0cmluZyAtIGpzSABQAFgAcAB4AZABAJgBAKABAKoBALgBDMgBAJgCAKACAJgDAOIDBRIBMSBAkgcAoAcA&sclient=gws-wiz-serp
+
+
 */ 
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
  
-import {
-  updatingID,
-  selectCompIDToDelete,
-  updatingID2,
-  addToDeletList,
-  removeFromDeletList,
-  selectCompIDToDelete2,
-  updateArr,
-  selectArr,
-  } from '../features/counter/deleteComponentSlice';
+// import {
+//   updatingID,
+//   selectCompIDToDelete,
+//   updatingID2,
+//   addToDeletList,
+//   removeFromDeletList,
+//   selectCompIDToDelete2,
+//   updateArr,
+//   selectArr,
+//   } from '../features/counter/deleteComponentSlice';
+
+import { 
+  addToList,
+  removeFromList,
+  selectDeletionID,
+  updateDeletionTarget,
+  selectModalOpen,
+  updateModalDisplaying,
+  toggleModalDisplaying,
+  selectMyArr,
+  selectDummyVar,
+  updateDummyVar,
+  selectInputText,
+  updateInputText,
+  updateDummyVarHelper,
+  } from '../features/counter/questionComponentSlice';
 
 import styles from './Counter.module.css';
 
@@ -103,6 +122,7 @@ interface DynamicTF {
   isProductionState: boolean;
 } 
 interface DynamicMCProps {
+  optionID: string;
   text: string;
   checkedCondition: boolean;
   hasEditorOpened: boolean;
@@ -112,10 +132,46 @@ interface DynamicMCProps {
     
   // }
 }
-// function UseGreeting()
-// {
-//   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
-// }
+
+
+function ConfirmationModal({isModalOpen, confirmText, cancelText, confirmAction, cancelAction}) {
+  // const [open, setOpen] = useState(true);
+
+  // CHQ: caused the page to break and not load
+  // if (open) {
+  //   // whether I called the method on thedialog or just as a function
+  //   showTheDialog();
+  //   thedialog.showTheDialog();
+  // }
+  // const    [open, setOpen] = useState(false);
+
+  return (
+    <>
+      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
+      <Dialog id="dialog2" open={isModalOpen}>
+
+      {/* <Dialog id="dialog2" open={open}> */}
+
+        <form id="form2" method="dialog">
+          {/* <form method="dialog" action=""> */}
+          <br />
+          <label htmlFor="fname">Are you sure?: </label>
+          {/* <input type="submit"></input> */}
+          <br />
+          <br />
+          {/* <button onclick="closeDialog()">Cancel</button> */}
+          <input className="my_button" type="submit" onSubmit={confirmAction} value={confirmText} />
+          <input className="my_button" type="submit" onSubmit={cancelAction} value={cancelText} />
+          {/* <button onclick="myFunc()" id="confirmBtn" value="default">
+              Confirm
+            </button> */}
+        </form>
+      </Dialog>
+    </>
+  );
+}
+
+
  const createDynamicComponent2 = (
    component: React.ComponentType<any>,
    props?: any
@@ -174,34 +230,26 @@ const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
     );
   };
   
-
-const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+  
+const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+// const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 // Property 'text' does not exist on type '{}'.ts(2339)
 // const DynamicShortAnswer: React.FC<{}> = ({ text }) => {
 // const DynamicShortAnswer: React.FC<{}> = () => {
   const [field, setField] = useState('');
+  const [myCompID, setMyCompID] = useState(componentID);
 
   const [randomId, setRandomId] = useState(Math.random().toString(36).substring(2,2+20))
-
-  // const randomIDLength = 20;
-  // const randomId = Math.random().toString(36).substring(2,2+randomIDLength); 
-  
-
-  const removeComponent = () => {
-    // history.push("/new-form")
-    
-    // navigate("/new-form")
-    
-  }
+ 
   // [AR]
   return (
-    <>
-
-    <div className="Component-leftside">
-      {/* CHQ: not doing much useful so removing use of class componentWidth */}
-      {/* <div className="componentWidth"> */}
+    <> 
+<div className="multichoiceBlock"> 
+{/* <div> */}
+    {/* <div className="Component-leftside"> */}
       <div>
         <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
+        <br/>
         <label> {/* {text}{': '} */} 
           <input
             type="textarea"
@@ -217,18 +265,12 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
           />
         </label>
       </div>
+      {/* <br /> */}
+      <p>{"component ID: "+myCompID}</p>
+    </div>        
+    {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
+      <br /> 
       <br />
-    </div>
-    <div className="Component-rightside">
-      {/* <button className='compdelbutton' onClick={removeComponent}>Delete</button> */}
-      {/* <button className='compdelbutton' onClick={ConfirmComponentDeletion(randomId, d)}>Delete</button> */}
-      {/* <button onClick={removeComponent}>Delete</button> */}
-
-{/* Type 'void' is not assignable to type 'MouseEventHandler<HTMLButtonElement> | undefined'.ts(2322)
- */}
-      {/* <button id="component-delete" onClick={removeComponent()}></button> */}
-
-    </div>
 
     </>
   ); 
@@ -236,14 +278,18 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
 
 // [AV]
 
- const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+//  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
   // const DynamicLongAnswer: React.FC<{}> = () => {
     const [field, setField] = useState('');
+    const [myCompID, setMyCompID] = useState(componentID);
     
   return (
     <>
-    <div className="componentWidth">
+    {/* <div className="componentWidth"> */}
+    <div className="multichoiceBlock"> 
       <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
+      <br/>
       <label> {/* {text}{': '} */} <input
           type="textarea"
           // type="text"
@@ -257,6 +303,8 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
           maxLength={560}
         />
       </label> 
+      <br/>
+      <p>{"component ID: "+myCompID}</p>
     </div>
     <br />
     </>
@@ -264,16 +312,22 @@ const DynamicShortAnswer: React.FC<DynamicComponentProps> = ({ text, isProductio
 };
 
 // const DynamicTrueFalse: React.FC<DynamicTF> = ({ text }) => {
-const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({ componentID, text, isProductionState, captureState }) => {
+// const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+
 //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
   const [truth, setTruth] = useState(false);
+  const [myCompID, setMyCompID] = useState(componentID);
+
     // [AU]
   return (
     <>
-    <div className="componentWidth">
+    {/* <div className="componentWidth"> */}
+    <div className="multichoiceBlock"> 
       <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
       {/* <EditableTextModule myText={text} isEditing={isProductionState} theFontSize={"p"}/> */}
+      <br/> 
       <label>
         True
         <input
@@ -294,7 +348,9 @@ const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionS
           // onClick={setTruth(true)}
         />
       </label>
-    </div>
+      <br/>
+      <p>{"component ID: "+myCompID}</p>
+      </div> 
 
     {/* <br /> */}
     <br />
@@ -446,7 +502,7 @@ function EditableTextModule({myText, isEditing, theFontSize}) {
 }
 
 // const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, checkedFunction }) => {
-const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondition, hasEditorOpened }) => {
+const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ optionID, text, checkedCondition, hasEditorOpened }) => {
   // const [isChecked, setIsChecked] = useState(false);
   // const [isChecked, setIsChecked] = useState(checkedCondition);
   // const [optionText, setOptionText] = useState(text);
@@ -486,71 +542,68 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({ text, checkedCondi
 
 //  [ZA]
 
-const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
- // const DynamicTrueFalse: React.FC<{}> = () => {
-  //  const [truth, setTruth] = useState(false);
-  //  const [theChoice, setTheChoice] = useState("");
-   // [AU] [AJ]
-  let myListing = [
-    React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
-  ];
-  const [optionList, setOptionList] = useState(myListing);
+// const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+//  // const DynamicTrueFalse: React.FC<{}> = () => {
+//   //  const [truth, setTruth] = useState(false);
+//   //  const [theChoice, setTheChoice] = useState("");
+//    // [AU] [AJ]
+//   let myListing = [
+//     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+//   ];
+//   const [optionList, setOptionList] = useState(myListing);
  
-  // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
-   return (
-    <>
-    <div>
-      <div> 
-        <br />
-        <div className="componentWidth">
-        {/* <div > */}
-        <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
+//    return (
+//     <>
+//     <div>
+//       <div> 
+//         <br />
+//         <div className="componentWidth">
+//         {/* <div > */}
+//         <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
 
-        {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
-        {/* <div>{optionList}</div> */}
+//         {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+//         {/* <div>{optionList}</div> */}
 
-        <ul>
-          {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
-        </ul> 
-        </div>
-        <br />
-      </div>
-    <div>
-   {/* <button className='formbuttons' id="some-inner-answer" */}
-    <button id="some-inner-answer"
-        onClick={() =>
-          // @ts-ignore comment
-          setOptionList((optionList) =>  
-            optionList.concat(
-              React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-            )
-          )
-        }
-      >
-        Add Option (+)
-      </button>     
-      <button id="some-inner-answer"
-        onClick={() =>{
-          // [ZB]
-          setOptionList(optionList.slice(0, -1))} }
-      >
-        Remove Option (-)
-      </button> 
-      {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-      {/* <p>total number of inner things: {optionList.length}</p> */}
-
-     </div>
+//         <ul>
+//           {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
+//         </ul> 
+//         </div>
+//         <br />
+//       </div>
+//     <div>
+//    {/* <button className='formbuttons' id="some-inner-answer" */}
+//     <button id="some-inner-answer"
+//         onClick={() =>
+//           // @ts-ignore comment
+//           setOptionList((optionList) =>  
+//             optionList.concat(
+//               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+//             )
+//           )
+//         }
+//       >
+//         Add Option (+)
+//       </button>     
+//       <button id="some-inner-answer"
+//         onClick={() =>{
+//           // [ZB]
+//           setOptionList(optionList.slice(0, -1))} }
+//       >
+//         Remove Option (-)
+//       </button> 
+//      </div>
      
-     </div> 
+//      </div> 
      
-     <br /> 
-     <br />
-  </>
- );
-};
+//      <br /> 
+//      <br />
+//   </>
+//  );
+// };
+ 
 
 // Anytime "Add multiple choice alt" is hit, a function should be called that generates a random ID. an useEffect
 // should be called afterwards that takes the randomID generated and creates a component to pass in that ID into it
@@ -563,26 +616,85 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    //  const [truth, setTruth] = useState(false);
    //  const [theChoice, setTheChoice] = useState("");
     // [AU] [AJ]
-   let myListing = [
-     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
-   ];
+
+  // const [optionIDList, setOptionIDList] = useState(Array<String>);
+  // const [isCheckedList, setIsCheckedList] = useState(Array<Boolean>);
+ 
+  const [optionIDList, setOptionIDList] = [randNum(), randNum(), randNum(), randNum()];
+  const [isCheckedList, setIsCheckedList] = [true, false, false, false];
+ 
+  // let myListing: React.FC<DynamicMCProps>[] = [];
+
+  //  let myListing = [
+  //    React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+  //  ];
+
+  let myListing = [
+    React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[0], text: 'Option 1', checkedCondition: isCheckedList[0], hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[1], text: 'Option 2', checkedCondition: isCheckedList[1], hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[2], text: 'Option 3', checkedCondition: isCheckedList[2], hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[3], text: 'Option 4', checkedCondition: isCheckedList[3], hasEditorOpened: false})
+  ];
    const [optionList, setOptionList] = useState(myListing);
 
    const [showContent, setShowContent] = useState(true);
 
    const [myCompID, setMyCompID] = useState(componentID);
-   const targetComponentToDelete = useSelector(selectCompIDToDelete);
-   const otherText = useSelector(selectCompIDToDelete2);
-   const deletionIDs = useSelector(selectArr);
+   const targetComponentToDelete = useSelector(selectDeletionID);
+ 
+  const myOwnDummyVar1 = useSelector(selectDummyVar);
 
-  //  let correctedDeletionIDs = deletionIDs.slice(1);
+  const myInputText = useSelector(selectInputText)
 
-   const dispatch = useDispatch();
+  const mustModalAppear = useRef(false);
+  const dispatch2 = useDispatch();
 
-   // TODO: CHQ: I see now that I was using an arbitrary component width to force the multuipelchoice options onto new lines, RATHER than just listing them via a map. I see how that caused issues when text overflowed a certain size
+
+  // const DeleteComponent = (targetQuestion) => {}
+  
+  const addOption = () => {
+    
+    setOptionList((optionList) =>
+      optionList.concat(
+        React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+
+        // React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+      )
+    )
+  }
+
+  const deleteComponent = () => {
+    dispatch2(updateDeletionTarget(myCompID));
+    dispatch2(updateModalDisplaying(true));
+
+    // FIXME: CHQ: this is having trouble updating a boolean global state but I don't understand why
+
+    // this isn't occuring right after updating the deletiontarget with the componentID
+    // dispatch2(toggleModalDisplaying());
+
+
+    dispatch2(updateDummyVar(myOwnDummyVar1+"dd"));
+      // dispatch2(updateInputText("BRO")),
+ 
+    // updateDummyVarHelper();
+    // dispatch2(updateDummyVarHelper());
+    
+    // toggleModalDisplaying
+  }
+ 
+useEffect(() => {
+  // dispatch2(toggleModalDisplaying());
+
+  if(mustModalAppear.current)
+  {
+    // dispatch2(toggleModalDisplaying());
+  }
+  mustModalAppear.current = true;
+
+}, [targetComponentToDelete]); 
     return (
       <>
       <div className="multichoiceBlock">
@@ -593,16 +705,10 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               {/* <h4>targetComponentToDelete is {targetComponentToDelete}</h4> */}
               {/* <br/>  */}
               {/* <h4>other text is {otherText}</h4> */}
-              {/* <br/> */}
-              {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
-              {/* <h5>the corrected component IDs for deletionID are {JSON.stringify(correctedDeletionIDs)}</h5> */}
- 
-              {/* correctedDeletionIDs */}
-              {/* <br/><br/> */}
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
-              <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/>
-              {/* <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/> */}
+              {/* <EditableTextModule myText={"component ID stored in state is: "+myCompID} isEditing={true} theFontSize={"h3"}/> */}
+              <EditableTextModule myText={text} isEditing={true} theFontSize={"p"}/>
                      
               <button id="some-inner-answer"
               onClick={() =>
@@ -632,7 +738,11 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               <button id="some-inner-answer"
               onClick={() =>
                 // @ts-ignore
-                dispatch(removeFromDeletList())
+
+                deleteComponent()
+ 
+                // dispatch(removeFromDeletList())
+                // dispatch(removeFromList(myCompID))
                 // dispatch(updatingID())
                 //  makeWorkerCallback2(componentID)
               }
@@ -659,11 +769,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
             <button id="some-inner-answer"
             onClick={() =>
               // @ts-ignore comment
-              setOptionList((optionList) =>
-                optionList.concat(
-                  React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-                )
-              )
+              addOption()
             }
             >
               Add Option (+)
@@ -675,13 +781,12 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
               setOptionList(optionList.slice(0, -1))} }
             >
               Remove Option (-)
-            </button> 
-            {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-            {/* <p>total number of inner things: {optionList.length}</p> */}
+            </button>  
           </div>
+          <p>{"component ID: "+myCompID}</p>
         </div>
       </div>
-
+ 
        {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
       <br /> 
       <br />
@@ -754,7 +859,7 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
  
 
  
-let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
+// let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
 
 
 // CHQ
@@ -768,6 +873,9 @@ let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProd
 // ];
 
 let myFirstId = randNum();
+// React.FC<DynamicMCProps>
+// let listOfOptions: React.FC<DynamicMutliChoiceOption>[] = [];
+// let listOfOptions: React.FC<DynamicMCProps>[] = [];
 
 let myList4Alt: React.FC<DynamicComponentPropsAlt>[] = [];
 
@@ -788,35 +896,6 @@ let myList5 = [
     React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
   ]         
 ];
-// let myList5 = [[
-//       myFirstId, 
-//       React.createElement(DynamicMultiChoiceAlt, { componentID: myFirstId, text: "test me", isProductionState: false})
-//     ]];
-
-
-// 'DynamicComponentProps' only refers to a type, but is being used as a value here.ts(2693)
-// let myList3 = [React.createElement(DynamicComponentProps, { text: "test me"})];
-
-
-//  let myList3 = [createDynamicComponent2(DynamicShortAnswer, "sss")];
-//  let myList3 = [createDynamicComponent2(DynamicShortAnswer)];
-
- 
-// function Greeting({ name, age }) {
-//   return React.createElement(
-//     'h1',
-//     { className: 'greeting' },
-//     'Hello ',
-//     React.createElement('i', null, name),
-//     '. Welcome! You are ', React.createElement('i', null, age), ' years old.' 
-//   );
-// }
-
-// CHQ: t his worked!
-// function UseGreeting()
-// {
-//   return  React.createElement(Greeting, { name: 'Taylor', age: 25 });
-// }
 
 
 function ConfirmComponentDeletion(componentID, deletionFunction) {
@@ -869,12 +948,38 @@ interface IWorkerCallback {
 }
 
 
+// CHQ: it took me over 80 minutes, while the solution was a simple join - wow
+const FormatList = ({theList, theSeparator}) => {
+
+  let firstPartOfList = (theList.length >= 1) ? theList[0]: "";
+
+  // CHQ: results in a bunch of "[object Object]" being printed
+  // let restOfList = (theList.length > 1) ? (
+  //   theList.slice(1).map((elem) => { return (<p> | {elem}</p>) })
+  // ): "";
+
+  // [QB]:
+  let restOfList = (theList.length > 1) ? (theList.slice(1).join(theSeparator)) : "";
+
+  // {(theList.slice(1).map((elem) => { return (<p> | {elem}</p>) }))}
+
+  // let theWholeList = firstPartOfList+restOfList;
+
+  let theWholeList = (theList.join(theSeparator));
+
+  return(
+    <>
+    <h5> {theWholeList} </h5> 
+    </>
+  )
+}
+
 const App3: React.FC = () => {
 // const App3: React.FC = ({getTheStore, setTheStore}) => {
   // const [count, setCount] = useState(0);
   // @ts-ignore comment
   //   const [thePlatform, setThePlatform] = [];
-  const [thePlatform, setThePlatform] = useState(myList3);
+  // const [thePlatform, setThePlatform] = useState(myList3);
   // const [thePlatform2, setThePlatform2] = useState(myList4);
   const [thePlatform2, setThePlatform2] = useState(myList4Alt);
   const [thePlatform3, setThePlatform3] = useState(myList5); 
@@ -885,44 +990,28 @@ const App3: React.FC = () => {
 
   const [targetIDForDeletion, setTargetIDForDeletion] = useState("");
 
+  const hasModalBeenOpened = useSelector(selectModalOpen);
+  // const [hasModalBeenOpened, setHasModalBeenOpened] = useState(false);
+
   // const theCurID = genNewID();
   const [theCurID, setTheCurID] = useState(randNum());
 
   const hasPageBeenRendered = useRef(false);
-  
-  // const targetComponentToDelete = useSelector(selectCompIDToDelete);
-  const otherText = useSelector(selectCompIDToDelete2);
-  const deletionIDs = useSelector(selectArr);
 
+  const hasButtonBeenPressed = useRef(false);
+  
+  const componentToDelete = useSelector(selectDeletionID);
+  // const otherText = useSelector(selectCompIDToDelete2);
+  //  const deletionIDs = useSelector(selectArr);
+  const deletionIDs = useSelector(selectMyArr);
+
+  const myOwnDummyVar = useSelector(selectDummyVar);
 
   const dispatch = useDispatch();
-
-  // CHQ: didn't get updated in UI when mutated in the useEffect
-  // let broski = "yes";
-
-  // CHQ: method 1 of using useEffect (works but technically produces errors)
-  // useEffect(() => {
-
-  //   // setThePlatform2((thePlatform2) => 
-  //   //   thePlatform2.concat( 
-        
-  //   //     React.createElement(DynamicMultiChoiceAlt, { componentID: theCurID, text: "test me", isProductionState: false})
-
-  //   //      )
-  //   // )
  
-  // }, [theCurID]); // The dependency array ensures the effect runs only when firstName changes
-
-  // useEffect(() => {
-
-  //   // dispatch(addToDeletList(myCompID))
-
-  //   // dispatch(addToDeletList(randNum()))
-  //   dispatch(addToDeletList(theCurID))
- 
-  // }, [thePlatform3]); 
- 
-
+    // const hasModalBeenOpened = useSelector(selectModalOpen);
+// issue with above line  
+    // Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. React limits the number of nested updates to prevent infinite loops.
   useEffect(() => {
 
     if(hasPageBeenRendered.current)
@@ -930,7 +1019,8 @@ const App3: React.FC = () => {
       // dispatch(addToDeletList(myCompID))
 
       // dispatch(addToDeletList(randNum()))
-      dispatch(addToDeletList(theCurID));
+      // dispatch(addToDeletList(theCurID));
+      dispatch(addToList(theCurID));
 
       // CHQ: didn't update anything
       setTheCurID(randNum());
@@ -946,78 +1036,73 @@ const App3: React.FC = () => {
   let isFillInTheBlank=[true, true, true];  
 
 
-  let curID;
-
- 
-
-
-
+  let curID; 
   // FIXME: CHQ: uncomment when lodash is ready
   // let firstTmpList = structuredClone(myList3);
   
   const navigate = useNavigate();
 
-  const RemoveComponent = (targetQuestion) => {
-      // 1. grab ID from target question 
-      // 2. compare target question ID to that of each question. If there is a match, uncouple
+//   const RemoveComponent = (targetQuestion) => {
+//       // 1. grab ID from target question 
+//       // 2. compare target question ID to that of each question. If there is a match, uncouple
 
-      let questionsToKeep: boolean[] = []
-      let indicesOfQuestionsToDelete: number[] = [];
+//       let questionsToKeep: boolean[] = []
+//       let indicesOfQuestionsToDelete: number[] = [];
 
-      thePlatform.forEach(() => {
-        questionsToKeep.push(true);
-      });
+//       thePlatform.forEach(() => {
+//         questionsToKeep.push(true);
+//       });
 
-      for (let index = 0; index < thePlatform.length; ++index) {
-        const question = thePlatform[index];
+//       for (let index = 0; index < thePlatform.length; ++index) {
+//         const question = thePlatform[index];
 
-        // FIXME: determinen how to grab this, won't be true for all questions
-        let isQuestionToDelete = true;
+//         // FIXME: determinen how to grab this, won't be true for all questions
+//         let isQuestionToDelete = true;
 
-        if(isQuestionToDelete){
-          questionsToKeep[index] = false;
-          indicesOfQuestionsToDelete.push(index);
-        }
-      }
-//         "message": "Type 'never[]' is missing the following properties from type 'FunctionComponentElement<DynamicComponentProps>': type, props, key",
-      // let tmpList: React.FunctionComponentElement<DynamicComponentProps> = [];
+//         if(isQuestionToDelete){
+//           questionsToKeep[index] = false;
+//           indicesOfQuestionsToDelete.push(index);
+//         }
+//       }
+// //         "message": "Type 'never[]' is missing the following properties from type 'FunctionComponentElement<DynamicComponentProps>': type, props, key",
+//       // let tmpList: React.FunctionComponentElement<DynamicComponentProps> = [];
 
-      let startIndex=0;
+//       let startIndex=0;
 
-      let i = 0;
+//       let i = 0;
 
-      // [AEG]
-      while(i < indicesOfQuestionsToDelete.length){
-        if(startIndex !== indicesOfQuestionsToDelete[i]){
-          let curKeptPortion = thePlatform.slice(startIndex, indicesOfQuestionsToDelete[i]);
-          // Property 'push' does not exist on type 'FunctionComponentElement<DynamicComponentProps>'.ts(2339)
-          // tmpList.push()
-          // let inserttionStart = firstTmpList.length;
-          /**
-           * Argument of type 'FunctionComponentElement<DynamicComponentProps>[]' is not assignable to parameter of 
-           * type 'FunctionComponentElement<DynamicComponentProps>'. Type 'FunctionComponentElement<DynamicComponentProps>[]' 
-           * is missing the following properties from type 
-           * 'FunctionComponentElement<DynamicComponentProps>': type, props, keyts(2345)
-           * */
+//       // [AEG]
+//       while(i < indicesOfQuestionsToDelete.length){
+//         if(startIndex !== indicesOfQuestionsToDelete[i]){
+//           let curKeptPortion = thePlatform.slice(startIndex, indicesOfQuestionsToDelete[i]);
+//           // Property 'push' does not exist on type 'FunctionComponentElement<DynamicComponentProps>'.ts(2339)
+//           // tmpList.push()
+//           // let inserttionStart = firstTmpList.length;
+//           /**
+//            * Argument of type 'FunctionComponentElement<DynamicComponentProps>[]' is not assignable to parameter of 
+//            * type 'FunctionComponentElement<DynamicComponentProps>'. Type 'FunctionComponentElement<DynamicComponentProps>[]' 
+//            * is missing the following properties from type 
+//            * 'FunctionComponentElement<DynamicComponentProps>': type, props, keyts(2345)
+//            * */
           
-          // firstTmpList.splice(inserttionStart, 0, curKeptPortion)
+//           // firstTmpList.splice(inserttionStart, 0, curKeptPortion)
         
-          // CHQ: yeah im modifying the orig val
+//           // CHQ: yeah im modifying the orig val
         
-          // FIXME: CHQ: uncomment when lodash is ready
-          // let tmpArr = structuredClone(firstTmpList);
-          // firstTmpList = tmpArr.concat(curKeptPortion);
-        } 
+//           // FIXME: CHQ: uncomment when lodash is ready
+//           // let tmpArr = structuredClone(firstTmpList);
+//           // firstTmpList = tmpArr.concat(curKeptPortion);
+//         } 
 
-        // we grab the indice of the question to be deleted, adn then add 1 so that we concat its neighbors on either 
-        // side goingn forward
-        startIndex = 1 + indicesOfQuestionsToDelete[i];
-        ++i;
-      }
-      // FIXME: CHQ: uncomment when lodash is ready
-      // setThePlatform(firstTmpList); 
+//         // we grab the indice of the question to be deleted, adn then add 1 so that we concat its neighbors on either 
+//         // side goingn forward
+//         startIndex = 1 + indicesOfQuestionsToDelete[i];
+//         ++i;
+//       }
+//       // FIXME: CHQ: uncomment when lodash is ready
+//       // setThePlatform(firstTmpList); 
       
-  }
+//   }
 
   const BackToHome = () => {
     // history.push("/new-form")
@@ -1065,10 +1150,48 @@ function genNewID()
   return (Math.random().toString(36).substring(2,2+20));
 }
 
+function addComponent(questionType){
+  switch(questionType){
+    case "ShortAnswer":
+      // code block
+      break;
+    case "shortAnswer":
+      // code block
+      break;
+    case "LongAnswer":
+      // code block
+      break;
+    case "True-False":
+      // code block
+      break;
+    case "Multiple-Choice":
+      // code block
+      break;
+    default:
+      // code block
+  }
+  return 0;
+}
+
+// addComponent2("Multiple-Choice")
+
+function addComponent2(questionType){
+  switch(questionType){
+    case "ShortAnswer":
+      return (React.createElement(DynamicShortAnswer, { componentID:theCurID, text: 'Short Answer Question', isProductionState: false}));
+    case "1":
+      return (React.createElement(DynamicLongAnswer, { componentID:theCurID, text: 'Long Answer Question', isProductionState: false}));
+    case "TrueFalse":
+      return (React.createElement(DynamicTrueFalse, { componentID:theCurID, text: 'True/False Question', isProductionState: false}));
+    case "Multiple-Choice":
+      return (React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Multiple Choice Question', isProductionState: false}));
+    default:
+      return (React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false}));
+  } 
+}
+
   return (
     <> 
-    {/* <UseGreeting/> */}
-    
       <div className='Button-section App-leftside'>
         <img src={logo} width={200} className="App-logo" alt="logo"/>
         {/* <img src={logo} width={20} className="App-logo" alt="logo"/> */}
@@ -1078,44 +1201,50 @@ function genNewID()
         <button className='formbuttons' id="short-answer"
         onClick={() =>
           // @ts-ignore comment
-          setThePlatform((thePlatform) =>
-            thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false}))
-          // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
-          )
+          // setThePlatform((thePlatform) =>
+          //   thePlatform.concat(React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false}))
+          // // thePlatform.concat(createDynamicComponent2(DynamicShortAnswer, "sss"))
+          // )
+          // setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("0") ))
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("ShortAnswer") ))
         }
         >
           Add short answer
         </button>
         <br />
-      <button className='formbuttons' id="long-answer"
+        
+        <button className='formbuttons' id="long-answer"
         onClick={() =>
           // @ts-ignore comment
-          setThePlatform((thePlatform) =>
-            // thePlatform.concat(React.createElement(DynamicLongAnswer))
-            thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me", isProductionState: false}))
-          )
+          // setThePlatform((thePlatform) =>
+          //   // thePlatform.concat(React.createElement(DynamicLongAnswer))
+          //   thePlatform.concat(React.createElement(DynamicLongAnswer, { text: "test me", isProductionState: false}))
+          // )
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("1") ))
+          // setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("LongAnswer") ))
         }
-      >
+        >
         Add long answer
-      </button> 
-      <br />
-
-     <button className='formbuttons' id="true-false"
+        </button>
+        <br />
+        
+        <button className='formbuttons' id="true-false"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
-          setThePlatform((thePlatform) =>
-            // thePlatform.concat(React.createElement(DynamicTrueFalse))
-            thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title', isProductionState: false}))
-          // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
-          )
+          // setThePlatform((thePlatform) =>
+          //   // thePlatform.concat(React.createElement(DynamicTrueFalse))
+          //   thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title', isProductionState: false}))
+          // // thePlatform.concat(React.createElement(DynamicTrueFalse, { text: 'Question Title'}))
+          // )
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("TrueFalse") ))
         }
-      >
+        >
         Add True/False
-      </button>
-      {/* <br /> */}
-
-      <button className='formbuttons' id="multi-choice"
+        </button>
+        {/* <br /> */}
+        
+        {/* <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1125,20 +1254,23 @@ function genNewID()
              
           )
         }
-      >
-        Add Multiple choice
-      </button>
-      <button className='formbuttons' id="multi-choice"
+        >
+          Add Multiple choice
+        </button> */}
+        <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following works.
-          setThePlatform2((thePlatform2) => 
-              thePlatform2.concat(
-                React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false})
+          // setThePlatform2((thePlatform2) => 
+          //     thePlatform2.concat(
+          //       React.createElement(DynamicMultiChoiceAlt, { componentID:theCurID, text: 'Question Title', isProductionState: false})
               
               
-              )
-          )
+          //     )
+          // )
+          setThePlatform2((thePlatform2) => thePlatform2.concat( addComponent2("Multiple-Choice") ))
+ 
+
           // addQuesComponent(genNewID())
           // addQuesComponent(77)
           // setTheCurID(randNum())
@@ -1157,10 +1289,10 @@ function genNewID()
            */
          
         }
-      >
-        Add Multiple choice Alt
-      </button>
-      <button className='formbuttons' id="multi-choice"
+        >
+        Add Multiple choice
+        </button>
+        {/* <button className='formbuttons' id="multi-choice"
         onClick={() =>
           // @ts-ignore comment
           // CHQ: the following doesn't work.
@@ -1173,10 +1305,10 @@ function genNewID()
             ]) }
           )
         }
-      >
-        Add Multiple choice Alt 2
-      </button>
-      <br />
+        >
+          Add Multiple choice Alt 2
+        </button> */}
+        <br />
 {/* the code around mC alt 2 is broken so i will just do the alt */}
 
 {/* No overload matches this call.
@@ -1219,28 +1351,36 @@ function genNewID()
             <div className="platformAlignment">
               {/* <button onClick={apiCall}>Make API call</button> */}
             <button onClick={apiCall}>Save Form</button>
+
+            {/*CHQ: learned the hard way that I cannot have two reducer functions editing the same state variable  */}
+            {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(toggleModalDisplaying()) }/> */}
+            {/* <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={() => setHasModalBeenOpened(false)}/> */}
+            <ConfirmationModal isModalOpen={hasModalBeenOpened} confirmText="Yes, delete question." cancelText="No go back." confirmAction="d" cancelAction={dispatch(updateModalDisplaying(false))}/>
             {/* <h2> New Form </h2> */}
             {/* FIXME: editing title isn't working */}
             <br/>
             {/* <SmallTextFieldAlt isVisible={isEditingTitle} thisText={formName} setThisText={setFormName} /> */}
             <EditableTextModuleTitle myText={formName} setMyText={setFormName} isEditing={isEditingTitle} theFontSize={"h2"}/>
             {/* <EditableTextModule myText={formName} isEditing={isEditingTitle} theFontSize={"h2"}/> */}
+            
+            <button id="some-inner-answer"
+            onClick={() => { setIsEditingTitle(!isEditingTitle) }} >
+              {isEditingTitle ? "Save Changes": "Edit Title"}
+            </button> 
             <br/>
 
+            <h5>hasModalBeenOpened is of type "{typeof(hasModalBeenOpened)}" and has the value "{String(hasModalBeenOpened)}"</h5><br/>
+            <h5>myOwnDummyVar is {myOwnDummyVar}</h5><br/>
+            <h5>the ID of the component to delete is {componentToDelete}</h5><br/>
+
             {/* <h5>the component IDs for deletionID are {JSON.stringify(deletionIDs)}</h5> */}
+{/* className='listAlt' */}
 
-            <h5>        
-              <ul>
-                The componentIDS of the Question Components
-                {deletionIDs.map((theSelectedID) => { return (<li>{theSelectedID}</li>) })}
-              </ul>
-            </h5>
+            <h5>The componentIDS of the Question Components {"   --> "}</h5>
+            {/* <br/> */}
+            <FormatList theList={deletionIDs} theSeparator=" | "/>
 
-            <button id="some-inner-answer"
-                onClick={() => { setIsEditingTitle(!isEditingTitle) }}
-                >
-                  {isEditingTitle ? "Save Changes": "Edit Title"}
-                </button>
+
                 {/* <p>Number of questions: {thePlatform.length}</p> */}
               {/* <div>{thePlatform}</div> */}
               <div>{thePlatform2}</div>
