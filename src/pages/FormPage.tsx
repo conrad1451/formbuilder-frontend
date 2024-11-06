@@ -616,12 +616,28 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
    //  const [truth, setTruth] = useState(false);
    //  const [theChoice, setTheChoice] = useState("");
     // [AU] [AJ]
-   let myListing = [
-     React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-     ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
-   ];
+
+  // const [optionIDList, setOptionIDList] = useState(Array<String>);
+  // const [isCheckedList, setIsCheckedList] = useState(Array<Boolean>);
+ 
+  const [optionIDList, setOptionIDList] = [randNum(), randNum(), randNum(), randNum()];
+  const [isCheckedList, setIsCheckedList] = [true, false, false, false];
+ 
+  // let myListing: React.FC<DynamicMCProps>[] = [];
+
+  //  let myListing = [
+  //    React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+  //  ];
+
+  let myListing = [
+    React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[0], text: 'Option 1', checkedCondition: isCheckedList[0], hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[1], text: 'Option 2', checkedCondition: isCheckedList[1], hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[2], text: 'Option 3', checkedCondition: isCheckedList[2], hasEditorOpened: false})
+    ,React.createElement(DynamicMutliChoiceOption, { optionID: optionIDList[3], text: 'Option 4', checkedCondition: isCheckedList[3], hasEditorOpened: false})
+  ];
    const [optionList, setOptionList] = useState(myListing);
 
    const [showContent, setShowContent] = useState(true);
@@ -638,6 +654,17 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
 
   // const DeleteComponent = (targetQuestion) => {}
+  
+  const addOption = () => {
+    
+    setOptionList((optionList) =>
+      optionList.concat(
+        React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+
+        // React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+      )
+    )
+  }
 
   const deleteComponent = () => {
     dispatch2(updateDeletionTarget(myCompID));
@@ -651,7 +678,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({ componentID
 
     dispatch2(updateDummyVar(myOwnDummyVar1+"dd"));
       // dispatch2(updateInputText("BRO")),
-
+ 
     // updateDummyVarHelper();
     // dispatch2(updateDummyVarHelper());
     
@@ -742,11 +769,7 @@ useEffect(() => {
             <button id="some-inner-answer"
             onClick={() =>
               // @ts-ignore comment
-              setOptionList((optionList) =>
-                optionList.concat(
-                  React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-                )
-              )
+              addOption()
             }
             >
               Add Option (+)
@@ -850,6 +873,9 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({ text, textSnippets, isFi
 // ];
 
 let myFirstId = randNum();
+// React.FC<DynamicMCProps>
+// let listOfOptions: React.FC<DynamicMutliChoiceOption>[] = [];
+// let listOfOptions: React.FC<DynamicMCProps>[] = [];
 
 let myList4Alt: React.FC<DynamicComponentPropsAlt>[] = [];
 
