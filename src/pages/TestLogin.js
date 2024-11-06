@@ -2,7 +2,14 @@
 
 import React, { useState } from 'react';
 
-function LoginForm({ endpoint }) {
+// require('dotenv').config();
+
+// const BACKEND_ENDPOINT = process.env.REACT_APP_LOGIN_SERVER;
+
+const BACKEND_ENDPOINT = "http://localhost:5000/login";
+function LoginForm() {
+
+// function LoginForm({ BACKEND_ENDPOINT }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -10,7 +17,7 @@ function LoginForm({ endpoint }) {
     e.preventDefault();
 
     // Send a POST request to the specified endpoint
-    const response = await fetch(endpoint, {
+    const response = await fetch(BACKEND_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,6 +39,7 @@ function LoginForm({ endpoint }) {
 
   return (
     <form onSubmit={handleSubmit}>
+    {/* // <form onSubmit={handleSubmit(e)}> */}
       <div>
         <label htmlFor="username">Username:</label>
         <input
