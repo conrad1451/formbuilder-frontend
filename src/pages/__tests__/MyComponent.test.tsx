@@ -32,16 +32,19 @@ describe('MyLogin Component', () => {
     fireEvent.click(screen.getByRole('button', { name: /submit/i }));
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledTimes(1);
-      expect(global.fetch).toHaveBeenCalledWith('http://localhost:5000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: 'testuser', password: 'testpassword' }),
-      });
+        expect(global.fetch).toHaveBeenCalledTimes(1);
     });
 
     await waitFor(() => {
-      expect(screen.getByText(/Login successful/i)).toBeInTheDocument();
+        expect(global.fetch).toHaveBeenCalledWith('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: 'testuser', password: 'testpassword' }),
+        });
+    });
+
+    await waitFor(() => {
+        expect(screen.getByText(/Login successful/i)).toBeInTheDocument();
     });
   });
 
