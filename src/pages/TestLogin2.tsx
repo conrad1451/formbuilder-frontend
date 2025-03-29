@@ -18,12 +18,14 @@ export default function MyLogin() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [modalMessage, setModalMessage] = useState<string | null>(null);
+  const [jwtToken, setJwtToken] = useState<string | null>(null); // CHQ: added by Gemimi: State for JWT token
 
   const onSubmit: SubmitHandler<FormValues2> = async (data: FormValues2) => {
     setIsLoading(true);
     setErrorMessage(null);
     setSuccessMessage(null);
-    setModalMessage(null); // Clear any previous modal messages
+    setModalMessage(null);
+    setJwtToken(null); // CHQ: added by Gemimi: Clear previous token
     let username = data.username;
     let password = data.password;
 
@@ -40,9 +42,17 @@ export default function MyLogin() {
       });
 
       if (response.ok) {
-        setSuccessMessage("Login successful!");
-        reset();
-        console.log("Login successful!");
+        const responseData = await response.json(); // Parse response JSON
+        if (responseData.token) {
+          setJwtToken(responseData.token); // CHQ: added by Gemimi: Store the JWT token
+          setSuccessMessage("Login successful!");
+          reset();
+          // CHQ: added by Gemimi:
+          console.log("Login successful! JWT Token:", responseData.token);
+        } else {
+          setErrorMessage("Login successful, but token not received.");
+          console.error("Login successful, but no token in response:", responseData);
+        }
       } else {
         const errorData = await response.json();
         if (errorData.message === "User not found") {
@@ -61,8 +71,8 @@ export default function MyLogin() {
       setIsLoading(false);
       if (modalMessage) {
         setTimeout(() => {
-          setModalMessage(null); // Clear modal message after a delay
-        }, 3000); // Modal disappears after 3 seconds
+          setModalMessage(null);
+        }, 3000);
       }
     }
   };
@@ -87,6 +97,7 @@ export default function MyLogin() {
       )}
       {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
       {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+      {jwtToken && <p style={{ color: "blue" }}>JWT Token: {jwtToken}</p>} {/* CHQ: added by Gemimi: Display the JWT token */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="username">Username:</label>
         <input type="text" {...register("username")} />
