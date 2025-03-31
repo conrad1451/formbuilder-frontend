@@ -10,6 +10,7 @@ import store3 from './app/store3';
 import store4 from './app/store4';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { DescopeProvider } from '@descope/react-sdk';
 
 import reportWebVitals from './reportWebVitals';
 
@@ -47,8 +48,12 @@ function Choice2(){
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ChoiceInsertDelete/>
-  // <Choice1New/>
+  <React.StrictMode>
+    <DescopeProvider projectId={import.meta.env.REACT_APP_DESCOPE_PROJECT_ID}>
+      <ChoiceInsertDelete />
+    </DescopeProvider>
+  </React.StrictMode>
+   // <Choice1New/>
   // <Choice2/>
 );
 
