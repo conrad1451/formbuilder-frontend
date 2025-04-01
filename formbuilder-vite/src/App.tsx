@@ -2,7 +2,10 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
-import DescopeAuthComponent from './AppWithLogin'
+// import DescopeAuthComponent from './AppWithLogin'
+import { AuthProvider } from '@descope/react-sdk'
+import Login from './Login'
+
 
 import './App.css'
 
@@ -36,12 +39,14 @@ function DefaultApp() {
 }
 
 function App() {
-  const projectId = 'YOUR_DESCOPE_PROJECT_ID'; // Replace with your actual project ID
-
+  const projectId = import.meta.env.VITE_DESCOPE_PROJECT_ID;
+   
   return(
     <div>
-      <DefaultApp/>
-      <DescopeAuthComponent projectId={projectId} />
+      {/* <DefaultApp/> */}
+      <AuthProvider projectId={projectId}>
+        <Login />
+      </AuthProvider>
     </div>
   );
 }

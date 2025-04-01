@@ -90,10 +90,10 @@ if (rootElement) {
   root.render(
     <React.StrictMode>
       {/* <App /> */}
-      <DescopeProvider projectId={import.meta.env.REACT_APP_DESCOPE_PROJECT_ID}>
+      {/* <DescopeProvider projectId={import.meta.env.REACT_APP_DESCOPE_PROJECT_ID}> */}
         {/* <ChoiceInsertDelete /> */}
               <App />
-      </DescopeProvider>
+      {/* </DescopeProvider> */}
     </React.StrictMode>
   );
 } else {
