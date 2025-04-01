@@ -14,18 +14,18 @@ import logo from '../logo.svg';
 import '../App.css';
 // import 'axios';
 // import Axios from 'axios';
-import axios from 'axios';
+// import axios from 'axios';
   
 
 // CHQ: TODO: set margins between buttons
 
 
-const apiCall = () => {
-  axios.get('http://localhost:5000').then((data) => {
-    // this console.log will be in our frontend console
-    console.log(data)
-  })
-};
+// const apiCall = () => {
+//   axios.get('http://localhost:5000').then((data) => {
+//     // this console.log will be in our frontend console
+//     console.log(data)
+//   })
+// };
 function FormModal3() {
     // const [open, setOpen] = useState(true);
   

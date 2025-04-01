@@ -9,20 +9,20 @@ import { Descope, useDescope, useSession, useUser } from '@descope/react-sdk'
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import HomePage from './HomePage.tsx';
+import HomePage from './pages/HomePage.tsx';
 // import LoginPage from "./pages/LoginPage";
 // import FormPage from "./pages/FormPage";
 import FormPage from "./pages/FormPage.tsx";
 
 // import LoginForm from "./pages/TestLogin.js";
-import MyLogin from "./pages/TestLogin2.tsx";
+// import MyLogin from "./pages/TestLogin2.tsx";
 
 const AllRoutes = () => {
   return (
         <Router>
               <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/login" element={<MyLogin />} />
+                {/* <Route path="/login" element={<MyLogin />} /> */}
                 {/* <Route path="/login" element={<LoginForm />} /> */}
                 {/* <Route path="/login" element={<LoginPage />} /> */}
                 <Route path="/new-form" element={<FormPage />} />
