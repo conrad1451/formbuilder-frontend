@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+
+import DescopeAuthComponent from './AppWithLogin'
+
 import './App.css'
 
-function App() {
+function DefaultApp() {
   const [count, setCount] = useState(0)
 
   return (
@@ -30,6 +33,17 @@ function App() {
       </p>
     </>
   )
+}
+
+function App() {
+  const projectId = 'YOUR_DESCOPE_PROJECT_ID'; // Replace with your actual project ID
+
+  return(
+    <div>
+      <DefaultApp/>
+      <DescopeAuthComponent projectId={projectId} />
+    </div>
+  );
 }
 
 export default App
