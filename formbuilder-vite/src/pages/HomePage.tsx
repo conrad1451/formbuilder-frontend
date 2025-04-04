@@ -204,7 +204,7 @@ function HomePage() {
       <div className='App-rightside'>
 
       <img src={logo} className="App-logo" alt="logo" />
-        <button onClick={apiCall}>Make API call</button>
+        {/* <button onClick={apiCall}>Make API call</button> */}
         <p>
             Make a New Form
         </p>
