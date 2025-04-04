@@ -5,6 +5,18 @@ import viteLogo from '/vite.svg'
 import { AuthProvider } from '@descope/react-sdk'
 import Login from './Login'
 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import HomePage from './pages/HomePage.tsx';
+// import LoginPage from "./pages/LoginPage";
+// import FormPage from "./pages/FormPage";
+import FormPage from "./pages/FormPage.tsx";
+
+// import LoginForm from "./pages/TestLogin.js";
+// import MyLogin from "./pages/TestLogin2.tsx";
+
+// export default App;
+import MongoLogin from './MongoLogin';
 
 import './App.css'
 
@@ -37,7 +49,8 @@ function DefaultApp() {
   )
 }
 
-function App() {
+
+function DescopeLogin() {
   const projectId = import.meta.env.VITE_DESCOPE_PROJECT_ID;
    
   return(
@@ -49,5 +62,21 @@ function App() {
     </div>
   );
 }
+
+const App = () => {
+  return (
+        <Router>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login-descope" element={<DescopeLogin />} />
+                <Route path="/login-mongo" element={<MongoLogin />} />
+                {/* <Route path="/login" element={<LoginPage />} /> */}
+                <Route path="/new-form" element={<FormPage />} />
+                {/* <Route path="/path_name/:dynamic" element={<Component_Name />} /> //dynamic route */}
+                {/* <Route path="/*" element={<Component_Name />} />  */}
+              </Routes>
+        </Router>
+  );
+};
 
 export default App

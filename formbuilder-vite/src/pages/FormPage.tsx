@@ -68,13 +68,13 @@ import styles from './Counter.module.css';
  import { useNavigate } from "react-router-dom";
 
  // import Dialog from "./MyDialog";
- import Dialog from "../modules/MyDialog";
+ import Dialog from "../modules/MyDialog"
  
- import logo from '../logo.svg';
+ import logo from "../logo.svg"
  import '../App.css';
  // import 'axios';
  // import Axios from 'axios';
- import axios from 'axios';
+//  import axios from 'axios';
  
  const formField = []
  
@@ -187,12 +187,12 @@ function ConfirmationModal({isModalOpen, confirmText, cancelText, confirmAction,
 // [AP]
 
  
-const apiCall = () => {
-   axios.get('http://localhost:5000').then((data) => {
-     // this console.log will be in our frontend console
-     console.log(data)
-   })
-}; 
+// const apiCall = () => {
+//    axios.get('http://localhost:5000').then((data) => {
+//      // this console.log will be in our frontend console
+//      console.log(data)
+//    })
+// }; 
 
 
 const randNum = () => {
