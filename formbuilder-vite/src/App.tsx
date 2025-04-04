@@ -16,6 +16,7 @@ import FormPage from "./pages/FormPage.tsx";
 // import MyLogin from "./pages/TestLogin2.tsx";
 
 // export default App;
+import MongoLogin from './MongoLogin';
 
 import './App.css'
 
@@ -68,7 +69,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login-descope" element={<DescopeLogin />} />
-                <Route path="/login-mongo" element={<DefaultApp />} />
+                <Route path="/login-mongo" element={<MongoLogin />} />
                 {/* <Route path="/login" element={<LoginPage />} /> */}
                 <Route path="/new-form" element={<FormPage />} />
                 {/* <Route path="/path_name/:dynamic" element={<Component_Name />} /> //dynamic route */}
