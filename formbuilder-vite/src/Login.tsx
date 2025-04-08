@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { Descope, useDescope, useSession, useUser } from '@descope/react-sdk'
+import MyFormContainer from './pages/MyForm'
 
 // Sources:
 // [1]: https://dev.to/jps27cse/react-router-dom-v6-boilerplate-2ce1
@@ -10,6 +11,7 @@ const Option1 = (props:{theUser, theHandleLogout}) => {
     <>
         <p>Hello {props.theUser.name}</p>
         <div>My Private Component</div>
+        <MyFormContainer/>
         <button onClick={props.theHandleLogout}>Logout</button>
     </>
   )
