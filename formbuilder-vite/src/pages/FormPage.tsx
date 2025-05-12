@@ -744,20 +744,8 @@ const FormPage = () => {
   const TwoDivPage = () => {
     return (
       <div className="container">
-        <div className="left-div">
-          {/* Left div content can go here */}
-          <p className="text">
-            This is the left div. It takes up 25% of the screen width and is
-            red.
-          </p>
-        </div>
-        <div className="right-div">
-          {/* Right div content can go here */}
-          <p className="text">
-            This is the right div. It takes up 75% of the screen width and is
-            green.
-          </p>
-        </div>
+        <div className="left-div">{/* Left div content can go here */}</div>
+        <div className="right-div">{/* Right div content can go here */}</div>
       </div>
     );
   };
@@ -774,10 +762,6 @@ const FormPage = () => {
           <Provider store={store}>
             <div className="left-div">
               {/* Left div content can go here */}
-              <p className="text">
-                This is the left div. It takes up 25% of the screen width and is
-                red.
-              </p>
               <>
                 {!isProduction && (
                   <div className="toolbox" style={{ width: "200px" }}>
@@ -822,11 +806,6 @@ const FormPage = () => {
 
             <div className="right-div">
               {/* Right div content can go here */}
-              <p className="text">
-                This is the right div. It takes up 75% of the screen width and
-                is green.
-              </p>
-
               <div className="App">
                 <header className="App-header">
                   <EditableTextModuleTitle
