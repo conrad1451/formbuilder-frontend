@@ -54,7 +54,7 @@ function DescopeLogin() {
 
   return (
     <div>
-      {/* <DefaultApp/> */}
+      <DefaultApp />
       <AuthProvider projectId={projectId}>
         <Login />
       </AuthProvider>
