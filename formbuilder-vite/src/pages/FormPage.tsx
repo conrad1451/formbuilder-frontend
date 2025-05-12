@@ -1,68 +1,33 @@
-/* Sources:
-
-[AP]: https://medium.com/@gecno/creating-dynamic-components-in-react-with-typescript-f965bc8cd5fd
-
-[AR]: https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/textbox_role
-
-[AV]: https://react.dev/reference/react/memo#updating-a-memoized-component-using-state
-
-[AU]: https://www.pluralsight.com/resources/blog/guides/how-to-use-radio-buttons-in-reactjs
-
-[VB]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_operator
-
-
-[ZA]: https://daily.dev/blog/pop-and-push-in-javascript-array-essentials
-
- [ZB]: https://react.dev/learn/updating-arrays-in-state#removing-from-an-array
-
-[AT]: https://www.w3schools.com/jsref/prop_style_visibility.asp
-
-[AS]: https://learn.shayhowe.com/html-css/positioning-content/#inline-block
-
-
-[AZ]: https://www.geeksforgeeks.org/how-to-make-your-content-editable-in-html/#
-
-[AJ]: https://react.dev/reference/react/createElement#usage
-
-[AM]: https://stackoverflow.com/questions/46230992/html-placing-headers-side-by-side
-
-
-[AEG]: https://amcereijo.medium.com/diving-into-object-cloning-exploring-alternatives-and-limitations-644f0c71315d
-
-[QB]: https://www.google.com/search?q=use+map+to+concatenate+elements+of+a+list+into+string+-+js&client=firefox-b-1-d&sca_esv=d8dc71a00e7da157&ei=12YjZ-7RBdiKptQPpdGQMQ&ved=0ahUKEwiumd7_vriJAxVYhYkEHaUoJAYQ4dUDCBA&oq=use+map+to+concatenate+elements+of+a+list+intoa+string+-+js&gs_lp=Egxnd3Mtd2l6LXNlcnAiO3VzZSBtYXAgdG8gY29uY2F0ZW5hdGUgZWxlbWVudHMgb2YgYSBsaXN0IGludG9hIHN0cmluZyAtIGpzSABQAFgAcAB4AZABAJgBAKABAKoBALgBDMgBAJgCAKACAJgDAOIDBRIBMSBAkgcAoAcA&sclient=gws-wiz-serp
-
-
-*/
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch, Provider } from "react-redux";
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 
 // import {
-//   updatingID,
-//   selectCompIDToDelete,
-//   updatingID2,
-//   addToDeletList,
-//   removeFromDeletList,
-//   selectCompIDToDelete2,
-//   updateArr,
-//   selectArr,
-//   } from '../features/counter/deleteComponentSlice';
+//   updatingID,
+//   selectCompIDToDelete,
+//   updatingID2,
+//   addToDeletList,
+//   removeFromDeletList,
+//   selectCompIDToDelete2,
+//   updateArr,
+//   selectArr,
+//   } from '../features/counter/deleteComponentSlice';
 
 // import {
-//   addToList,
-//   removeFromList,
-//   selectDeletionID,
-//   updateDeletionTarget,
-//   selectModalOpen,
-//   updateModalDisplaying,
-//   toggleModalDisplaying,
-//   selectMyArr,
-//   selectDummyVar,
-//   updateDummyVar,
-//   selectInputText,
-//   updateInputText,
-//   updateDummyVarHelper,
-//   } from '../features/counter/questionComponentSlice.js';
+//   addToList,
+//   removeFromList,
+//   selectDeletionID,
+//   updateDeletionTarget,
+//   selectModalOpen,
+//   updateModalDisplaying,
+//   toggleModalDisplaying,
+//   selectMyArr,
+//   selectDummyVar,
+//   updateDummyVar,
+//   selectInputText,
+//   updateInputText,
+//   updateDummyVarHelper,
+//   } from '../features/counter/questionComponentSlice.js';
 
 // import styles from "./Counter.module.css";
 import styles from "../features/counter/Counter.module.css";
@@ -76,7 +41,7 @@ import logo from "../logo.svg";
 import "../App.css";
 // import 'axios';
 // import Axios from 'axios';
-//  import axios from 'axios';
+//  import axios from 'axios';
 
 const formField = [];
 
@@ -106,8 +71,8 @@ interface DynamicComponentPropsAlt {
 
 //neither of the below work
 // interface TestBro {
-//   theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
-//  }
+//  theType: React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})
+//  }
 // interface Bro implements DynamicComponentProps{
 
 // }
@@ -150,11 +115,11 @@ function ConfirmationModal({
 
   // CHQ: caused the page to break and not load
   // if (open) {
-  //   // whether I called the method on thedialog or just as a function
-  //   showTheDialog();
-  //   thedialog.showTheDialog();
+  //  // whether I called the method on thedialog or just as a function
+  //  showTheDialog();
+  //  thedialog.showTheDialog();
   // }
-  // const    [open, setOpen] = useState(false);
+  // const    [open, setOpen] = useState(false);
 
   return (
     <>
@@ -183,8 +148,8 @@ function ConfirmationModal({
             value={cancelText}
           />
           {/* <button onclick="myFunc()" id="confirmBtn" value="default">
-              Confirm
-            </button> */}
+            Confirm
+          </button> */}
         </form>
       </Dialog>
     </>
@@ -206,10 +171,10 @@ const createDynamicComponent2 = (
 // [AP]
 
 // const apiCall = () => {
-//    axios.get('http://localhost:5000').then((data) => {
-//      // this console.log will be in our frontend console
-//      console.log(data)
-//    })
+//    axios.get('http://localhost:5000').then((data) => {
+//      // this console.log will be in our frontend console
+//      console.log(data)
+//    })
 // };
 
 const randNum = () => {
@@ -238,7 +203,7 @@ const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
           size={10}
           // contentEditable="true"
           aria-multiline="true"
-          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
           // rows={10}
           maxLength={280}
         />
@@ -291,7 +256,7 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({
               size={50}
               // contentEditable="true"
               aria-multiline="true"
-              //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+              //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
               // rows={10}
               maxLength={280}
             />
@@ -314,7 +279,7 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({
   isProductionState,
   captureState,
 }) => {
-  //  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
+  //  const DynamicLongAnswer: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
   // const DynamicLongAnswer: React.FC<{}> = () => {
   const [field, setField] = useState("");
   const [myCompID, setMyCompID] = useState(componentID);
@@ -336,7 +301,7 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({
             size={50}
             // contentEditable="true"
             aria-multiline="true"
-            //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+            //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
             // rows={10}
             maxLength={560}
           />
@@ -358,7 +323,7 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
 }) => {
   // const DynamicTrueFalse: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
 
-  //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
+  //  const DynamicTrueFalse: React.FC<DynamicTF> = ({ text, isProductionState }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
   const [truth, setTruth] = useState(false);
   const [myCompID, setMyCompID] = useState(componentID);
@@ -425,7 +390,7 @@ function SmallTextField({ isVisible }: { isVisible: boolean }) {
           size={10}
           // contentEditable="true"
           aria-multiline="true"
-          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
+          //   Property 'rows' does not exist on type 'DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>'.ts(2322)
           // rows={10}
           maxLength={280}
         />
@@ -463,16 +428,16 @@ function SmallTextFieldAlt({
       {/* <label> */}
       {/* {text}{': '} */}
       {/* <input
-      // type = {isVisible ? "textarea" : "hidden"}
-      type =  "textarea"
-      value={thisText}
-      onChange={e => setThisText(e.target.value) }
-      size={10}
-      // contentEditable="true"
-      aria-multiline="true"
-      maxLength={280}
-      /> */}
-      {/* </label>  */}
+      // type = {isVisible ? "textarea" : "hidden"}
+      type =    "textarea"
+      value={thisText}
+      onChange={e => setThisText(e.target.value) }
+      size={10}
+      // contentEditable="true"
+      aria-multiline="true"
+      maxLength={280}
+      /> */}
+      {/* </label>  */}
     </div>
   );
 }
@@ -709,7 +674,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
 
   // let myListing = [createDynamicComponent2(DynamicTextEntry)];
   const [truth, setTruth] = useState(checkedCondition);
-  //  const [inputView, setInputView] = useState(myListing);
+  //  const [inputView, setInputView] = useState(myListing);
 
   // if I click on the option and it is not already selected, now it will be selected
   // if I click on the option and it is already selected, it is just selected - indempotent action
@@ -717,7 +682,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
     <>
       {/* [AM] */}
       <div className="multiChoiceOptLayout">
-        {/* <div>  */}
+        {/* <div>  */}
         <input
           type="radio"
           checked={truth}
@@ -745,68 +710,67 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
   );
 };
 
-//  [ZA]
+//  [ZA]
 
 // const DynamicMultiChoice: React.FC<DynamicComponentProps> = ({ text, isProductionState, captureState }) => {
-//  // const DynamicTrueFalse: React.FC<{}> = () => {
-//   //  const [truth, setTruth] = useState(false);
-//   //  const [theChoice, setTheChoice] = useState("");
-//    // [AU] [AJ]
-//   let myListing = [
-//     React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-//     ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
-//   ];
-//   const [optionList, setOptionList] = useState(myListing);
+//  // const DynamicTrueFalse: React.FC<{}> = () => {
+//  //    const [truth, setTruth] = useState(false);
+//  //    const [theChoice, setTheChoice] = useState("");
+//    // [AU] [AJ]
+//  let myListing = [
+//    React.createElement(DynamicMutliChoiceOption, { text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+//    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+//    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+//    ,React.createElement(DynamicMutliChoiceOption, { text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+//  ];
+//  const [optionList, setOptionList] = useState(myListing);
 
-//    return (
-//     <>
-//     <div>
-//       <div>
-//         <br />
-//         <div className="componentWidth">
-//         {/* <div > */}
-//         <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
+//    return (
+//    <>
+//    <div>
+//      <div>
+//        <br />
+//        <div className="componentWidth">
+//        {/* <div > */}
+//        <EditableTextModule myText={text} isEditing={true} theFontSize={"h3"}/>
 
-//         {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
-//         {/* <div>{optionList}</div> */}
+//        {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+//        {/* <div>{optionList}</div> */}
 
-//         <ul>
-//           {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
-//         </ul>
-//         </div>
-//         <br />
-//       </div>
-//     <div>
-//    {/* <button className='formbuttons' id="some-inner-answer" */}
-//     <button id="some-inner-answer"
-//         onClick={() =>
-//           // @ts-ignore comment
-//           setOptionList((optionList) =>
-//             optionList.concat(
-//               React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-//             )
-//           )
-//         }
-//       >
-//         Add Option (+)
-//       </button>
-//       <button id="some-inner-answer"
-//         onClick={() =>{
-//           // [ZB]
-//           setOptionList(optionList.slice(0, -1))} }
-//       >
-//         Remove Option (-)
-//       </button>
-//      </div>
+//        <ul>
+//          {optionList.map((mcOption) => { return (<li>{mcOption}</li>) })}
+//        </ul>
+//        </div>
+//        <br />
+//      </div>
+//    <div>
+//    {/* <button className='formbuttons' id="some-inner-answer" */}
+//    <button id="some-inner-answer"
+//        onClick={() =>
+//          // @ts-ignore comment
+//          setOptionList((optionList) =>
+//            optionList.concat(
+//              React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
+//            )
+//          )
+//        }
+//      >
+//        Add Option (+)
+//      </button>
+//      <button id="some-inner-answer"
+//        onClick={() =>{
+//          // [ZB]
+//          setOptionList(optionList.slice(0, -1))} }
+//      >
+//        Remove Option (-)
+//      </button>
+//    </div>
 
-//      </div>
+//    </div>
 
-//      <br />
-//      <br />
-//   </>
-//  );
+//    <br />
+//    <br />
+//  </>);
 // };
 
 // Anytime "Add multiple choice alt" is hit, a function should be called that generates a random ID. an useEffect
@@ -822,8 +786,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
   captureState,
 }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
-  //  const [truth, setTruth] = useState(false);
-  //  const [theChoice, setTheChoice] = useState("");
+  //    const [truth, setTruth] = useState(false);
+  //    const [theChoice, setTheChoice] = useState("");
   // [AU] [AJ]
 
   // const [optionIDList, setOptionIDList] = useState(Array<String>);
@@ -844,12 +808,12 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
 
   // let myListing: React.FC<DynamicMCProps>[] = [];
 
-  //  let myListing = [
-  //    React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
-  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
-  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
-  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
-  //  ];
+  //  let myListing = [
+  //    React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 1', checkedCondition: true, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 2', checkedCondition: false, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 3', checkedCondition: true, hasEditorOpened: false})
+  //    ,React.createElement(DynamicMutliChoiceOption, { optionID: "", text: 'Option 4', checkedCondition: false, hasEditorOpened: false})
+  //  ];
 
   let myListing = [
     React.createElement(DynamicMutliChoiceOption, {
@@ -885,8 +849,6 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
   const targetComponentToDelete = useSelector(selectDeletionID);
 
   const myOwnDummyVar1 = useSelector(selectDummyVar);
-
-  const myInputText = useSelector(selectInputText);
 
   const mustModalAppear = useRef(false);
   const dispatch2 = useDispatch();
@@ -941,7 +903,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
             {/* <br /> */}
             <div className="componentWidth">
               {/* <h4>targetComponentToDelete is {targetComponentToDelete}</h4> */}
-              {/* <br/>  */}
+              {/* <br/>  */}
               {/* <h4>other text is {otherText}</h4> */}
               {/* <div > */}
               {/* <EditableTextModule myText={componentID} isEditing={true} theFontSize={"h3"}/> */}
@@ -973,7 +935,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
                   // dispatch(addToDeletList("incrementValue"))
                   // dispatch(updateArr())
                   // dispatch(updatingID2())
-                  //  makeWorkerCallback2(componentID)
+                  //  makeWorkerCallback2(componentID)
                 }
               >
                 Insert Question above (+)
@@ -990,13 +952,13 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
                   // dispatch(removeFromDeletList())
                   // dispatch(removeFromList(myCompID))
                   // dispatch(updatingID())
-                  //  makeWorkerCallback2(componentID)
+                  //  makeWorkerCallback2(componentID)
                 }
               >
                 Remove Question (-)
               </button>
 
-              {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
+              {/*CHQ: This lists the list elements (components) side by side - we dont wan't that  */}
               {/* <div>{optionList}</div> */}
 
               <ul className={showContent ? "displayList" : "hideList"}>
@@ -1008,7 +970,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
             {/* <br /> */}
           </div>
 
-          {/* <br/>          <br/>          <br/> */}
+          {/* <br/>      <br/>      <br/> */}
 
           <div className={showContent ? "displayList" : "hideList"}>
             {/* <button className='formbuttons' id="some-inner-answer" */}
@@ -1036,7 +998,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
         </div>
       </div>
 
-      {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
+      {/*CHQ: Following line breaks provide spacing between multiple choice components  */}
       <br />
       <br />
     </>
@@ -1050,8 +1012,8 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({
   isFillInTheBlank,
 }) => {
   // const DynamicTrueFalse: React.FC<{}> = () => {
-  //  const [truth, setTruth] = useState(false);
-  //  const [theChoice, setTheChoice] = useState("");
+  //  const [truth, setTruth] = useState(false);
+  //  const [theChoice, setTheChoice] = useState("");
   // [AU] [AJ]
   let myListing = [
     // React.createElement(EditableTextModule, { myText: {text}, isEditing: true})
@@ -1085,14 +1047,17 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({
             onClick={() =>
               // @ts-ignore comment
               setSegmentList((segmentList) =>
-                segmentList
-                  .concat
-                  //  React.createElement(DynamicMutliChoiceOption, { text: 'another option', checkedCondition: false, hasEditorOpened: false})
-                  ()
+                segmentList.concat(
+                  // React.createElement(SmallTextField, { isVisible: true})
+                  React.createElement(EditableTextModule, {
+                    myText: "another segment",
+                    isEditing: true,
+                  })
+                )
               )
             }
           >
-            Add Option (+)
+            Add Segment (+)
           </button>
           <button
             id="some-inner-answer"
@@ -1101,264 +1066,408 @@ const DynamicFillInTheBlank: React.FC<DynamicFITB> = ({
               setSegmentList(segmentList.slice(0, -1));
             }}
           >
-            Remove Option (-)
+            Remove Segment (-)
           </button>
-          {/* CHQ: This is where I tested to prove that content editable would address my problems */}
-          {/* <p>total number of inner things: {segmentList.length}</p> */}
         </div>
       </div>
+
       <br />
       <br />
     </>
   );
 };
 
-// let myList3 = [React.createElement(DynamicShortAnswer, { text: "test me", isProductionState: false})];
+//  [AM]
+const makeMeParagraph = (text: string) => {
+  return <p>{text}</p>;
+};
+const makeMeH1 = (text: string) => {
+  return <h1>{text}</h1>;
+};
+const makeMeH2 = (text: string) => {
+  return <h2>{text}</h2>;
+};
+const makeMeH3 = (text: string) => {
+  return <h3>{text}</h3>;
+};
+const makeMeH4 = (text: string) => {
+  return <h4>{text}</h4>;
+};
+const makeMeH5 = (text: string) => {
+  return <h5>{text}</h5>;
+};
+const makeMeH6 = (text: string) => {
+  return <h6>{text}</h6>;
+};
 
-// CHQ
-// Cannot find name 'compId'.ts(2304)
-// let myList4 = [
+// const makeMeComponent = (componentName, text) => {
+//  switch (componentName) {
+//    case "paragraph":
+//      return makeMeParagraph(text);
+//    case "h1":
+//      return makeMeH1(text);
+//    case "h2":
+//      return makeMeH2(text);
+//    case "h3":
+//      return makeMeH3(text);
+//    case "h4":
+//      return makeMeH4(text);
+//    case "h5":
+//      return makeMeH5(text);
+//    case "h6":
+//      return makeMeH6(text);
+//    default:
+//      return null;
+//  }
+// };
 
-//   {
-//     compId: Math.random().toString(36).substring(2,2+20),
-//     comp: React.createElement(DynamicMultiChoiceAlt, { componentID:compId, text: "test me", isProductionState: false})
-//   }
-// ];
+// const makeMeComponent = (componentName, text) => {
+//  const componentMapping = {
+//    paragraph: makeMeParagraph,
+//    h1: makeMeH1,
+//    h2: makeMeH2,
+//    h3: makeMeH3,
+//    h4: makeMeH4,
+//    h5: makeMeH5,
+//    h6: makeMeH6,
+//  };
 
-let myFirstId = randNum();
-// React.FC<DynamicMCProps>
-// let listOfOptions: React.FC<DynamicMutliChoiceOption>[] = [];
-// let listOfOptions: React.FC<DynamicMCProps>[] = [];
+//  const componentFunction = componentMapping[componentName];
+//  return componentFunction ? componentFunction(text) : null;
+// };
 
-let myList4Alt: React.FC<DynamicComponentPropsAlt>[] = [];
-
-let myList4 = [
-  React.createElement(DynamicMultiChoiceAlt, {
-    componentID: myFirstId,
-    text: "test me",
-    isProductionState: false,
-  }),
-];
-
-// let myList4 = [ ];
-let myList5 = [
-  [
-    myFirstId,
-    React.createElement(DynamicMultiChoiceAlt, {
-      componentID: myFirstId,
-      text: "test me",
-      isProductionState: false,
-    }),
-  ],
-  [
-    myFirstId,
-    React.createElement(DynamicMultiChoiceAlt, {
-      componentID: myFirstId,
-      text: "test me",
-      isProductionState: false,
-    }),
-  ],
-  [
-    myFirstId,
-    React.createElement(DynamicMultiChoiceAlt, {
-      componentID: myFirstId,
-      text: "test me",
-      isProductionState: false,
-    }),
-  ],
-];
-
-function ConfirmComponentDeletion(
-  componentID: string,
-  deletionFunction: () => void
-) {
-  const [open, setOpen] = useState(true);
-
-  // CHQ: caused the page to break and not load
-  // if (open) {
-  //   // whether I called the method on thedialog or just as a function
-  //   showTheDialog();
-  //   thedialog.showTheDialog();
-  // }
-  // const    [open, setOpen] = useState(false);
-
-  const myFunc = () => {
-    setOpen(false);
+const makeMeComponent = (componentName: string, text: string) => {
+  const componentMapping: { [key: string]: (text: string) => JSX.Element } = {
+    paragraph: makeMeParagraph,
+    h1: makeMeH1,
+    h2: makeMeH2,
+    h3: makeMeH3,
+    h4: makeMeH4,
+    h5: makeMeH5,
+    h6: makeMeH6,
   };
 
-  return (
-    <>
-      {/* <button onClick={() => setOpen(true)}>Open Dialog</button> */}
-      <Dialog id="dialog2" open={open}>
-        {/* <Dialog id="dialog2" open={open}> */}
-        <p>Are you sure you want to delete the component?</p>
-        <button onClick={myFunc} id="confirmBtn" value="default">
-          No, nevermind
-        </button>
-        <button onClick={deletionFunction} id="confirmBtn" value="default">
-          Yes, delete
-        </button>
-      </Dialog>
-    </>
-  );
-}
+  const componentFunction = componentMapping[componentName];
+  return componentFunction ? componentFunction(text) : null;
+};
 
-// Define Redux slices and store
-const questionComponentSlice = createSlice({
-  name: "questionComponent",
-  initialState: {
-    deletionId: "",
-    modalOpen: false,
-    myArr: [],
-    dummyVar: "initial value",
-    inputText: "",
-    dummyVarHelper: 0,
-  },
-  reducers: {
-    addToList: (state, action) => {
-      state.myArr.push(action.payload);
-    },
-    removeFromList: (state, action) => {
-      state.myArr = state.myArr.filter((item) => item !== action.payload);
-    },
-    updateDeletionTarget: (state, action) => {
-      state.deletionId = action.payload;
-    },
-    updateModalDisplaying: (state, action) => {
-      state.modalOpen = action.payload;
-    },
-    toggleModalDisplaying: (state) => {
-      state.modalOpen = !state.modalOpen;
-    },
-    updateDummyVar: (state, action) => {
-      state.dummyVar = action.payload;
-    },
-    updateInputText: (state, action) => {
-      state.inputText = action.payload;
-    },
-    updateDummyVarHelper: (state) => {
-      state.dummyVarHelper += 1;
-    },
-  },
-});
+const thedialog = new Dialog();
 
-export const {
-  addToList,
-  removeFromList,
-  selectDeletionID,
-  updateDeletionTarget,
-  selectModalOpen,
-  updateModalDisplaying,
-  toggleModalDisplaying,
-  selectMyArr,
-  selectDummyVar,
-  updateDummyVar,
-  selectInputText,
-  updateInputText,
-  updateDummyVarHelper,
-} = questionComponentSlice.actions;
+// CHQ: the following global variables are here for debugging purposes
+let global_var1 = "I am the global var";
+let global_var2 = 2;
+let global_var3 = [1, 2, 3];
 
+// CHQ: following 3 lines added to fix "could not find react-redux context value" error
 const store = configureStore({
-  reducer: {
-    questionComponent: questionComponentSlice.reducer,
-  },
+  reducer: {},
 });
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [myList, setMyList] = useState(myList4);
-  const [myList2, setMyList2] = useState(myList5);
-  const [theText, setTheText] = useState("my initial text");
-  const dispatch = useDispatch();
-  const targetComponentToDelete = useSelector(selectDeletionID);
-  const isModalOpen = useSelector(selectModalOpen);
-  const myArr = useSelector(selectMyArr);
-  const myDummyVar = useSelector(selectDummyVar);
-  const myInputText = useSelector(selectInputText);
-  const myDummyVarHelper = useSelector(
-    (state) => state.questionComponent.dummyVarHelper
-  );
+  const [myList, setMyList] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalText, setModalText] = useState("default text");
+  const [modalConfirmText, setModalConfirmText] = useState("confirm");
+  const [modalCancelText, setModalCancelText] = useState("cancel");
+  const [modalConfirmAction, setModalConfirmAction] = useState(() => {
+    console.log("default confirm action");
+  });
+  const [modalCancelAction, setModalCancelAction] = useState(() => {
+    console.log("default cancel action");
+  });
 
-  const [modalConfirmText, setModalConfirmText] = useState("Confirm");
-  const [modalCancelText, setModalCancelText] = useState("Cancel");
+  const [inputText, setInputText] = useState("");
 
-  const [modalConfirmAction, setModalConfirmAction] = useState(() => {});
-  const [modalCancelAction, setModalCancelAction] = useState(() => {});
+  const [showContent, setShowContent] = useState(true);
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [theText, setTheText] = useState("default text");
+
+  // const [myArr, setMyArr] = useState([]);
+
+  const [myDummyVar, setMyDummyVar] = useState("initial value");
+
+  const [deletionTarget, setDeletionTarget] = useState("");
+
+  const [isModalDisplaying, setIsModalDisplaying] = useState(false);
+
+  const [myArr, setMyArr] = useState<string[]>([]);
+  const [compIDToDelete, setCompIDToDelete] = useState("");
+
+  const [compIDToDelete2, setCompIDToDelete2] = useState("");
+
+  const [updatingID, setUpdatingID] = useState("");
+
+  const [updatingID2, setUpdatingID2] = useState("");
+
+  const [myInputText, setMyInputText] = useState("");
+
+  const [myDummyVarHelper, setMyDummyVarHelper] = useState("");
 
   const navigate = useNavigate();
 
-  const addQuestion = () => {
-    let newId = randNum();
-    const newQuestion = React.createElement(DynamicMultiChoiceAlt, {
-      componentID: newId,
-      text: "New Question",
-      isProductionState: false,
-    });
-    setMyList((prevList) => [...prevList, newQuestion]);
-    setMyList2((prevList) => [...prevList, [newId, newQuestion]]);
-    dispatch(addToList(newId));
+  const dispatch = useDispatch();
+
+  // const globalVar = useSelector(selectGlobalVar);
+  const deletionID = useSelector(selectDeletionID);
+  const modalOpenSelector = useSelector(selectModalOpen);
+
+  const myArrSelector = useSelector(selectMyArr);
+  const dummyVarSelector = useSelector(selectDummyVar);
+  const inputTextSelector = useSelector(selectInputText);
+
+  // const compIDToDeleteSelector = useSelector(selectCompIDToDelete);
+  const compIDToDeleteSelector2 = useSelector(selectCompIDToDelete2);
+  const arrSelector = useSelector(selectArr);
+
+  const [globalVar, setGlobalVar] = useState("global var 1");
+
+  // CHQ: adding a new global state variable
+  const [globalVar2, setGlobalVar2] = useState("global var 2");
+
+  const questionComponentSlice = createSlice({
+    name: "questionComponent",
+    initialState: {
+      deletionID: "",
+      modalOpen: false,
+      myArr: [],
+      dummyVar: "initial value",
+      inputText: "",
+    },
+    reducers: {
+      updateDeletionTarget: (state, action) => {
+        state.deletionID = action.payload;
+      },
+      updateModalDisplaying: (state, action) => {
+        state.modalOpen = action.payload;
+      },
+      toggleModalDisplaying: (state) => {
+        state.modalOpen = !state.modalOpen;
+      },
+      addToList: (state, action) => {
+        state.myArr.push(action.payload);
+      },
+      removeFromList: (state, action) => {
+        // [ZB]
+        state.myArr.splice(
+          state.myArr.findIndex((v) => v === action.payload),
+          1
+        );
+      },
+      updateDummyVar: (state, action) => {
+        state.dummyVar = action.payload;
+      },
+      updateInputText: (state, action) => {
+        state.inputText = action.payload;
+      },
+    },
+  });
+
+  const deleteComponentSlice = createSlice({
+    name: "deleteComponent",
+    initialState: {
+      compIDToDelete: "",
+      compIDToDelete2: "",
+      arr: [],
+      updatingID: "",
+      updatingID2: "",
+    },
+    reducers: {
+      updatingID: (state) => {
+        state.updatingID = "some new id";
+      },
+      updatingID2: (state) => {
+        state.updatingID2 = "some even newer id";
+      },
+      addToDeletList: (state, action) => {
+        state.arr.push(action.payload);
+      },
+      removeFromDeletList: (state, action) => {
+        // [ZB]
+        state.arr.splice(
+          state.arr.findIndex((v) => v === action.payload),
+          1
+        );
+      },
+      updateArr: (state) => {
+        state.arr.push("some new element in array");
+      },
+      selectCompIDToDelete: (state, action) => {
+        state.compIDToDelete = action.payload;
+      },
+      selectCompIDToDelete2: (state, action) => {
+        state.compIDToDelete2 = action.payload;
+      },
+    },
+  });
+
+  const globalVarSlice = createSlice({
+    name: "globalVar",
+    initialState: {
+      globalVar: "initial global var value",
+      globalVar2: "initial global var 2 value",
+    },
+    reducers: {
+      updateGlobalVar: (state, action) => {
+        state.globalVar = action.payload;
+      },
+      updateGlobalVar2: (state, action) => {
+        state.globalVar2 = action.payload;
+      },
+    },
+  });
+
+  // export const {
+  //  updatingID,
+  //  selectCompIDToDelete,
+  //  updatingID2,
+  //  addToDeletList,
+  //  removeFromDeletList,
+  //  selectCompIDToDelete2,
+  //  updateArr,
+  //  selectArr,
+  // } = deleteComponentSlice.actions;
+
+  // export const {
+  //  addToList,
+  //  removeFromList,
+  //  selectDeletionID,
+  //  updateDeletionTarget,
+  //  selectModalOpen,
+  //  updateModalDisplaying,
+  //  toggleModalDisplaying,
+  //  selectMyArr,
+  //  selectDummyVar,
+  //  updateDummyVar,
+  //  selectInputText,
+  //  updateInputText,
+  //  updateDummyVarHelper,
+  //  } = questionComponentSlice.actions;
+
+  export const { updateGlobalVar, updateGlobalVar2 } = globalVarSlice.actions;
+
+  const store = configureStore({
+    reducer: {
+      questionComponent: questionComponentSlice.reducer,
+      deleteComponent: deleteComponentSlice.reducer,
+      globalVar: globalVarSlice.reducer,
+    },
+  });
+
+  const {
+    updatingID,
+    addToDeletList,
+    removeFromDeletList,
+    updateArr,
+    selectArr,
+  } = deleteComponentSlice.actions;
+
+  const {
+    addToList,
+    removeFromList,
+    updateDeletionTarget,
+    updateModalDisplaying,
+    toggleModalDisplaying,
+    selectMyArr,
+    updateDummyVar,
+    updateInputText,
+  } = questionComponentSlice.actions;
+
+  const { selectGlobalVar } = globalVarSlice.actions;
+
+  // const DeleteComponent = (targetQuestion) => {}
+
+  const addMeToList = (text: string) => {
+    dispatch(addToList(text));
+  };
+  const removeMeFromList = (text: string) => {
+    dispatch(removeFromList(text));
+  };
+  const updateMeDeletionTarget = (text: string) => {
+    dispatch(updateDeletionTarget(text));
+  };
+  const updateMeModalDisplaying = (bool: boolean) => {
+    dispatch(updateModalDisplaying(bool));
+  };
+  const toggleMeModalDisplaying = () => {
+    dispatch(toggleModalDisplaying());
+  };
+  const updateMeDummyVar = (text: string) => {
+    dispatch(updateDummyVar(text));
+  };
+  const updateMeInputText = (text: string) => {
+    dispatch(updateInputText(text));
   };
 
-  const deleteQuestion = (componentIdToDelete: string) => {
-    // setMyList(prevList => prevList.filter((item:any) => item.props.componentID != componentIdToDelete));
-
-    setMyList((prevList) =>
-      prevList.filter((item: any) => {
-        if (item && item.props && item.props.componentID) {
-          return item.props.componentID !== componentIdToDelete;
-        }
-        return true; // Keep items without the relevant property
-      })
-    );
-
-    setMyList2((prevList) =>
-      prevList.filter((item) => item[0] !== componentIdToDelete)
-    );
-    dispatch(removeFromList(componentIdToDelete));
-    dispatch(updateModalDisplaying(false));
+  const updateMeGlobalVar = (text: string) => {
+    dispatch(updateGlobalVar(text));
+  };
+  const updateMeGlobalVar2 = (text: string) => {
+    dispatch(updateGlobalVar2(text));
   };
 
-  useEffect(() => {
-    if (targetComponentToDelete != "") {
-      // setModalConfirmAction(() => deleteQuestion(targetComponentToDelete));
-      // setModalCancelAction(() => dispatch(updateModalDisplaying(false)));
-      // setIsDialogOpen(true);
-
-      setModalConfirmAction(() => {
-        deleteQuestion(targetComponentToDelete);
-        setIsDialogOpen(false); // Close the dialog
-      });
-
-      setModalCancelAction(() => {
-        dispatch(updateModalDisplaying(false));
-        setIsDialogOpen(false); // Also close on cancel
-      });
-
-      setIsDialogOpen(true);
-    }
-  }, [targetComponentToDelete]);
-
-  const handleConfirm = () => {
-    // Perform the deletion here, using targetComponentToDelete
-    if (targetComponentToDelete) {
-      deleteQuestion(targetComponentToDelete);
-    }
-    setIsDialogOpen(false); // Close the dialog
+  const addMeToDeletList = (text: string) => {
+    dispatch(addToDeletList(text));
+  };
+  const removeMeFromDeletList = (text: string) => {
+    dispatch(removeFromDeletList(text));
+  };
+  const updateMeArr = () => {
+    dispatch(updateArr());
+  };
+  const updateMeUpdatingID = () => {
+    dispatch(updatingID());
   };
 
-  const handleCancel = () => {
-    dispatch(updateModalDisplaying(false));
-    setIsDialogOpen(false); // Close the dialog
-  };
+  // const DeleteComponent = (targetQuestion) => {}
 
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
+  // CHQ: following 2 functions added to fix "could not find react-redux context value" error
+  const ConnectedApp = () => <AppContent />;
+  const AppContent = () => {
+    return (
+      <>
+        {/* All your components that use Redux should be inside the Provider */}
+        <div className="App">
+          <header className="App-header">
+            {/* <img src={logo} className="App-logo" alt="logo" /> */}
+            {/* <Counter /> */}
+            {/* <ConfirmationModal
+            isModalOpen={modalOpen}
+            confirmText={modalConfirmText}
+            cancelText={modalCancelText}
+            confirmAction={modalConfirmAction}
+            cancelAction={modalCancelAction}
+          /> */}
+            {/* <Dialog id="dialog1" open={true}>
+            <form method="dialog">
+              <label>
+                Favorite animal:
+                <select>
+                  <option>Cats</option>
+                  <option>Dogs</option>
+                  <option>Hamsters</option>
+                </select>
+              </label>
+              <p>
+                <button>Confirm</button>
+                <button>Cancel</button>
+              </p>
+            </form>
+          </Dialog> */}
+            {/* <div className="App">
+            <header className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <Counter />
+              <p>
+                Edit <code>src/App.tsx</code> and save to reload.
+              </p>
+              <span className="App-link"
+                
+              >
+                Learn React
+              </span>
+            </header>
+          </div> */}
+            {/* <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
           <a
@@ -1368,86 +1477,16 @@ function App() {
             rel="noopener noreferrer"
           >
             Learn React
-          </a>
-          <br />
-          <br />
-          <button
-            className="formbuttons"
-            onClick={() => navigate("/page2")}
-            // onClick={() => navigate("/page2")}
-          >
-            Go to page 2
-          </button>
-          <br />
-          <br />
-          <button
-            className="formbuttons"
-            onClick={() => navigate("/page3")}
-            // onClick={() => navigate("/page2")}
-          >
-            Go to page 3
-          </button>
-          <p>
-            <span className={styles.read_the_docs}>
-              Click on the Vite and React logos to learn more
-            </span>
-          </p>
-        </header>
-        <div className="form">
-          <br />
-          <br />
-          <button className="formbuttons" onClick={() => setCount(count + 1)}>
-            +
-          </button>
-          <br />
-          <br />
-          <button className="formbuttons" onClick={() => setCount(count - 1)}>
-            -
-          </button>
-          <p>count is {count}</p>
-          <br />
-          <br />
-          <button className="formbuttons" onClick={addQuestion}>
-            Add a question
-          </button>
-          <br />
-          <br />
-          <button
-            className="formbuttons"
-            onClick={() => {
-              // setMyList(myList4);
-              // setMyList(myList4Alt);
-              dispatch(updateDummyVar("hello world"));
-            }}
-          >
-            Reset questions
-          </button>
-
-          <p>target component to delete is: {targetComponentToDelete}</p>
-          <p>is modal open: {isModalOpen ? "true" : "false"}</p>
-          <p>global list of components: {myArr}</p>
-          <p>dummy var is: {myDummyVar}</p>
-          <p>input text is: {myInputText}</p>
-          <p>dummy var helper is: {myDummyVarHelper}</p>
-          {/* {myList} */}
-          {myList.map((item: any, index) => (
-            <div key={index}>{item}</div>
-          ))}
-          {/* <ConfirmationModal
-                                isModalOpen={isDialogOpen}
-                                confirmText={modalConfirmText}
-                                cancelText={modalCancelText}
-                                confirmAction={handleConfirm}
-                                cancelAction={handleCancel}/> */}
-          <ConfirmationModal
-            isModalOpen={isDialogOpen}
-            confirmText={modalConfirmText}
-            cancelText={modalCancelText}
-            confirmAction={modalConfirmAction}
-            cancelAction={modalCancelAction}
-          />
+          </a> */}
+          </header>
         </div>
-      </div>
+      </>
+    );
+  };
+
+  return (
+    <Provider store={store}>
+      <ConnectedApp />
     </Provider>
   );
 }
