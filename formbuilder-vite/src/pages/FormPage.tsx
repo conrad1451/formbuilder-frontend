@@ -751,7 +751,6 @@ const FormPage = () => {
   };
   return (
     <>
-      <p>bro</p>
       <div className="left-part"> </div>
 
       {/* <TwoDivPage /> */}
