@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 export default function Login2() {
   const navigate = useNavigate();
@@ -20,8 +20,8 @@ export default function Login2() {
     const isMatch = window.location.href.match(accessTokenRegex);
 
     if (isMatch) {
-      const accessToken = isMatch[1];
-      Cookies.set("access_token", accessToken);
+      // const accessToken = isMatch[1];
+      // Cookies.set("access_token", accessToken);
       setIsLoggedin(true);
     }
   }, []);

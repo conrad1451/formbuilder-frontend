@@ -1,17 +1,30 @@
 import { useCallback } from "react";
 import { Descope, useDescope, useSession, useUser } from "@descope/react-sdk";
 import FormToNotion from "./pages/MyForm";
-import FormToMongo from "./pages/MyFormMongo";
+// import FormToMongo from "./pages/MyFormMongo";
 // Sources:
 // [1]: https://dev.to/jps27cse/react-router-dom-v6-boilerplate-2ce1
 
-const Option1 = (props: { theUser; theHandleLogout }) => {
+interface DescopeUser {
+  name?: string; // Assuming 'name' is a property in the user object. Adjust as needed.
+  // [key: string]: any; // To allow other potential properties
+}
+
+interface Option1Props {
+  theUser: DescopeUser;
+  theHandleLogout: () => void;
+}
+
+// const Option1 = (props: { theUser; theHandleLogout }) => {
+const Option1 = (props: Option1Props) => {
   return (
     <>
-      <p>Hello {props.theUser.name}</p>
+      {/* <p>Hello {props.theUser.name}</p> */}
+      <p>Hello {props.theUser?.name}</p>{" "}
+      {/* Using optional chaining in case name is not always present */}
       <div>My Private Component</div>
       <FormToNotion />
-      <FormToMongo />
+      {/* <FormToMongo /> */}
       <button onClick={props.theHandleLogout}>Logout</button>
     </>
   );
@@ -47,7 +60,7 @@ const Login = () => {
       <Descope
         flowId="sign-up-or-in"
         onSuccess={(e) => console.log(e.detail.user)}
-        onError={(e) => console.log("Could not log in!")}
+        onError={() => console.log("Could not log in!")}
       />
     </div>
   );

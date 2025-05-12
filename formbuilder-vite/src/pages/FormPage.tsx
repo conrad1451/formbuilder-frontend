@@ -89,14 +89,14 @@ function ConfirmationModal({
 }
 
 // Dynamic Component Creation Function
-const createDynamicComponent2 = (
-  component: React.ComponentType<any>,
-  props?: any
-) => {
-  return props
-    ? React.createElement(component, props)
-    : React.createElement(component);
-};
+// const createDynamicComponent2 = (
+//   component: React.ComponentType<any>,
+//   props?: any
+// ) => {
+//   return props
+//     ? React.createElement(component, props)
+//     : React.createElement(component);
+// };
 
 // Utility function to generate random IDs
 const randNum = () => {
@@ -143,7 +143,7 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({
         <div>
           <EditableTextModule
             myText={text}
-            isEditing={true}
+            isEditing={!isProductionState}
             theFontSize={"p"}
           />
           <br />
@@ -159,7 +159,7 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({
             />
           </label>
         </div>
-        <p>{"component ID: " + myCompID}</p>
+        <p>{isProductionState ? "" : "component ID: " + myCompID}</p>
       </div>
       <br />
       <br />
@@ -179,7 +179,11 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({
   return (
     <>
       <div className="multichoiceBlock">
-        <EditableTextModule myText={text} isEditing={true} theFontSize={"p"} />
+        <EditableTextModule
+          myText={text}
+          isEditing={!isProductionState}
+          theFontSize={"p"}
+        />
         <br />
         <label>
           {" "}
@@ -193,7 +197,7 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({
           />
         </label>
         <br />
-        <p>{"component ID: " + myCompID}</p>
+        <p>{isProductionState ? "" : "component ID: " + myCompID}</p>
       </div>
       <br />
     </>
@@ -212,7 +216,11 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
   return (
     <>
       <div className="multichoiceBlock">
-        <EditableTextModule myText={text} isEditing={true} theFontSize={"p"} />
+        <EditableTextModule
+          myText={text}
+          isEditing={!isProductionState}
+          theFontSize={"p"}
+        />
         <br />
         <label>
           True
@@ -233,7 +241,7 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
           />
         </label>
         <br />
-        <p>{"component ID: " + myCompID}</p>
+        <p>{isProductionState ? "" : "component ID: " + myCompID}</p>
       </div>
       <br />
     </>
@@ -560,7 +568,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
           <div className="componentWidth">
             <EditableTextModule
               myText={text}
-              isEditing={true}
+              isEditing={!isProductionState}
               theFontSize={"h3"}
             />
 
@@ -581,7 +589,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
           </button>
         </div>
       </div>
-      <p>{"component ID: " + myCompID}</p>
+      <p>{isProductionState ? "" : "component ID: " + myCompID}</p>
 
       <br />
       <br />
@@ -765,37 +773,61 @@ const FormPage = () => {
                 {!isProduction && (
                   <div className="toolbox" style={{ width: "200px" }}>
                     <h2 className="hasBorder3">Toolbox</h2>
-                    <button className="formbuttons" onClick={addShortAnswer}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addShortAnswer}
+                    >
                       Add Short Answer
                     </button>
-                    <button className="formbuttons" onClick={addLongAnswer}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addLongAnswer}
+                    >
                       Add Long Answer
                     </button>
-                    <button className="formbuttons" onClick={addTrueFalse}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addTrueFalse}
+                    >
                       Add True/False
                     </button>
-                    <button className="formbuttons" onClick={addMultiChoiceAlt}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addMultiChoiceAlt}
+                    >
                       Add Multiple Choice
                     </button>
-                    <button className="formbuttons" onClick={addTextEntry}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addTextEntry}
+                    >
                       Add Text Entry
                     </button>
-                    <button className="formbuttons" onClick={addHeader}>
+                    <button className="formtoolboxbuttons" onClick={addHeader}>
                       Add Header
                     </button>
-                    <button className="formbuttons" onClick={addParagraph}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addParagraph}
+                    >
                       Add Paragraph
                     </button>
-                    <button className="formbuttons" onClick={addImage}>
+                    <button className="formtoolboxbuttons" onClick={addImage}>
                       Add Image
                     </button>
-                    <button className="formbuttons" onClick={addVideo}>
+                    <button className="formtoolboxbuttons" onClick={addVideo}>
                       Add Video
                     </button>
-                    <button className="formbuttons" onClick={addLineBreak}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addLineBreak}
+                    >
                       Add Line Break
                     </button>
-                    <button className="formbuttons" onClick={addPageBreak}>
+                    <button
+                      className="formtoolboxbuttons"
+                      onClick={addPageBreak}
+                    >
                       Add Page Break
                     </button>
                   </div>
@@ -822,21 +854,28 @@ const FormPage = () => {
                   <br />
                   <br />
 
-                  <div className="topButtons">
+                  <div>
                     <button
-                      className="formbuttons"
+                      classname="formstatebuttons"
                       onClick={() => setIsProduction(!isProduction)}
                     >
                       {isProduction ? "Edit Form" : "View Form"}
                     </button>
-                    <button className="formbuttons" onClick={submitTheForm}>
+                    <button
+                      className="formstatebuttons"
+                      onClick={submitTheForm}
+                    >
                       Submit Form
                     </button>
-                    <button className="formbuttons" onClick={saveTheForm}>
+                    <button className="formstatebuttons" onClick={saveTheForm}>
                       Save Form
                     </button>
+                    <p>brbr</p>
                   </div>
+                  <p>brbr</p>
                 </header>
+
+                <p>brbr</p>
 
                 <ConfirmationModal
                   isModalOpen={showModal}

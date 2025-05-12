@@ -23,14 +23,14 @@ export default function Secure() {
       {userDetails ? (
         <div className="user-profile">
           <div className="card">
-            <img
+            {/* <img
               src={userDetails.picture}
               alt={`${userDetails.given_name}'s profile`}
               className="profile-pic"
-            />
+            /> */}
             <p>Welcome</p>
-            <h1 className="name">{userDetails.name}</h1>
-            <p className="email">{userDetails.email}</p>
+            {/* <h1 className="name">{userDetails.name}</h1> */}
+            {/* <p className="email">{userDetails.email}</p> */}
           </div>
         </div>
       ) : (
