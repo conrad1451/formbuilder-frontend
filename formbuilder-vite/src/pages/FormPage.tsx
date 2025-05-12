@@ -617,7 +617,7 @@ const FormPage = () => {
   });
   const [modalActions, setModalActions] = useState({
     confirm: () => console.log("confirm"),
-    cancel: () => console.log("cancel"),
+    cancel: () => setShowModal(false),
   });
   const [formName, setFormName] = useState("My Form");
   const [formDescription, setFormDescription] = useState(
@@ -736,92 +736,143 @@ const FormPage = () => {
       cancel: () => setShowModal(false),
     });
   };
-
-  return (
-    <Provider store={store}>
-      <div className="App">
-        <header className="App-header">
-          <EditableTextModuleTitle
-            myText={formName}
-            setMyText={setFormName}
-            isEditing={!isProduction}
-            theFontSize={"h1"}
-          />
-          <EditableTextModuleTitle
-            myText={formDescription}
-            setMyText={setFormDescription}
-            isEditing={!isProduction}
-            theFontSize={"p"}
-          />
-          <br />
-          <br />
-
-          <div className="topButtons">
-            <button
-              className="formbuttons"
-              onClick={() => setIsProduction(!isProduction)}
-            >
-              {isProduction ? "Edit Form" : "View Form"}
-            </button>
-            <button className="formbuttons" onClick={submitTheForm}>
-              Submit Form
-            </button>
-            <button className="formbuttons" onClick={saveTheForm}>
-              Save Form
-            </button>
-          </div>
-        </header>
-
-        <ConfirmationModal
-          isModalOpen={showModal}
-          confirmText={modalText.confirm}
-          cancelText={modalText.cancel}
-          confirmAction={modalActions.confirm}
-          cancelAction={modalActions.cancel}
-        />
-
-        {!isProduction && (
-          <div className="toolbox">
-            <h2 className="hasBorder3">Toolbox</h2>
-            <button className="formbuttons" onClick={addShortAnswer}>
-              Add Short Answer
-            </button>
-            <button className="formbuttons" onClick={addLongAnswer}>
-              Add Long Answer
-            </button>
-            <button className="formbuttons" onClick={addTrueFalse}>
-              Add True/False
-            </button>
-            <button className="formbuttons" onClick={addMultiChoiceAlt}>
-              Add Multiple Choice
-            </button>
-            <button className="formbuttons" onClick={addTextEntry}>
-              Add Text Entry
-            </button>
-            <button className="formbuttons" onClick={addHeader}>
-              Add Header
-            </button>
-            <button className="formbuttons" onClick={addParagraph}>
-              Add Paragraph
-            </button>
-            <button className="formbuttons" onClick={addImage}>
-              Add Image
-            </button>
-            <button className="formbuttons" onClick={addVideo}>
-              Add Video
-            </button>
-            <button className="formbuttons" onClick={addLineBreak}>
-              Add Line Break
-            </button>
-            <button className="formbuttons" onClick={addPageBreak}>
-              Add Page Break
-            </button>
-          </div>
-        )}
-
-        <div className="formSection">{myList.map((item, index) => item)}</div>
+  const TwoDivPage = () => {
+    return (
+      <div className="container">
+        <div className="left-div">
+          {/* Left div content can go here */}
+          <p className="text">
+            This is the left div. It takes up 25% of the screen width and is
+            red.
+          </p>
+        </div>
+        <div className="right-div">
+          {/* Right div content can go here */}
+          <p className="text">
+            This is the right div. It takes up 75% of the screen width and is
+            green.
+          </p>
+        </div>
       </div>
-    </Provider>
+    );
+  };
+  return (
+    <>
+      <p>bro</p>
+      <div className="left-part"> </div>
+
+      {/* <TwoDivPage /> */}
+
+      <>
+        {" "}
+        <div className="container">
+          <Provider store={store}>
+            <div className="left-div">
+              {/* Left div content can go here */}
+              <p className="text">
+                This is the left div. It takes up 25% of the screen width and is
+                red.
+              </p>
+              <>
+                {!isProduction && (
+                  <div className="toolbox" style={{ width: "200px" }}>
+                    <h2 className="hasBorder3">Toolbox</h2>
+                    <button className="formbuttons" onClick={addShortAnswer}>
+                      Add Short Answer
+                    </button>
+                    <button className="formbuttons" onClick={addLongAnswer}>
+                      Add Long Answer
+                    </button>
+                    <button className="formbuttons" onClick={addTrueFalse}>
+                      Add True/False
+                    </button>
+                    <button className="formbuttons" onClick={addMultiChoiceAlt}>
+                      Add Multiple Choice
+                    </button>
+                    <button className="formbuttons" onClick={addTextEntry}>
+                      Add Text Entry
+                    </button>
+                    <button className="formbuttons" onClick={addHeader}>
+                      Add Header
+                    </button>
+                    <button className="formbuttons" onClick={addParagraph}>
+                      Add Paragraph
+                    </button>
+                    <button className="formbuttons" onClick={addImage}>
+                      Add Image
+                    </button>
+                    <button className="formbuttons" onClick={addVideo}>
+                      Add Video
+                    </button>
+                    <button className="formbuttons" onClick={addLineBreak}>
+                      Add Line Break
+                    </button>
+                    <button className="formbuttons" onClick={addPageBreak}>
+                      Add Page Break
+                    </button>
+                  </div>
+                )}
+              </>
+            </div>
+
+            <div className="right-div">
+              {/* Right div content can go here */}
+              <p className="text">
+                This is the right div. It takes up 75% of the screen width and
+                is green.
+              </p>
+
+              <div className="App">
+                <header className="App-header">
+                  <EditableTextModuleTitle
+                    myText={formName}
+                    setMyText={setFormName}
+                    isEditing={!isProduction}
+                    theFontSize={"h1"}
+                  />
+                  <EditableTextModuleTitle
+                    myText={formDescription}
+                    setMyText={setFormDescription}
+                    isEditing={!isProduction}
+                    theFontSize={"p"}
+                  />
+                  <br />
+                  <br />
+
+                  <div className="topButtons">
+                    <button
+                      className="formbuttons"
+                      onClick={() => setIsProduction(!isProduction)}
+                    >
+                      {isProduction ? "Edit Form" : "View Form"}
+                    </button>
+                    <button className="formbuttons" onClick={submitTheForm}>
+                      Submit Form
+                    </button>
+                    <button className="formbuttons" onClick={saveTheForm}>
+                      Save Form
+                    </button>
+                  </div>
+                </header>
+
+                <ConfirmationModal
+                  isModalOpen={showModal}
+                  confirmText={modalText.confirm}
+                  cancelText={modalText.cancel}
+                  confirmAction={modalActions.confirm}
+                  cancelAction={modalActions.cancel}
+                />
+                <div style={{ display: "flex" }}>
+                  <div className="formSection" style={{ flex: 1 }}>
+                    {myList.map((item, index) => item)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Provider>
+        </div>
+      </>
+    </>
   );
 };
 
