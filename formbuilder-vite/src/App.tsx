@@ -67,10 +67,10 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login-descope" element={<DescopeLogin />} />
-        <Route path="/login-mongo" element={<MongoLogin />} />
+        <Route path="/logindescope" element={<DescopeLogin />} />
+        <Route path="/loginmongo" element={<MongoLogin />} />
         {/* <Route path="/login" element={<LoginPage />} /> */}
-        <Route path="/new-form" element={<FormPage />} />
+        <Route path="/newform" element={<FormPage />} />
         {/* <Route path="/path_name/:dynamic" element={<Component_Name />} /> //dynamic route */}
         {/* <Route path="/*" element={<Component_Name />} />  */}
       </Routes>
