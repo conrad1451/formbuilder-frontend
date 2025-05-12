@@ -480,9 +480,10 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
   const [truth, setTruth] = useState(checkedCondition);
 
   return (
-    <>
-      <div className="multiChoiceOptLayout">
-        <input type="radio" checked={truth} onChange={() => setTruth(!truth)} />
+    <div className="multiChoiceOptionContainer">
+      <input type="radio" checked={truth} onChange={() => setTruth(!truth)} />
+
+      <div className="buttontitlewidth">
         <EditableTextModule
           myText={text}
           isEditing={hasEditorOpen}
@@ -491,6 +492,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
       </div>
 
       <button
+        className="editbuttonsmultichoice"
         id="some-inner-answer"
         onClick={() => {
           setHasEditorOpen(!hasEditorOpen);
@@ -498,7 +500,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
       >
         {hasEditorOpen ? "Save Changes" : "Edit Option"}
       </button>
-    </>
+    </div>
   );
 };
 
@@ -508,6 +510,8 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
   isProductionState,
   captureState,
 }) => {
+  const [myCompID, setMyCompID] = useState(componentID);
+
   const [optionIDList, setOptionIDList] = useState([
     randNum(),
     randNum(),
@@ -577,6 +581,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
           </button>
         </div>
       </div>
+      <p>{"component ID: " + myCompID}</p>
 
       <br />
       <br />

@@ -90,3 +90,8 @@
   padding: 1vh;
   /* background-color: white; */
 }
+
+.multiChoiceOptionContainer {
+  display: flex;
+  align-items: center; /* Vertically align items */
+}
