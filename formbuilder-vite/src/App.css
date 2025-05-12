@@ -40,3 +40,53 @@
 .read-the-docs {
   color: #888;
 }
+
+.left-part {
+  width: 25%;
+}
+
+.container {
+  display: flex;
+  /* height: 100vh; */
+}
+
+.containeroption {
+  display: flex;
+}
+
+.left-div {
+  width: 25%;
+  background-color: red;
+}
+
+.right-div {
+  width: 75%;
+  background-color: green;
+}
+
+.text {
+  color: white;
+  padding: 1rem;
+}
+
+.formbuttons {
+  /* padding-bottom: 50%; */
+  margin-bottom: 30%;
+}
+
+.editbuttonsmultichoice {
+  /* padding-bottom: 50%; */
+  /* font-size: small; */
+  font-size: small;
+  padding: 1%;
+
+  size: 10%;
+  /* margin-bottom: 30%; */
+}
+
+.buttontitlesize {
+  width: 15vw;
+  height: 0.5vh;
+  padding: 1vh;
+  /* background-color: white; */
+}
