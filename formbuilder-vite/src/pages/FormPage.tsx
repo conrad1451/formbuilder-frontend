@@ -754,6 +754,28 @@ const FormPage = () => {
     });
   };
 
+  // CHQ: commented out for later oonce I replace fragile cloneElement with more robust render prop
+  // https://react.dev/reference/react/cloneElement#alternatives
+  // useEffect(() => {
+  //   const updatedList = myList.map((item) => {
+  //     // Check if the item is a React element and has the type of one of your dynamic components
+  //     if (React.isValidElement(item)) {
+  //       if (
+  //         item.type === DynamicShortAnswer ||
+  //         item.type === DynamicLongAnswer ||
+  //         item.type === DynamicTrueFalse ||
+  //         item.type === DynamicMultiChoiceAlt
+  //         //  || item.type === DynamicTextEntry // Add other relevant dynamic components
+  //       ) {
+  //         // Clone the element with the updated isProductionState prop
+  //         return React.cloneElement(item, { isProductionState: isProduction });
+  //       }
+  //     }
+  //     return item; // If it's not a dynamic component we care about, keep it as is
+  //   });
+  //   setMyList(updatedList);
+  // }, [isProduction, myList]); // Re-run this effect whenever isProduction or myList changes
+
   return (
     <>
       <div className="left-part"> </div>
