@@ -545,7 +545,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
         optionID: optionID,
         text: `Option ${index + 1}`,
         checkedCondition: isCheckedList[index],
-        hasEditorOpened: false,
+        hasEditorOpened: !isProductionState,
       })
     );
     setOptionList(newOptionList);
@@ -753,6 +753,7 @@ const FormPage = () => {
       cancel: () => setShowModal(false),
     });
   };
+
   return (
     <>
       <div className="left-part"> </div>
