@@ -116,6 +116,7 @@ const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
         <br />
         <input
           type="textarea"
+          aria-label="text entry"
           value={field}
           onChange={(e) => setField(e.target.value)}
           size={10}
@@ -491,7 +492,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
     <div className="multiChoiceOptionContainer">
       <input type="radio" checked={truth} onChange={() => setTruth(!truth)} />
 
-      <div className="buttontitlewidth">
+      <div className="buttontitlesize">
         <EditableTextModule
           myText={text}
           isEditing={hasEditorOpen}
@@ -870,12 +871,8 @@ const FormPage = () => {
                     <button className="formstatebuttons" onClick={saveTheForm}>
                       Save Form
                     </button>
-                    <p>brbr</p>
                   </div>
-                  <p>brbr</p>
                 </header>
-
-                <p>brbr</p>
 
                 <ConfirmationModal
                   isModalOpen={showModal}
