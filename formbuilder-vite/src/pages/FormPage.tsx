@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector, useDispatch, Provider } from "react-redux";
+// import React, { useState, useRef, useEffect } from "react";
+// import { useSelector, useDispatch, Provider } from "react-redux";
+
+import React, { useState, useEffect } from "react";
+import { Provider } from "react-redux";
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 // Import styles
-import styles from "../features/counter/Counter.module.css";
+// import styles from "../features/counter/Counter.module.css";
 import "../App.css";
 
 // Import components
@@ -12,34 +15,34 @@ import Dialog from "../modules/MyDialog";
 import logo from "../logo.svg";
 
 // Define interfaces
-interface IDeleteHandler {
-  onWorkDone(): void;
-  onError(message: string): void;
-}
+// interface IDeleteHandler {
+//   onWorkDone(): void;
+//   onError(message: string): void;
+// }
 
 interface DynamicComponentProps {
   text: string;
   isProductionState: boolean;
-  captureState?: any;
+  // captureState?: any;
 }
 
 interface DynamicComponentPropsAlt {
   componentID: string;
   text?: string;
   isProductionState?: boolean;
-  captureState?: object;
+  // captureState?: object;
 }
 
-interface DynamicFITB {
-  text: string;
-  textSnippets: [];
-  isFillInTheBlank: [];
-}
+// interface DynamicFITB {
+//   text: string;
+//   textSnippets: [];
+//   isFillInTheBlank: [];
+// }
 
-interface DynamicTF {
-  text: string;
-  isProductionState: boolean;
-}
+// interface DynamicTF {
+//   text: string;
+//   isProductionState: boolean;
+// }
 
 interface DynamicMCProps {
   optionID: string;
@@ -133,10 +136,11 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({
   componentID,
   text,
   isProductionState,
-  captureState,
+  // captureState,
 }) => {
   const [field, setField] = useState("");
-  const [myCompID, setMyCompID] = useState(componentID);
+  // const [myCompID, setMyCompID] = useState(componentID);
+  const myCompID = componentID;
 
   return (
     <>
@@ -172,16 +176,17 @@ const DynamicLongAnswer: React.FC<DynamicComponentPropsAlt> = ({
   componentID,
   text,
   isProductionState,
-  captureState,
+  // captureState,
 }) => {
   const [field, setField] = useState("");
-  const [myCompID, setMyCompID] = useState(componentID);
+  // const [myCompID, setMyCompID] = useState(componentID);
+  const myCompID = componentID;
 
   return (
     <>
       <div className="multichoiceBlock">
         <EditableTextModule
-          myText={text}
+          myText={String(text)}
           isEditing={!isProductionState}
           theFontSize={"p"}
         />
@@ -209,10 +214,11 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
   componentID,
   text,
   isProductionState,
-  captureState,
+  // captureState,
 }) => {
   const [truth, setTruth] = useState(false);
-  const [myCompID, setMyCompID] = useState(componentID);
+  // const [myCompID, setMyCompID] = useState(componentID);
+  const myCompID = componentID;
 
   return (
     <>
@@ -225,11 +231,7 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
         <br />
         <label>
           True
-          <input
-            type="radio"
-            checked={truth}
-            onChange={(e) => setTruth(true)}
-          />
+          <input type="radio" checked={truth} onChange={() => setTruth(true)} />
         </label>
         <br />
 
@@ -238,7 +240,7 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
           <input
             type="radio"
             checked={!truth}
-            onChange={(e) => setTruth(false)}
+            onChange={() => setTruth(false)}
           />
         </label>
         <br />
@@ -517,9 +519,10 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
   componentID,
   text,
   isProductionState,
-  captureState,
+  // captureState,
 }) => {
-  const [myCompID, setMyCompID] = useState(componentID);
+  // const [myCompID, setMyCompID] = useState(componentID);
+  const myCompID = componentID;
 
   const [optionIDList, setOptionIDList] = useState([
     randNum(),
