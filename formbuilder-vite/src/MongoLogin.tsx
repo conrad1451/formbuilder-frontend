@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 
 const MongoLogin = () => {
   const [loginFormData, setLoginFormData] = useState({
@@ -16,21 +16,25 @@ const MongoLogin = () => {
   const [signupError, setSignupError] = useState("");
   const [signupSuccess, setSignupSuccess] = useState("");
 
-  const handleLoginChange = (e) => {
+  // CHQ: types handled by Gemini AI
+  const handleLoginChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginFormData({
       ...loginFormData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSignupChange = (e) => {
+  // CHQ: types handled by Gemini AI
+  const handleSignupChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSignupFormData({
       ...signupFormData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleLoginSubmit = async (e) => {
+  // CHQ: types handled by Gemini AI
+
+  const handleLoginSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setLoginError("");
     setLoginSuccess("");
@@ -51,13 +55,19 @@ const MongoLogin = () => {
       }
 
       setLoginSuccess("Login successful!");
+      // CHQ: refactored by Gemini AI
       // Handle successful login (e.g., store token, redirect)
-    } catch (err) {
-      setLoginError(err.message || "Login failed");
+    } catch (err: unknown) {
+      let errorMessage = "Login failed";
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      setSignupError(errorMessage);
     }
   };
 
-  const handleSignupSubmit = async (e) => {
+  // CHQ: types handled by Gemini AI
+  const handleSignupSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setSignupError("");
     setSignupSuccess("");
@@ -78,9 +88,14 @@ const MongoLogin = () => {
       }
 
       setSignupSuccess("Account created successfully!");
+      // CHQ: refactored by Gemini AI
       // Optionally handle post-signup actions (e.g., redirect to login)
-    } catch (err) {
-      setSignupError(err.message || "Signup failed");
+    } catch (err: unknown) {
+      let errorMessage = "Signup failed";
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      setSignupError(errorMessage);
     }
   };
 
