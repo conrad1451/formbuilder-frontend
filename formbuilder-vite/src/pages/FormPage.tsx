@@ -772,8 +772,11 @@ const FormPage = () => {
               {/* Left div content can go here */}
               <>
                 {!isProduction && (
-                  <div className="toolbox" style={{ width: "200px" }}>
-                    <h2 className="hasBorder3">Toolbox</h2>
+                  <div
+                    className="toolbox"
+                    style={{ width: "200px", marginLeft: "4vw" }}
+                  >
+                    <h2>Toolbox</h2>
                     <button
                       className="formtoolboxbuttons"
                       onClick={addShortAnswer}
