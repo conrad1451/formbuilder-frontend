@@ -750,22 +750,10 @@ const FormPage = () => {
       cancel: () => setShowModal(false),
     });
   };
-  const TwoDivPage = () => {
-    return (
-      <div className="container">
-        <div className="left-div">{/* Left div content can go here */}</div>
-        <div className="right-div">{/* Right div content can go here */}</div>
-      </div>
-    );
-  };
   return (
     <>
       <div className="left-part"> </div>
-
-      {/* <TwoDivPage /> */}
-
       <>
-        {" "}
         <div className="container">
           <Provider store={store}>
             <div className="left-div">
