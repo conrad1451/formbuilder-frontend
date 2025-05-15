@@ -1,6 +1,7 @@
 // import React, { useRef, useEffect } from "react";
 import { useRef, useEffect } from "react";
 
+// function Dialog(props: { open: boolean }) {
 function Dialog(props: { children: string; open: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -14,6 +15,7 @@ function Dialog(props: { children: string; open: boolean }) {
     }
   }, [props.open]);
 
+  // return <dialog ref={dialogRef}>{"props.children"}</dialog>;
   return <dialog ref={dialogRef}>{props.children}</dialog>;
 }
 
