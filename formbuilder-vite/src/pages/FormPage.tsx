@@ -304,18 +304,24 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
 //   );
 // }
 
+// function EditableTextModuleTitle({
+//   myText,
+//   setMyText,
+//   isEditing,
+//   theFontSize,
+// }: {
+
 function EditableTextModuleTitle({
   myText,
-  setMyText,
   isEditing,
   theFontSize,
 }: {
   myText: string;
-  setMyText: (text: string) => void;
+  // setMyText: (text: string) => void;
   isEditing: boolean;
   theFontSize: string;
 }) {
-  let theText = myText;
+  const theText = myText;
 
   switch (theFontSize) {
     case "h1":
@@ -652,10 +658,14 @@ const FormPage = () => {
     confirm: () => console.log("confirm"),
     cancel: () => setShowModal(false),
   });
-  const [formName, setFormName] = useState("My Form");
-  const [formDescription, setFormDescription] = useState(
-    "Description of My Form"
-  );
+
+  const formName = "My Form";
+  const formDescription = "Description of My Form";
+
+  // const [formName, setFormName] = useState("My Form");
+  // const [formDescription, setFormDescription] = useState(
+  //   "Description of My Form"
+  // );
 
   // const [formField, setFormField] = useState<React.ReactNode[]>([]);
 
@@ -876,13 +886,13 @@ const FormPage = () => {
                 <header className="App-header">
                   <EditableTextModuleTitle
                     myText={formName}
-                    setMyText={setFormName}
+                    // setMyText={setFormName}
                     isEditing={!isProduction}
                     theFontSize={"h1"}
                   />
                   <EditableTextModuleTitle
                     myText={formDescription}
-                    setMyText={setFormDescription}
+                    // setMyText={setFormDescription}
                     isEditing={!isProduction}
                     theFontSize={"p"}
                   />
@@ -917,7 +927,8 @@ const FormPage = () => {
                 />
                 <div style={{ display: "flex" }}>
                   <div className="formSection" style={{ flex: 1 }}>
-                    {myList.map((item, index) => item)}
+                    {/* {myList.map((item, index) => item)} */}
+                    {myList.map((item) => item)}
                   </div>
                 </div>
               </div>
