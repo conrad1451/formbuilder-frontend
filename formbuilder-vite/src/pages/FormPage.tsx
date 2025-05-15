@@ -410,7 +410,7 @@ function EditableTextModule({
   isEditing: boolean;
   theFontSize: string;
 }) {
-  let theText = myText;
+  const theText = myText;
 
   switch (theFontSize) {
     case "h1":
