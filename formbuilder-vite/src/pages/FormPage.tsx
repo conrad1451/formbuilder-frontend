@@ -239,7 +239,7 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
     <>
       <div className="multichoiceBlock">
         <EditableTextModule
-          myText={text}
+          myText={String(text)}
           isEditing={!isProductionState}
           theFontSize={"p"}
         />
@@ -266,43 +266,43 @@ const DynamicTrueFalse: React.FC<DynamicComponentPropsAlt> = ({
   );
 };
 
-function SmallTextField({ isVisible }: { isVisible: boolean }) {
-  const [field, setField] = useState("");
+// function SmallTextField({ isVisible }: { isVisible: boolean }) {
+//   const [field, setField] = useState("");
 
-  return (
-    <div className="testMe">
-      <label>
-        <input
-          type={isVisible ? "textarea" : "hidden"}
-          value={field}
-          onChange={(e) => setField(e.target.value)}
-          size={10}
-          aria-multiline="true"
-          maxLength={280}
-        />
-      </label>
-    </div>
-  );
-}
+//   return (
+//     <div className="testMe">
+//       <label>
+//         <input
+//           type={isVisible ? "textarea" : "hidden"}
+//           value={field}
+//           onChange={(e) => setField(e.target.value)}
+//           size={10}
+//           aria-multiline="true"
+//           maxLength={280}
+//         />
+//       </label>
+//     </div>
+//   );
+// }
 
-function SmallTextFieldAlt({
-  isVisible,
-  thisText,
-  setThisText,
-}: {
-  isVisible: boolean;
-  thisText: string;
-  setThisText: (text: string) => void;
-}) {
-  return (
-    <div className="testMe">
-      <h1 className="hasBorder1" contentEditable={isVisible}>
-        {" "}
-        {thisText}{" "}
-      </h1>
-    </div>
-  );
-}
+// function SmallTextFieldAlt({
+//   isVisible,
+//   thisText,
+//   setThisText,
+// }: {
+//   isVisible: boolean;
+//   thisText: string;
+//   setThisText: (text: string) => void;
+// }) {
+//   return (
+//     <div className="testMe">
+//       <h1 className="hasBorder1" contentEditable={isVisible}>
+//         {" "}
+//         {thisText}{" "}
+//       </h1>
+//     </div>
+//   );
+// }
 
 function EditableTextModuleTitle({
   myText,
@@ -511,7 +511,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
 
       <div className="buttontitlesize">
         <EditableTextModule
-          myText={text}
+          myText={String(text)}
           isEditing={hasEditorOpen}
           theFontSize={"h6"}
         />
@@ -586,7 +586,7 @@ const DynamicMultiChoiceAlt: React.FC<DynamicComponentPropsAlt> = ({
           <br />
           <div className="componentWidth">
             <EditableTextModule
-              myText={text}
+              myText={String(text)}
               isEditing={!isProductionState}
               theFontSize={"h3"}
             />
