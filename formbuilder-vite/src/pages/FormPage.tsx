@@ -20,11 +20,11 @@ import logo from "../logo.svg";
 //   onError(message: string): void;
 // }
 
-interface DynamicComponentProps {
-  text: string;
-  isProductionState: boolean;
-  // captureState?: any;
-}
+// interface DynamicComponentProps {
+//   text: string;
+//   isProductionState: boolean;
+//   // captureState?: any;
+// }
 
 interface DynamicComponentPropsAlt {
   componentID: string;
@@ -67,7 +67,7 @@ function ConfirmationModal({
 }) {
   return (
     <>
-      <Dialog id="dialog2" open={isModalOpen}>
+      <Dialog open={isModalOpen}>
         <form id="form2" method="dialog">
           <br />
           <label htmlFor="fname">Are you sure?: </label>
@@ -110,12 +110,27 @@ const randNum = () => {
 
 // Dynamic Components
 
-const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
-  const [field, setField] = useState("");
+// const DynamicTextEntry: React.FC<DynamicComponentProps> = () => {
+// const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
+const DynamicTextEntry: React.FC<DynamicComponentPropsAlt> = ({
+  componentID,
+  text,
+  isProductionState,
+  // captureState,
+}) => {
+  // const [field, setField] = useState("");
+  const myCompID = componentID;
 
   return (
     <>
-      <label>
+      <EditableTextModule
+        myText={String(text)}
+        isEditing={!isProductionState}
+        theFontSize={"p"}
+      />
+      <p>{isProductionState ? "" : "component ID: " + myCompID}</p>
+
+      {/* <label>
         <br />
         <input
           type="textarea"
@@ -127,7 +142,7 @@ const DynamicTextEntry: React.FC<DynamicComponentProps> = ({ text }) => {
           maxLength={280}
         />
       </label>
-      <br />
+      <br /> */}
     </>
   );
 };
@@ -147,7 +162,7 @@ const DynamicShortAnswer: React.FC<DynamicComponentPropsAlt> = ({
       <div className="multichoiceBlock">
         <div>
           <EditableTextModule
-            myText={text}
+            myText={String(text)}
             isEditing={!isProductionState}
             theFontSize={"p"}
           />
