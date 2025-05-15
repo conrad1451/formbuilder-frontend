@@ -1,96 +1,109 @@
-import { useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from "react";
 
 const MongoLogin = () => {
   const [loginFormData, setLoginFormData] = useState({
-    username: '',
-    password: ''
+    username: "",
+    password: "",
   });
-  const [loginError, setLoginError] = useState('');
-  const [loginSuccess, setLoginSuccess] = useState('');
+  const [loginError, setLoginError] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState("");
 
   const [signupFormData, setSignupFormData] = useState({
-    username: '',
-    email: '', // New email field
-    password: ''
+    username: "",
+    email: "", // New email field
+    password: "",
   });
-  const [signupError, setSignupError] = useState('');
-  const [signupSuccess, setSignupSuccess] = useState('');
+  const [signupError, setSignupError] = useState("");
+  const [signupSuccess, setSignupSuccess] = useState("");
 
-  const handleLoginChange = (e) => {
+  // CHQ: types handled by Gemini AI
+  const handleLoginChange = (e: ChangeEvent<HTMLInputElement>) => {
     setLoginFormData({
       ...loginFormData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSignupChange = (e) => {
+  // CHQ: types handled by Gemini AI
+  const handleSignupChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSignupFormData({
       ...signupFormData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleLoginSubmit = async (e) => {
+  // CHQ: types handled by Gemini AI
+
+  const handleLoginSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoginError('');
-    setLoginSuccess('');
+    setLoginError("");
+    setLoginSuccess("");
 
     try {
       const response = await fetch("http://localhost:5000/mongo-login", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(loginFormData)
+        body: JSON.stringify(loginFormData),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Login failed');
+        throw new Error(data.message || "Login failed");
       }
 
-      setLoginSuccess('Login successful!');
+      setLoginSuccess("Login successful!");
+      // CHQ: refactored by Gemini AI
       // Handle successful login (e.g., store token, redirect)
-
-    } catch (err) {
-      setLoginError(err.message || 'Login failed');
+    } catch (err: unknown) {
+      let errorMessage = "Login failed";
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      setSignupError(errorMessage);
     }
   };
 
-  const handleSignupSubmit = async (e) => {
+  // CHQ: types handled by Gemini AI
+  const handleSignupSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSignupError('');
-    setSignupSuccess('');
+    setSignupError("");
+    setSignupSuccess("");
 
     try {
       const response = await fetch("http://localhost:5000/mongo-signup", {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(signupFormData)
+        body: JSON.stringify(signupFormData),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || 'Signup failed');
+        throw new Error(data.message || "Signup failed");
       }
 
-      setSignupSuccess('Account created successfully!');
+      setSignupSuccess("Account created successfully!");
+      // CHQ: refactored by Gemini AI
       // Optionally handle post-signup actions (e.g., redirect to login)
-
-    } catch (err) {
-      setSignupError(err.message || 'Signup failed');
+    } catch (err: unknown) {
+      let errorMessage = "Signup failed";
+      if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      setSignupError(errorMessage);
     }
   };
 
   return (
     <div>
       <h2>MongoDB Login</h2>
-      {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
-      {loginSuccess && <p style={{ color: 'green' }}>{loginSuccess}</p>}
+      {loginError && <p style={{ color: "red" }}>{loginError}</p>}
+      {loginSuccess && <p style={{ color: "green" }}>{loginSuccess}</p>}
 
       <form onSubmit={handleLoginSubmit}>
         <div>
@@ -120,11 +133,11 @@ const MongoLogin = () => {
         <button type="submit">Login</button>
       </form>
 
-      <hr style={{ margin: '20px 0' }} />
+      <hr style={{ margin: "20px 0" }} />
 
       <h2>Create New Account</h2>
-      {signupError && <p style={{ color: 'red' }}>{signupError}</p>}
-      {signupSuccess && <p style={{ color: 'green' }}>{signupSuccess}</p>}
+      {signupError && <p style={{ color: "red" }}>{signupError}</p>}
+      {signupSuccess && <p style={{ color: "green" }}>{signupSuccess}</p>}
 
       <form onSubmit={handleSignupSubmit}>
         <div>

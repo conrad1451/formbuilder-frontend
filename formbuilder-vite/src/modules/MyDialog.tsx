@@ -1,24 +1,22 @@
-import React, { useRef, useEffect } from "react";
+// import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
-// @ts-ignore
-function Dialog({ children, open }) {
-  const dialogRef = useRef(null);
+// function Dialog(props: { open: boolean }) {
+function Dialog(props: { children: string; open: boolean }) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     if (dialogRef.current) {
-      if (open) {
-        // CHQ: ignoring errors
-        // @ts-ignore
+      if (props.open) {
         dialogRef.current.showModal();
       } else {
-        // CHQ: ignoring errors
-        // @ts-ignore
         dialogRef.current.close();
       }
     }
-  }, [open]);
+  }, [props.open]);
 
-  return <dialog ref={dialogRef}>{children}</dialog>;
+  // return <dialog ref={dialogRef}>{"props.children"}</dialog>;
+  return <dialog ref={dialogRef}>{props.children}</dialog>;
 }
 
 export default Dialog;
