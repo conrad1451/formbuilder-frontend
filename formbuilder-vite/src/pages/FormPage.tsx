@@ -526,6 +526,7 @@ const DynamicMutliChoiceOption: React.FC<DynamicMCProps> = ({
       >
         {hasEditorOpen ? "Save Changes" : "Edit Option"}
       </button>
+      <p>{optionID}</p>
     </div>
   );
 };
@@ -656,7 +657,7 @@ const FormPage = () => {
     "Description of My Form"
   );
 
-  const [formField, setFormField] = useState<React.ReactNode[]>([]);
+  // const [formField, setFormField] = useState<React.ReactNode[]>([]);
 
   const navigate = useNavigate();
 
@@ -698,6 +699,7 @@ const FormPage = () => {
 
   const addTextEntry = () => {
     const newComponent = React.createElement(DynamicTextEntry, {
+      componentID: randNum(),
       text: "Text Entry Question",
       isProductionState: isProduction,
     });
@@ -889,7 +891,7 @@ const FormPage = () => {
 
                   <div>
                     <button
-                      classname="formstatebuttons"
+                      className="formstatebuttons"
                       onClick={() => setIsProduction(!isProduction)}
                     >
                       {isProduction ? "Edit Form" : "View Form"}
