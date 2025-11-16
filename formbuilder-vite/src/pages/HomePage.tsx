@@ -165,7 +165,7 @@ function HomePage() {
 
   const coursesPage = () => {
     // history.push("/new-form")
-    navigate("/new-form");
+    navigate("/newform");
   };
 
   const loggingOut = () => {
