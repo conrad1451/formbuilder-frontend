@@ -1,18 +1,18 @@
-import React from 'react';
-import { Flow } from '@descope/react-sdk';
+import React from "react";
+import { Flow } from "@descope/react-sdk";
 
 function Authentication() {
   return (
     <div>
       <Flow
         flowId="sign-up-or-in"
-        onSuccess={(e) => {
+        onSuccess={(result: Error) => {
           // Handle successful authentication
-          console.log('Authenticated:', e);
+          console.log("Authenticated:", result);
         }}
-        onError={(error) => {
+        onError={(error: Error) => {
           // Handle authentication errors
-          console.error('Authentication error:', error);
+          console.error("Authentication error:", error);
         }}
       />
     </div>

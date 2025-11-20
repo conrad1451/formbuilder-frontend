@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useSession } from "@descope/react-sdk";
 
+// CHQ: option B, given by DescopeAI
+// import { getSessionToken } from '@descope/react-sdk';
+
 interface WebFormProps {
   onSubmit: (formData: { myName: string }) => Promise<void>;
 }
@@ -28,7 +31,7 @@ const WebForm: React.FC<WebFormProps> = ({ onSubmit }) => {
           onChange={(e) => setText(e.target.value)}
         />
       </label>
-      <button type="submit">Submit data to Notion</button>{" "}
+      <button type="submit">Submit data to Mongo</button>{" "}
       {/* Changed button text */}
     </form>
   );
@@ -39,11 +42,14 @@ interface ApiResponse {
   // ... other properties
 }
 
-const FormToNotion: React.FC = () => {
+const FormToMongo: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { session } = useSession();
+  const { sessionToken } = useSession();
+
+  // CHQ: option B, given by DescopeAI
+  // const sessionToken = getSessionToken();
 
   const handleFormSubmit = async (formData: { myName: string }) => {
     setLoading(true);
@@ -52,13 +58,10 @@ const FormToNotion: React.FC = () => {
 
     try {
       const BASE_URL =
-        import.meta.env.VITE_TEST_BSS_DATABASE ||
-        import.meta.env.VITE_TEST_BSS_DATABASE_LOCAL;
-      const sessionToken = session?.jwt;
+        import.meta.env.VITE_LOGIN_SERVER_2 ||
+        import.meta.env.VITE_LOGIN_SERVER_2;
 
-      // const response = await fetch(`${BASE_URL}/targetnotion`, { // Changed endpoint to /targetnotion
-      const response = await fetch(`${BASE_URL}/submitformhere`, {
-        // Changed endpoint to /targetnotion
+      const response = await fetch(`${BASE_URL}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -72,15 +75,15 @@ const FormToNotion: React.FC = () => {
           const errorData = await response.json();
           throw new Error(errorData.message || "Server error");
         }
-        throw new Error("Failed to submit to Notion"); // Changed error message
+        throw new Error("Failed to submit to MongoDB"); // Changed error message
       }
 
       const result: ApiResponse = await response.json();
-      console.log("Data sent to Notion successfully:", result);
-      setSuccessMessage("Data sent to Notion successfully!"); // Changed success message
+      console.log("Data sent to MongoDB successfully:", result);
+      setSuccessMessage("Data sent to MongoDB successfully!"); // Changed success message
     } catch (error) {
-      console.error("Error in MyFormContainer (Notion):", error);
-      setErrorMessage("Failed to send data to Notion. Please try again."); // Changed error message
+      console.error("Error in MyForm (MongoDB):", error);
+      setErrorMessage("Failed to send data to MongoDB. Please try again."); // Changed error message
     } finally {
       setLoading(false);
     }
@@ -96,4 +99,4 @@ const FormToNotion: React.FC = () => {
   );
 };
 
-export default FormToNotion;
+export default FormToMongo;
